@@ -87,7 +87,7 @@ public class MainListFragment extends Fragment {
                     floatingActionButton.hide();
                     Log.d("~fab","hide");
                 }
-                else {
+                else if(dy<0){
                     floatingActionButton.show();
                     Log.d("~fab","show");
                     Log.d("~fab shown:",""+floatingActionButton.isShown());
