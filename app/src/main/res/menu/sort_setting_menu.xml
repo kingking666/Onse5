@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:apps="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/seeting"
+        android:title="设置"
+        apps:showAsAction="never" />
+
+    <item
+        android:title="分类排序"
+        android:icon="@mipmap/ic_sort_white_24dp"
+        apps:showAsAction="ifRoom">
+        <menu>
+            <group>
+                <item android:title="按报酬">
+                    <menu>
+                        <item android:title="升序" />
+                        <item android:title="降序" />
+                    </menu>
+                </item>
+            </group>
+
+            <group>
+                <item android:title="按类型">
+                    <menu>
+                        <item android:title="外卖" />
+                        <item android:title="快递" />
+                        <item android:title="其他" />
+                    </menu>
+                </item>
+            </group>
+
+        </menu>
+
+    </item>
+
+</menu>

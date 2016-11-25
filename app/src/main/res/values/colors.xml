@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+
+
+    <color name="primary">#03a9f4</color>
+    <color name="primary_dark">#0091ea</color>
+    <color name="primary_darker">#0277bd</color>
+
+    <color name="colorPrimary">#3F51B5</color>
+    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="border_color">#78909C</color>
+    
+    <color name="accent">#FFFFFF</color>
+
+    <!-- 广钊配色1 -->
+    <color name="gz_1_primary">#03A9F4</color>
+    <color name="gz_1_primary_dark">#0288D1</color>
+    <color name="gz_1_primary_light">#B3E5FC</color>
+    <color name="gz_1_text_icons">#FFFFFF</color>
+    <color name="gz_1_accent">#FFC107</color>
+    <color name="gz_1_primary_text">#212121</color>
+    <color name="gz_1_secondary_text">#757575</color>
+    <color name="gz_1_driver">#BDBDBD</color>
+
+
+    <color name="black">#000000</color>
+    <color name="jet">#222222</color>
+    <color name="oil">#333333</color>
+    <color name="monsoon">#777777</color>
+    <color name="jumbo">#888888</color>
+    <color name="aluminum">#999999</color>
+    <color name="base">#AAAAAA</color>
+    <color name="iron">#CCCCCC</color>
+    <color name="white">#FFFFFF</color>
+    <color name="pink_500">#E91E63</color>
+</resources>
