@@ -34,7 +34,6 @@ import java.util.ArrayList;
 public class MainActivity extends AppCompatActivity {
 
     private CoordinatorLayout coordinatorLayout;
-    private LinearLayout linearLayout;
     private FloatingActionButton floatingActionButton;
     private NavigationView navigationView;
     private DrawerLayout drawerLayout;
