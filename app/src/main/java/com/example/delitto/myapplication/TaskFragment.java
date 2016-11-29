@@ -60,6 +60,7 @@ public class TaskFragment extends Fragment implements View.OnClickListener {
                 else{
                     InputMethodManager imm = (InputMethodManager)getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
                     imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
+                    bottomNavigationBar.show();
                 }
             }
         });
@@ -73,6 +74,7 @@ public class TaskFragment extends Fragment implements View.OnClickListener {
                 else{
                     InputMethodManager imm = (InputMethodManager)getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
                     imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
+                    bottomNavigationBar.show();
                 }
             }
         });

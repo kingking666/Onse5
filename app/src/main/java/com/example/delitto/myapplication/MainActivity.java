@@ -178,7 +178,7 @@ public class MainActivity extends AppCompatActivity {
             case 1:
                 getMenuInflater().inflate(R.menu.publish_task_menu, menu);
                 toolbar.setTitle("发布任务");
-                floatingActionButton.setVisibility(View.INVISIBLE);
+                floatingActionButton.hide();
                 break;
             case 2:
                 getMenuInflater().inflate(R.menu.seeting_menu, menu);
