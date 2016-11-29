@@ -31,6 +31,8 @@ import com.example.delitto.myapplication.R;
 
 import java.util.ArrayList;
 
+import de.hdodenhof.circleimageview.CircleImageView;
+
 public class MainActivity extends AppCompatActivity {
 
     private CoordinatorLayout coordinatorLayout;
@@ -45,14 +47,19 @@ public class MainActivity extends AppCompatActivity {
     private static int switchPosition;
 
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_main);
         //初始化变量
-        initalize();
+        drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
+        toolbar = (Toolbar) findViewById(R.id.toolbar);
+        coordinatorLayout = (CoordinatorLayout) findViewById(R.id.coordinator);
+        floatingActionButton = (FloatingActionButton) findViewById(R.id.floatingaction_button);
+        navigationView = (NavigationView) findViewById(R.id.nav_view);
+        bottomNavigationBar = (BottomNavigationBar) findViewById(R.id.bottom_navigation_bar);
+        viewPager = (ViewPager) findViewById(R.id.view_pager);
 
 
         //设置bar
@@ -155,16 +162,6 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    public void initalize() {
-        drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
-        toolbar = (Toolbar) findViewById(R.id.toolbar);
-        coordinatorLayout = (CoordinatorLayout) findViewById(R.id.coordinator);
-        floatingActionButton = (FloatingActionButton) findViewById(R.id.floatingaction_button);
-        navigationView = (NavigationView) findViewById(R.id.nav_view);
-        bottomNavigationBar = (BottomNavigationBar) findViewById(R.id.bottom_navigation_bar);
-        viewPager = (ViewPager) findViewById(R.id.view_pager);
-
-    }
 
     //每次viewpager变动后重新绘制toolbar，fab也要动态改变
     @Override

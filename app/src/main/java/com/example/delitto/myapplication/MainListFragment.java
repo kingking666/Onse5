@@ -25,7 +25,6 @@ import java.util.ArrayList;
  * Created by pokedo on 2016/11/18.
  */
 
-
 public class MainListFragment extends Fragment {
 
     private RecyclerView recyclerView;
@@ -39,8 +38,6 @@ public class MainListFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.main_fragment, container, false);
 
-        Log.d("~act","getactivity:"+getActivity());
-        Log.d("~act","view:"+view);
         floatingActionButton = (FloatingActionButton) getActivity().findViewById(R.id.floatingaction_button);
 
         list_data = new ArrayList<MainListData>();
@@ -52,7 +49,7 @@ public class MainListFragment extends Fragment {
                 (this.getContext(), LinearLayoutManager.VERTICAL, false);
         recyclerView.setLayoutManager(linearLayoutManager);
         //数据适配器 MyAdapter
-        final MainListAdapter requireListAdapter = new MainListAdapter(this.getContext(), list_data);
+        final MainListAdapter requireListAdapter = new MainListAdapter(this,list_data);
         recyclerView.setAdapter(requireListAdapter);
 
 
@@ -85,17 +82,12 @@ public class MainListFragment extends Fragment {
                 super.onScrolled(recyclerView, dx, dy);
                 if(dy>0) {
                     floatingActionButton.hide();
-                    Log.d("~fab","hide");
                 }
                 else if(dy<0){
                     floatingActionButton.show();
-                    Log.d("~fab","show");
-                    Log.d("~fab shown:",""+floatingActionButton.isShown());
                 }
             }
         });
-
-
 
         //myAdapter设置自定义接口监听者,重写OnItemClickLIstener的方法
         requireListAdapter.setOnItemClickListener(new MainListAdapter.OnItemClickListener() {
@@ -110,7 +102,6 @@ public class MainListFragment extends Fragment {
                 Toast.makeText(getContext(), "You click item" + position, Toast.LENGTH_SHORT).show();
             }
         });
-
 
         return view;
     }

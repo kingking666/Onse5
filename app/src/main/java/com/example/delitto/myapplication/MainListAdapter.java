@@ -1,6 +1,9 @@
 package com.example.delitto.myapplication;
 
+import android.app.Activity;
 import android.content.Context;
+import android.graphics.drawable.BitmapDrawable;
+import android.support.v4.app.Fragment;
 import android.support.v7.widget.PopupMenu;
 import android.support.v7.widget.RecyclerView;
 import android.view.Gravity;
@@ -8,7 +11,9 @@ import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.ImageView;
+import android.widget.PopupWindow;
 import android.widget.TextView;
 
 import com.example.delitto.myapplication.Bean.MainListData;
@@ -20,12 +25,13 @@ import java.util.ArrayList;
  */
 class MainListAdapter extends RecyclerView.Adapter {
 
-    private Context mContext;
+    private Fragment fragment;
     private ArrayList<MainListData> list_data;
+    private PopupDialog popupDialog;
 
     //实例化时传入一个Context
-    public MainListAdapter(Context mContext, ArrayList<MainListData> list_data) {
-        this.mContext = mContext;
+    public MainListAdapter(Fragment fragment, ArrayList<MainListData> list_data) {
+        this.fragment = fragment;
         this.list_data = list_data;
     }
 
@@ -59,20 +65,19 @@ class MainListAdapter extends RecyclerView.Adapter {
 //    }
 
 
-
     //自定义viewHolder ,获取每个子视图对象的里面的控件
     class RequireViewHolder extends RecyclerView.ViewHolder {
         private TextView titleview1;
         private TextView contentview1;
         private ImageView imageView1;
-        private ImageView moreHoriz1;
+        private ImageView morebutton;
 
         public RequireViewHolder(View itemView) {
             super(itemView);
             titleview1 = (TextView) itemView.findViewById(R.id.require_title);
             contentview1 = (TextView) itemView.findViewById(R.id.require_content);
             imageView1 = (ImageView) itemView.findViewById(R.id.require_image);
-            moreHoriz1 = (ImageView) itemView.findViewById(R.id.require_more_horiz);
+            morebutton = (ImageView) itemView.findViewById(R.id.require_more_horiz);
         }
     }
 
@@ -96,22 +101,16 @@ class MainListAdapter extends RecyclerView.Adapter {
 //        ((MyViewHolder) holder).imageView.setImageResource(R.mipmap.ic_launcher);
         MainListData data = list_data.get(position);
         String title = data.title[0] + "·" + data.title[1];
+        //初始化 触发morebutton后弹出的popupDialog
+        popupDialog = new PopupDialog((Activity) fragment.getContext());
         ((RequireViewHolder) holder).titleview1.setText(title);
         ((RequireViewHolder) holder).contentview1.setText(data.content);
         ((RequireViewHolder) holder).imageView1.setImageResource(data.resourceid);
-        ((RequireViewHolder) holder).moreHoriz1.setOnClickListener(new View.OnClickListener() {
+        ((RequireViewHolder) holder).morebutton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                PopupMenu popupMenu = new PopupMenu(mContext, ((RequireViewHolder) holder).moreHoriz1, Gravity.TOP);
-                popupMenu.getMenuInflater().inflate(R.menu.popup_menu, popupMenu.getMenu());
-                popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
-                    @Override
-                    public boolean onMenuItemClick(MenuItem item) {
-                        return true;
-                    }
-                });
-                popupMenu.show();
-//                popupMenu.setGravity(Gravity.END);
+                //每次触发morebuttonhou，调用方法显示popupDialog，并传入触发的view从而确定popupDialog的显示位置
+                popupDialog.showPopupWindow(((RequireViewHolder) holder).morebutton);
             }
         });
 

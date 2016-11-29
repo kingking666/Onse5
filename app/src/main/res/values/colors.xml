@@ -13,6 +13,11 @@
     
     <color name="accent">#FFFFFF</color>
 
+    <!--其他-->
+    <color name="popup_press">#FAFAFA</color>
+    <color name="popup_unpress">#ECEFF1</color>
+
+
     <!-- 广钊配色1 -->
     <color name="gz_1_primary">#03A9F4</color>
     <color name="gz_1_primary_dark">#0288D1</color>
