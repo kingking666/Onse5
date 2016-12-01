@@ -36,6 +36,7 @@ android {
         compile 'de.hdodenhof:circleimageview:2.1.0'
         compile 'com.github.razerdp:BasePopup:v1.4.0'
         compile files('libs/cia_sdk_v_2_3_1.jar')
+        compile 'com.android.support:preference-v14:25.0.1'
 
     }
 }

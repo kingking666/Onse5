@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <PreferenceCategory android:title="基本设置">
+        <Preference
+            android:key="change_theme"
+            android:title="切换主题" />
+        <SwitchPreference
+            android:defaultValue="true"
+            android:key="switch_notification"
+            android:title="显示接单通知" />
+        <SwitchPreference
+            android:defaultValue="true"
+            android:key="lighteness"
+            android:title="跟随系统亮度" />
+    </PreferenceCategory>
+
+    <PreferenceCategory android:title="隐私设置">
+        <SwitchPreference
+            android:defaultValue="true"
+            android:key="publish_log"
+            android:title="不让他人看我的发布记录" />
+        <SwitchPreference
+            android:defaultValue="true"
+            android:key="publish_log"
+            android:title="不让他人看我的发布记录" />
+    </PreferenceCategory>
+    <PreferenceCategory android:title="安全设置">
+        <Preference
+            android:key="account_password"
+            android:title="账号与密码" />
+    </PreferenceCategory>
+
+    <PreferenceCategory android:title="关于与帮助">
+        <Preference
+            android:key="feedback"
+            android:title="意见反馈" />
+        <Preference
+            android:key="agreement"
+            android:title="万事屋协议" />
+        <Preference
+            android:key="open_source"
+            android:title="开源许可" />
+        <Preference
+            android:key="update"
+            android:title="检查更新" />
+
+    </PreferenceCategory>
+</PreferenceScreen>

@@ -1,5 +1,6 @@
 package com.example.delitto.myapplication;
 
+import android.content.Intent;
 import android.support.annotation.IdRes;
 import android.support.annotation.NonNull;
 import android.support.design.widget.CoordinatorLayout;
@@ -62,7 +63,7 @@ public class MainActivity extends AppCompatActivity {
         viewPager = (ViewPager) findViewById(R.id.view_pager);
 
 
-        //设置bar
+        //设置toolbar
         setSupportActionBar(toolbar);
         ActionBarDrawerToggle actionBarDrawerToggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar,
                 R.string.drawer_open, R.string.drawer_close);
@@ -81,19 +82,23 @@ public class MainActivity extends AppCompatActivity {
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+//                Log.d("~start","start");
                 switch (item.getItemId()) {
                     case R.id.drawer_money: {
                     }
-                    ;
+                    break;
                     case R.id.drawer_publish: {
                     }
-                    ;
+                    break;
                     case R.id.drawer_get: {
                     }
-                    ;
-                    case R.id.seeting: {
+                    break;
+                    case R.id.nav_setting: {
+                        Intent intent = new Intent(MainActivity.this, SettingActivity.class);
+                        startActivity(intent);
+                        Log.d("~start","start");
                     }
-                    ;
+                    break;
 
                 }
                 drawerLayout.closeDrawer(GravityCompat.START);

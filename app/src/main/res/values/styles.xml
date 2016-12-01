@@ -8,11 +8,30 @@
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorPrimary</item>
+        <item name="windowNoTitle">true</item>
+        <item name="windowActionBar">false</item>
         <item name="android:textViewStyle">@style/MyTextViewStyle</item>
+        <item name="android:windowAnimationStyle">@style/activityAnimation</item>
+        <item name="preferenceTheme">@style/myPreferenceScreen</item>
     </style>
 
+    <!--New-->
     <style name="MyTextViewStyle" parent="android:Widget.TextView">
         <item name="android:textColor">#000</item>
+    </style>
+
+    <!--必须指定preferenceScreen主题-->
+    <style name="myPreferenceScreen" parent="PreferenceThemeOverlay.v14.Material">
+        <item name="android:fadeScrollbars">true</item>
+        <item name="android:scrollbars">vertical</item>
+        <item name="android:scrollbarFadeDuration">1</item>
+    </style>
+
+    <style name="activityAnimation" parent="@android:style/Animation.Activity">
+        <item name="android:activityOpenEnterAnimation">@anim/push_left_in</item>
+        <item name="android:activityOpenExitAnimation">@anim/push_left_out</item>
+        <item name="android:activityCloseEnterAnimation">@anim/push_right_in</item>
+        <item name="android:activityCloseExitAnimation">@anim/push_right_out</item>
     </style>
 
 
