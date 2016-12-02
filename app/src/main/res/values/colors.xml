@@ -17,6 +17,10 @@
     <color name="popup_press">#FAFAFA</color>
     <color name="popup_unpress">#ECEFF1</color>
 
+    <!--exit_button-->
+    <color name="exit_highlight">#B71C1C</color>
+    <color name="exit_normal">#F44336</color>
+
 
     <!-- 广钊配色1 -->
     <color name="gz_1_primary">#03A9F4</color>
