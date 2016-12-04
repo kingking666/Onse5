@@ -170,8 +170,9 @@
                     app:met_maxCharacters="30" />
 
             </android.support.v7.widget.CardView>
-
         </LinearLayout>
+
+
     </LinearLayout>
 
 </android.support.v4.widget.NestedScrollView>

@@ -2,301 +2,283 @@
 <items version="2" >
 
     <item
-        is-multidex="true"
-        jar="D:\android_project\Onse5\app\build\intermediates\incremental-classes\debug\instant-run-bootstrap.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="25.0.0"
-        sha1="fd0bc629112bb3a8c49b61ee4d14836d07bbe931">
-        <dex dex="D:\android_project\Onse5\app\build\intermediates\transforms\dex\debug\folders\1000\10\instant-run-bootstrap_eda8b81dd2ba238a994b5c8640c83df411663a30\classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="D:\android_project\Onse5\app\build\intermediates\exploded-aar\com.github.ganfra\material-spinner\1.1.1\jars\classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="25.0.0"
-        sha1="d0df3bf618b078d102a4234ceff33c44026e64b9">
-        <dex dex="D:\android_project\Onse5\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.github.ganfra-material-spinner-1.1.1_3da8bdf3b1107f9dc5bbe5102b6edb37ce65f93b\classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="D:\android_project\Onse5\app\build\intermediates\exploded-aar\com.android.support\support-core-ui\25.0.1\jars\classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="25.0.0"
-        sha1="bc7e99e8d0fc279a05aa91378530f467ad62d443">
-        <dex dex="D:\android_project\Onse5\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-support-core-ui-25.0.1_baa348be610b2139f97828a08924163a76ac665d\classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="D:\android_project\Onse5\app\build\intermediates\exploded-aar\com.android.support\support-core-utils\25.0.1\jars\libs\internal_impl-25.0.1.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="25.0.0"
-        sha1="c5b7145fb34779b6639147b8f2f8dd77c0db771b">
-        <dex dex="D:\android_project\Onse5\app\build\intermediates\transforms\dex\debug\folders\1000\10\internal_impl-25.0.1_291b0283f4a6b599450a1788062a8b4f886418da\classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="D:\android_project\Onse5\app\build\intermediates\incremental-runtime-classes\debug\instant-run.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="25.0.0"
-        sha1="bf793835d4afd74043fdf98e1fff64998aafd210">
-        <dex dex="D:\android_project\Onse5\app\build\intermediates\transforms\dex\debug\folders\1000\10\instant-run_42e3a41f015992e7a69224727cff58e874f0053f\classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="D:\android_project\Onse5\app\build\intermediates\exploded-aar\com.android.support\support-fragment\25.0.1\jars\classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="25.0.0"
-        sha1="26c6eef571592c91f29e56fda0bac73321de0c92">
-        <dex dex="D:\android_project\Onse5\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-support-fragment-25.0.1_982a9cefa023ec5129bc71b83b2f4597fad4103e\classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="D:\android_project\Onse5\app\build\intermediates\exploded-aar\com.android.support\support-core-utils\25.0.1\jars\classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="25.0.0"
-        sha1="00d4c8eebf2b681073c72a26bd0849549e51c7cb">
-        <dex dex="D:\android_project\Onse5\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-support-core-utils-25.0.1_e7460e98295817e7dd4b22f348b9905ba25d3fed\classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="D:\android_project\Onse5\app\build\intermediates\exploded-aar\com.android.support\animated-vector-drawable\25.0.1\jars\classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="25.0.0"
-        sha1="772bed2d992b67b9d0327f766cc95cd63031dcd3">
-        <dex dex="D:\android_project\Onse5\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-animated-vector-drawable-25.0.1_2a300dc7adc591f4385f21fedea28e62b1848871\classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="D:\android_project\Onse5\app\build\intermediates\exploded-aar\com.android.support\preference-v14\25.0.1\jars\classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="25.0.0"
-        sha1="6cdbe967aa2b693a0a1f6859091794601c087e5b">
-        <dex dex="D:\android_project\Onse5\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-preference-v14-25.0.1_82483f815e3ac7654da706cd17a26cf8533e14c4\classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="D:\android_project\Onse5\app\build\intermediates\exploded-aar\com.android.support\design\25.0.1\jars\classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="25.0.0"
-        sha1="3b236883e0df6002cabb01ce57d00a5b1e5de610">
-        <dex dex="D:\android_project\Onse5\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-design-25.0.1_d3e71de959251123cf055fa681b657b39ae95a8e\classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="D:\software\SDK\extras\android\m2repository\com\android\support\support-annotations\25.0.1\support-annotations-25.0.1.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="25.0.0"
-        sha1="a09194311f8f89c3e6db09d79f50897a889d615e">
-        <dex dex="D:\android_project\Onse5\app\build\intermediates\transforms\dex\debug\folders\1000\10\support-annotations-25.0.1_114e3e05512e107a83310c8de3789544420b1a0a\classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="D:\android_project\Onse5\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\25.0.1\jars\classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="25.0.0"
-        sha1="f7ac4b327fdb9e2ee386f5adc46164927658de4b">
-        <dex dex="D:\android_project\Onse5\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-appcompat-v7-25.0.1_c960f7a7515bbcf73454b89a6aea60dd0ba64c30\classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="D:\android_project\Onse5\app\build\intermediates\exploded-aar\com.rengwuxian.materialedittext\library\2.1.4\jars\classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="25.0.0"
-        sha1="288913b440a3c61c30aa171095453a605432277a">
-        <dex dex="D:\android_project\Onse5\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.rengwuxian.materialedittext-library-2.1.4_18b5bbac7813e51f3fc21bb988c49ea07bc50ad9\classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="D:\android_project\Onse5\app\build\intermediates\exploded-aar\de.hdodenhof\circleimageview\2.1.0\jars\classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="25.0.0"
-        sha1="a2af9c72ccaa4c5c049b500ca6ea664a4ce1f7d4">
-        <dex dex="D:\android_project\Onse5\app\build\intermediates\transforms\dex\debug\folders\1000\10\de.hdodenhof-circleimageview-2.1.0_711443acfbc7634e9da8009d864be48972b1410a\classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="D:\android_project\Onse5\app\build\intermediates\exploded-aar\com.android.support\transition\25.0.1\jars\classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="25.0.0"
-        sha1="c1b6ab157e8e12cb08b9ee82bb5e3c5d22632eb3">
-        <dex dex="D:\android_project\Onse5\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-transition-25.0.1_fe1b2e70b9cb13f413c34f232fc9ddba654e7546\classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="D:\android_project\Onse5\app\build\intermediates\exploded-aar\com.android.support\support-compat\25.0.1\jars\classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="25.0.0"
-        sha1="51eba4a4dd73044f90a9d58dd7ca34adbebfcf4e">
-        <dex dex="D:\android_project\Onse5\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-support-compat-25.0.1_25534ac16f7d6dcb6824958ece486b168c2a8344\classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
+        is-multidex="false"
         jar="D:\android_project\Onse5\app\build\intermediates\exploded-aar\com.android.support\recyclerview-v7\25.0.1\jars\classes.jar"
-        jumboMode="true"
+        jumboMode="false"
         optimize="true"
         revision="25.0.0"
         sha1="297d4bcf6ed4e747a1bf7d0d094a2d911a8d3a8e">
-        <dex dex="D:\android_project\Onse5\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-recyclerview-v7-25.0.1_dea8b0b6373a6deca95bf44d8411e13eac9868dc\classes.dex" />
+        <dex dex="D:\android_project\Onse5\app\build\intermediates\pre-dexed\debug\com.android.support-recyclerview-v7-25.0.1_dea8b0b6373a6deca95bf44d8411e13eac9868dc.jar" />
     </item>
     <item
-        is-multidex="true"
+        is-multidex="false"
         jar="D:\android_project\Onse5\app\build\intermediates\exploded-aar\com.android.support\cardview-v7\25.0.0\jars\classes.jar"
-        jumboMode="true"
+        jumboMode="false"
         optimize="true"
         revision="25.0.0"
         sha1="8a372c4191f80489770a231f7be4820b204b886a">
-        <dex dex="D:\android_project\Onse5\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-cardview-v7-25.0.0_a7d45280f4710d7753e4429ddd378605c973ea36\classes.dex" />
+        <dex dex="D:\android_project\Onse5\app\build\intermediates\pre-dexed\debug\com.android.support-cardview-v7-25.0.0_a7d45280f4710d7753e4429ddd378605c973ea36.jar" />
     </item>
     <item
-        is-multidex="true"
-        jar="D:\android_project\Onse5\app\build\intermediates\exploded-aar\com.android.support\support-v4\25.0.1\jars\classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="25.0.0"
-        sha1="d7c42c80f6509b9ea4db28ca7859ffae08ec5741">
-        <dex dex="D:\android_project\Onse5\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-support-v4-25.0.1_2f609d16d53fa0f93fabe70e91c9a64068a980d3\classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="D:\android_project\Onse5\app\libs\cia_sdk_v_2_3_1.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="25.0.0"
-        sha1="fc777cc1539c744978ce555b63bbcf2f7c8b1b55">
-        <dex dex="D:\android_project\Onse5\app\build\intermediates\transforms\dex\debug\folders\1000\2\cia_sdk_v_2_3_1_a22d167ab41feb07102fb6cf7d73dd61b04595f9\classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="D:\android_project\Onse5\app\build\intermediates\exploded-aar\com.android.support\support-vector-drawable\25.0.1\jars\classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="25.0.0"
-        sha1="b24e1c688744078e1fa833ffadf696794761bbe5">
-        <dex dex="D:\android_project\Onse5\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-support-vector-drawable-25.0.1_f1bea8beca1a62191c2f063bf1aa54f6cc78ef08\classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="D:\android_project\Onse5\app\build\intermediates\exploded-aar\com.android.support\preference-v7\25.0.1\jars\classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="25.0.0"
-        sha1="9bcc5d07e3c05d87798e602ad1e6d2a28ce0782d">
-        <dex dex="D:\android_project\Onse5\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-preference-v7-25.0.1_63a5c1862a7690d4a05a181b231194e3e8b15e1f\classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="D:\android_project\Onse5\app\build\intermediates\exploded-aar\com.android.support\support-compat\25.0.1\jars\libs\internal_impl-25.0.1.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="25.0.0"
-        sha1="3af8cc51ef7088e56f132780da8c0bd858b6a6ad">
-        <dex dex="D:\android_project\Onse5\app\build\intermediates\transforms\dex\debug\folders\1000\10\internal_impl-25.0.1_a22b1dd1c4bcb98f00dfe85b271d25ae1383ad72\classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="C:\Users\pokedo\.gradle\caches\modules-2\files-2.1\com.nineoldandroids\library\2.4.0\e9b63380f3a242dbdbf103a2355ad7e43bad17cb\library-2.4.0.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="25.0.0"
-        sha1="e9b63380f3a242dbdbf103a2355ad7e43bad17cb">
-        <dex dex="D:\android_project\Onse5\app\build\intermediates\transforms\dex\debug\folders\1000\10\library-2.4.0_f1997b468044336d6a4800adbdcaf7e47c9c57e5\classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
+        is-multidex="false"
         jar="D:\android_project\Onse5\app\build\intermediates\exploded-aar\com.ashokvarma.android\bottom-navigation-bar\1.3.0\jars\classes.jar"
-        jumboMode="true"
+        jumboMode="false"
         optimize="true"
         revision="25.0.0"
         sha1="84a5e720e441032fc979314a4539f3d40079801b">
-        <dex dex="D:\android_project\Onse5\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.ashokvarma.android-bottom-navigation-bar-1.3.0_53681d27ef4eefafd388387dc1ac2956267c64c2\classes.dex" />
+        <dex dex="D:\android_project\Onse5\app\build\intermediates\pre-dexed\debug\com.ashokvarma.android-bottom-navigation-bar-1.3.0_53681d27ef4eefafd388387dc1ac2956267c64c2.jar" />
     </item>
     <item
-        is-multidex="true"
+        is-multidex="false"
+        jar="D:\android_project\Onse5\app\build\intermediates\exploded-aar\com.android.support\support-compat\25.0.1\jars\libs\internal_impl-25.0.1.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.0"
+        sha1="3af8cc51ef7088e56f132780da8c0bd858b6a6ad">
+        <dex dex="D:\android_project\Onse5\app\build\intermediates\pre-dexed\debug\internal_impl-25.0.1_a22b1dd1c4bcb98f00dfe85b271d25ae1383ad72.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\pokedo\.gradle\caches\modules-2\files-2.1\com.nineoldandroids\library\2.4.0\e9b63380f3a242dbdbf103a2355ad7e43bad17cb\library-2.4.0.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.0"
+        sha1="e9b63380f3a242dbdbf103a2355ad7e43bad17cb">
+        <dex dex="D:\android_project\Onse5\app\build\intermediates\pre-dexed\debug\library-2.4.0_f1997b468044336d6a4800adbdcaf7e47c9c57e5.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="D:\android_project\Onse5\app\build\intermediates\exploded-aar\com.android.support\support-v4\25.0.1\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.0"
+        sha1="d7c42c80f6509b9ea4db28ca7859ffae08ec5741">
+        <dex dex="D:\android_project\Onse5\app\build\intermediates\pre-dexed\debug\com.android.support-support-v4-25.0.1_2f609d16d53fa0f93fabe70e91c9a64068a980d3.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="D:\android_project\Onse5\app\libs\cia_sdk_v_2_3_1.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.0"
+        sha1="fc777cc1539c744978ce555b63bbcf2f7c8b1b55">
+        <dex dex="D:\android_project\Onse5\app\build\intermediates\pre-dexed\debug\cia_sdk_v_2_3_1_a22d167ab41feb07102fb6cf7d73dd61b04595f9.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="D:\android_project\Onse5\app\build\intermediates\exploded-aar\com.android.support\preference-v7\25.0.1\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.0"
+        sha1="9bcc5d07e3c05d87798e602ad1e6d2a28ce0782d">
+        <dex dex="D:\android_project\Onse5\app\build\intermediates\pre-dexed\debug\com.android.support-preference-v7-25.0.1_63a5c1862a7690d4a05a181b231194e3e8b15e1f.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="D:\android_project\Onse5\app\build\intermediates\exploded-aar\com.android.support\support-vector-drawable\25.0.1\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.0"
+        sha1="b24e1c688744078e1fa833ffadf696794761bbe5">
+        <dex dex="D:\android_project\Onse5\app\build\intermediates\pre-dexed\debug\com.android.support-support-vector-drawable-25.0.1_f1bea8beca1a62191c2f063bf1aa54f6cc78ef08.jar" />
+    </item>
+    <item
+        is-multidex="false"
         jar="D:\android_project\Onse5\app\build\intermediates\exploded-aar\com.android.support\support-core-ui\25.0.1\jars\libs\internal_impl-25.0.1.jar"
-        jumboMode="true"
+        jumboMode="false"
         optimize="true"
         revision="25.0.0"
         sha1="e5343c9d19cb19ff55f6b268c7f3fe8c9d224f6f">
-        <dex dex="D:\android_project\Onse5\app\build\intermediates\transforms\dex\debug\folders\1000\10\internal_impl-25.0.1_5a91f893ea389c401c88b9bcc6b6d0d1c6f93013\classes.dex" />
+        <dex dex="D:\android_project\Onse5\app\build\intermediates\pre-dexed\debug\internal_impl-25.0.1_5a91f893ea389c401c88b9bcc6b6d0d1c6f93013.jar" />
     </item>
     <item
-        is-multidex="true"
+        is-multidex="false"
         jar="D:\android_project\Onse5\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-basement\8.4.0\jars\classes.jar"
-        jumboMode="true"
+        jumboMode="false"
         optimize="true"
         revision="25.0.0"
         sha1="8e673cdfadd8f2d98fdb2fda2285c30f6e449782">
-        <dex dex="D:\android_project\Onse5\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.google.android.gms-play-services-basement-8.4.0_fd045c869a77c5ceb8881bdb4ed7ef5a2947d7e4\classes.dex" />
+        <dex dex="D:\android_project\Onse5\app\build\intermediates\pre-dexed\debug\com.google.android.gms-play-services-basement-8.4.0_fd045c869a77c5ceb8881bdb4ed7ef5a2947d7e4.jar" />
     </item>
     <item
-        is-multidex="true"
+        is-multidex="false"
+        jar="D:\android_project\Onse5\app\build\intermediates\exploded-aar\com.android.support\design\25.0.1\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.0"
+        sha1="3b236883e0df6002cabb01ce57d00a5b1e5de610">
+        <dex dex="D:\android_project\Onse5\app\build\intermediates\pre-dexed\debug\com.android.support-design-25.0.1_d3e71de959251123cf055fa681b657b39ae95a8e.jar" />
+    </item>
+    <item
+        is-multidex="false"
         jar="D:\android_project\Onse5\app\build\intermediates\exploded-aar\com.android.support\support-media-compat\25.0.1\jars\classes.jar"
-        jumboMode="true"
+        jumboMode="false"
         optimize="true"
         revision="25.0.0"
         sha1="6a1479afe9f1b3645e1cd9a87318976893472818">
-        <dex dex="D:\android_project\Onse5\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-support-media-compat-25.0.1_41d151e0fde2e9b3d86e06f016416b42dac891b2\classes.dex" />
+        <dex dex="D:\android_project\Onse5\app\build\intermediates\pre-dexed\debug\com.android.support-support-media-compat-25.0.1_41d151e0fde2e9b3d86e06f016416b42dac891b2.jar" />
     </item>
     <item
-        is-multidex="true"
+        is-multidex="false"
         jar="D:\android_project\Onse5\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-base\8.4.0\jars\classes.jar"
-        jumboMode="true"
+        jumboMode="false"
         optimize="true"
         revision="25.0.0"
         sha1="fef2b3e4b6b1b0e5fe7b69fa137a5fa55a3182ab">
-        <dex dex="D:\android_project\Onse5\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.google.android.gms-play-services-base-8.4.0_759b0c04cf6b066e1b72f8f9ba686f6a555a0d7f\classes.dex" />
+        <dex dex="D:\android_project\Onse5\app\build\intermediates\pre-dexed\debug\com.google.android.gms-play-services-base-8.4.0_759b0c04cf6b066e1b72f8f9ba686f6a555a0d7f.jar" />
     </item>
     <item
-        is-multidex="true"
-        jar="D:\android_project\Onse5\app\build\intermediates\exploded-aar\com.github.razerdp\BasePopup\v1.4.0\jars\classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="25.0.0"
-        sha1="583225103ec5f1eae0dc3034d08fa490088265b2">
-        <dex dex="D:\android_project\Onse5\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.github.razerdp-BasePopup-v1.4.0_1c54a5af1b6306bb2fd36c08ee0eb881edb7f2a8\classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="D:\android_project\Onse5\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-appindexing\8.4.0\jars\classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="25.0.0"
-        sha1="65d086ee9daaf87b5af62ad24471edafa433354c">
-        <dex dex="D:\android_project\Onse5\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.google.android.gms-play-services-appindexing-8.4.0_794b0dbd9d3a956d73b0fe84229f078d575ab340\classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
+        is-multidex="false"
         jar="D:\android_project\Onse5\app\build\intermediates\exploded-aar\com.android.support\support-media-compat\25.0.1\jars\libs\internal_impl-25.0.1.jar"
-        jumboMode="true"
+        jumboMode="false"
         optimize="true"
         revision="25.0.0"
         sha1="f83b00041ecfba705603fec40363416c7de69719">
-        <dex dex="D:\android_project\Onse5\app\build\intermediates\transforms\dex\debug\folders\1000\10\internal_impl-25.0.1_bbe14db4be2bcc490e06cb5c8cb7aa3dddcbcb34\classes.dex" />
+        <dex dex="D:\android_project\Onse5\app\build\intermediates\pre-dexed\debug\internal_impl-25.0.1_bbe14db4be2bcc490e06cb5c8cb7aa3dddcbcb34.jar" />
     </item>
     <item
-        is-multidex="true"
+        is-multidex="false"
+        jar="D:\android_project\Onse5\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-appindexing\8.4.0\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.0"
+        sha1="65d086ee9daaf87b5af62ad24471edafa433354c">
+        <dex dex="D:\android_project\Onse5\app\build\intermediates\pre-dexed\debug\com.google.android.gms-play-services-appindexing-8.4.0_794b0dbd9d3a956d73b0fe84229f078d575ab340.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="D:\android_project\Onse5\app\build\intermediates\exploded-aar\com.github.razerdp\BasePopup\v1.4.0\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.0"
+        sha1="583225103ec5f1eae0dc3034d08fa490088265b2">
+        <dex dex="D:\android_project\Onse5\app\build\intermediates\pre-dexed\debug\com.github.razerdp-BasePopup-v1.4.0_1c54a5af1b6306bb2fd36c08ee0eb881edb7f2a8.jar" />
+    </item>
+    <item
+        is-multidex="false"
         jar="D:\android_project\Onse5\app\build\intermediates\exploded-aar\com.android.support\support-fragment\25.0.1\jars\libs\internal_impl-25.0.1.jar"
-        jumboMode="true"
+        jumboMode="false"
         optimize="true"
         revision="25.0.0"
         sha1="c0bd6ffb002a85b5e7cad29f8558d1cc59539679">
-        <dex dex="D:\android_project\Onse5\app\build\intermediates\transforms\dex\debug\folders\1000\10\internal_impl-25.0.1_3bb3ed2085fafc476f9d6f7ca831161ec44057e8\classes.dex" />
+        <dex dex="D:\android_project\Onse5\app\build\intermediates\pre-dexed\debug\internal_impl-25.0.1_3bb3ed2085fafc476f9d6f7ca831161ec44057e8.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="D:\android_project\Onse5\app\build\intermediates\exploded-aar\com.android.support\support-core-ui\25.0.1\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.0"
+        sha1="bc7e99e8d0fc279a05aa91378530f467ad62d443">
+        <dex dex="D:\android_project\Onse5\app\build\intermediates\pre-dexed\debug\com.android.support-support-core-ui-25.0.1_baa348be610b2139f97828a08924163a76ac665d.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="D:\android_project\Onse5\app\build\intermediates\exploded-aar\com.github.ganfra\material-spinner\1.1.1\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.0"
+        sha1="d0df3bf618b078d102a4234ceff33c44026e64b9">
+        <dex dex="D:\android_project\Onse5\app\build\intermediates\pre-dexed\debug\com.github.ganfra-material-spinner-1.1.1_3da8bdf3b1107f9dc5bbe5102b6edb37ce65f93b.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="D:\android_project\Onse5\app\build\intermediates\exploded-aar\com.android.support\support-core-utils\25.0.1\jars\libs\internal_impl-25.0.1.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.0"
+        sha1="c5b7145fb34779b6639147b8f2f8dd77c0db771b">
+        <dex dex="D:\android_project\Onse5\app\build\intermediates\pre-dexed\debug\internal_impl-25.0.1_291b0283f4a6b599450a1788062a8b4f886418da.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="D:\android_project\Onse5\app\build\intermediates\exploded-aar\com.android.support\preference-v14\25.0.1\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.0"
+        sha1="6cdbe967aa2b693a0a1f6859091794601c087e5b">
+        <dex dex="D:\android_project\Onse5\app\build\intermediates\pre-dexed\debug\com.android.support-preference-v14-25.0.1_82483f815e3ac7654da706cd17a26cf8533e14c4.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="D:\android_project\Onse5\app\build\intermediates\exploded-aar\com.android.support\support-fragment\25.0.1\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.0"
+        sha1="26c6eef571592c91f29e56fda0bac73321de0c92">
+        <dex dex="D:\android_project\Onse5\app\build\intermediates\pre-dexed\debug\com.android.support-support-fragment-25.0.1_982a9cefa023ec5129bc71b83b2f4597fad4103e.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="D:\android_project\Onse5\app\build\intermediates\exploded-aar\com.android.support\animated-vector-drawable\25.0.1\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.0"
+        sha1="772bed2d992b67b9d0327f766cc95cd63031dcd3">
+        <dex dex="D:\android_project\Onse5\app\build\intermediates\pre-dexed\debug\com.android.support-animated-vector-drawable-25.0.1_2a300dc7adc591f4385f21fedea28e62b1848871.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="D:\android_project\Onse5\app\build\intermediates\exploded-aar\com.android.support\support-core-utils\25.0.1\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.0"
+        sha1="00d4c8eebf2b681073c72a26bd0849549e51c7cb">
+        <dex dex="D:\android_project\Onse5\app\build\intermediates\pre-dexed\debug\com.android.support-support-core-utils-25.0.1_e7460e98295817e7dd4b22f348b9905ba25d3fed.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="D:\software\SDK\extras\android\m2repository\com\android\support\support-annotations\25.0.1\support-annotations-25.0.1.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.0"
+        sha1="a09194311f8f89c3e6db09d79f50897a889d615e">
+        <dex dex="D:\android_project\Onse5\app\build\intermediates\pre-dexed\debug\support-annotations-25.0.1_114e3e05512e107a83310c8de3789544420b1a0a.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="D:\android_project\Onse5\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\25.0.1\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.0"
+        sha1="f7ac4b327fdb9e2ee386f5adc46164927658de4b">
+        <dex dex="D:\android_project\Onse5\app\build\intermediates\pre-dexed\debug\com.android.support-appcompat-v7-25.0.1_c960f7a7515bbcf73454b89a6aea60dd0ba64c30.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="D:\android_project\Onse5\app\build\intermediates\exploded-aar\com.rengwuxian.materialedittext\library\2.1.4\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.0"
+        sha1="288913b440a3c61c30aa171095453a605432277a">
+        <dex dex="D:\android_project\Onse5\app\build\intermediates\pre-dexed\debug\com.rengwuxian.materialedittext-library-2.1.4_18b5bbac7813e51f3fc21bb988c49ea07bc50ad9.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="D:\android_project\Onse5\app\build\intermediates\exploded-aar\com.android.support\transition\25.0.1\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.0"
+        sha1="c1b6ab157e8e12cb08b9ee82bb5e3c5d22632eb3">
+        <dex dex="D:\android_project\Onse5\app\build\intermediates\pre-dexed\debug\com.android.support-transition-25.0.1_fe1b2e70b9cb13f413c34f232fc9ddba654e7546.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="D:\android_project\Onse5\app\build\intermediates\exploded-aar\de.hdodenhof\circleimageview\2.1.0\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.0"
+        sha1="a2af9c72ccaa4c5c049b500ca6ea664a4ce1f7d4">
+        <dex dex="D:\android_project\Onse5\app\build\intermediates\pre-dexed\debug\de.hdodenhof-circleimageview-2.1.0_711443acfbc7634e9da8009d864be48972b1410a.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="D:\android_project\Onse5\app\build\intermediates\exploded-aar\com.android.support\support-compat\25.0.1\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.0"
+        sha1="51eba4a4dd73044f90a9d58dd7ca34adbebfcf4e">
+        <dex dex="D:\android_project\Onse5\app\build\intermediates\pre-dexed\debug\com.android.support-support-compat-25.0.1_25534ac16f7d6dcb6824958ece486b168c2a8344.jar" />
     </item>
 
 </items>

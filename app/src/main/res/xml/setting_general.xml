@@ -22,8 +22,8 @@
             android:title="不让他人看我的发布记录" />
         <SwitchPreference
             android:defaultValue="true"
-            android:key="publish_log"
-            android:title="不让他人看我的发布记录" />
+            android:key="get_log"
+            android:title="不让他人看我的领取记录" />
     </PreferenceCategory>
     <PreferenceCategory android:title="安全设置">
         <Preference
@@ -43,10 +43,12 @@
             android:title="开源许可" />
         <Preference
             android:key="update"
+            android:summary="当前版本 1.0"
             android:title="检查更新" />
 
     </PreferenceCategory>
     <Preference
+        android:selectable="false"
         android:layout="@layout/layout_exit_button"
         android:key="exit">
     </Preference>

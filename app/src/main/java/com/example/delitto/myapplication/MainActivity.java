@@ -77,16 +77,12 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-
         //navifationView设置点击事件
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
 //                Log.d("~start","start");
                 switch (item.getItemId()) {
-                    case R.id.drawer_money: {
-                    }
-                    break;
                     case R.id.drawer_publish: {
                     }
                     break;
@@ -99,7 +95,6 @@ public class MainActivity extends AppCompatActivity {
                         Log.d("~start","start");
                     }
                     break;
-
                 }
                 drawerLayout.closeDrawer(GravityCompat.START);
                 return true;
@@ -193,6 +188,15 @@ public class MainActivity extends AppCompatActivity {
                 break;
         }
         return true;
+    }
+
+    @Override
+    public void onBackPressed(){
+        if(drawerLayout.isDrawerOpen(navigationView)){
+            drawerLayout.closeDrawers();
+        }else {
+            super.onBackPressed();
+        }
     }
 
 }

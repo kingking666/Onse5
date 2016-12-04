@@ -1,11 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
-    <group android:checkableBehavior="single"
+    <group android:checkableBehavior="none"
         android:id="@+id/group1">
-        <item
-            android:id="@+id/drawer_money"
-            android:icon="@mipmap/ic_local_atm_black_24dp"
-            android:title="钱包" />
         <item
             android:id="@+id/drawer_publish"
             android:icon="@mipmap/ic_content_paste_black_24dp"
@@ -14,12 +10,6 @@
             android:id="@+id/drawer_get"
             android:icon="@mipmap/ic_content_paste_black_24dp"
             android:title="领取记录" />
-    </group>
-    <group android:checkableBehavior="single"
-        android:id="@+id/group2">
-        <item
-            android:icon="@mipmap/ic_local_atm_black_24dp"
-            android:title="钱包" />
     </group>
     <item android:title="其他">
         <menu>
