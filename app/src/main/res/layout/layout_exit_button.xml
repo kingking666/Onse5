@@ -6,7 +6,7 @@
     android:paddingBottom="25dp"
     android:orientation="vertical">
 
-    <android.support.v7.widget.AppCompatButton
+    <Button
         android:id="@+id/exit_button"
         android:padding="15dp"
         android:layout_width="250dp"

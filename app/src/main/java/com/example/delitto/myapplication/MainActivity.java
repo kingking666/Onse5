@@ -1,12 +1,10 @@
 package com.example.delitto.myapplication;
 
 import android.content.Intent;
-import android.support.annotation.IdRes;
 import android.support.annotation.NonNull;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
-import android.support.design.widget.Snackbar;
 import android.support.v4.app.*;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.view.ViewPager;
@@ -14,25 +12,19 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
-import android.widget.Button;
-import android.widget.LinearLayout;
 
 
 import com.ashokvarma.bottomnavigation.BadgeItem;
 import com.ashokvarma.bottomnavigation.BottomNavigationBar;
 import com.ashokvarma.bottomnavigation.BottomNavigationItem;
-import com.example.delitto.myapplication.R;
 
 import java.util.ArrayList;
-
-import de.hdodenhof.circleimageview.CircleImageView;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -70,7 +62,9 @@ public class MainActivity extends AppCompatActivity {
         actionBarDrawerToggle.syncState();
         //DrwaerLayout动画效果
         drawerLayout.addDrawerListener(actionBarDrawerToggle);
-        floatingActionButton.setOnClickListener(new View.OnClickListener() {
+
+        //fab点击事件
+        floatingActionButton. setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
@@ -106,7 +100,7 @@ public class MainActivity extends AppCompatActivity {
         bottomNavigationBar.addItem(new BottomNavigationItem(R.mipmap.ic_store_black_24dp, "列表"));
         bottomNavigationBar.addItem(new BottomNavigationItem(R.mipmap.ic_add_circle_black_24dp, "发布"));
         bottomNavigationBar.addItem(new BottomNavigationItem(R.mipmap.ic_chat_bubble_black_24dp, "消息")
-                .setBadgeItem(new BadgeItem().setText("5").setTextColor("#f000ff")));
+                .setBadgeItem(new BadgeItem().setText("5").setTextColor("#ffffff")));
 //        bottomNavigationBar.setFab(floatingActionButton);
         bottomNavigationBar.initialise();
         bottomNavigationBar.setTabSelectedListener(new BottomNavigationBar.OnTabSelectedListener() {
@@ -117,7 +111,6 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onTabUnselected(int position) {
-
             }
 
             @Override
@@ -147,7 +140,7 @@ public class MainActivity extends AppCompatActivity {
                 bottomNavigationBar.addItem(new BottomNavigationItem(R.mipmap.ic_store_black_24dp, "列表"));
                 bottomNavigationBar.addItem(new BottomNavigationItem(R.mipmap.ic_add_circle_black_24dp, "发布"));
                 bottomNavigationBar.addItem(new BottomNavigationItem(R.mipmap.ic_chat_bubble_black_24dp, "消息")
-                        .setBadgeItem(new BadgeItem().setText("5").setTextColor("#f000ff")));
+                        .setBadgeItem(new BadgeItem().setText("5").setTextColor("#ffffff")));
                 bottomNavigationBar.setFirstSelectedPosition(position);
                 bottomNavigationBar.initialise();
                 bottomNavigationBar.show();
@@ -162,14 +155,13 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-
-    //每次viewpager变动后重新绘制toolbar，fab也要动态改变
+    //每次viewpager变变页数0,1,2后重新绘制toolbar，fab也要动态改变
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         super.onCreateOptionsMenu(menu);
         switch (switchPosition) {
             case 0:
-                getMenuInflater().inflate(R.menu.sort_setting_menu, menu);
+                getMenuInflater().inflate(R.menu.sort_menu, menu);
                 toolbar.setTitle("万事屋");
                 floatingActionButton.setImageResource(R.mipmap.ic_refresh_white_24dp);
                 floatingActionButton.show();
@@ -181,13 +173,30 @@ public class MainActivity extends AppCompatActivity {
                 floatingActionButton.hide();
                 break;
             case 2:
-                getMenuInflater().inflate(R.menu.seeting_menu, menu);
+                getMenuInflater().inflate(R.menu.more_menu, menu);
                 toolbar.setTitle("私信");
                 floatingActionButton.setImageResource(R.mipmap.ic_add_white_24dp);
                 floatingActionButton.show();
                 break;
         }
         return true;
+    }
+
+    //Toolbar item选项设置点击监听事件
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        Intent intent;
+        switch (item.getItemId()){
+            case R.id.item_change_theme:
+                return true;
+            case R.id.item_seeting:
+                intent = new Intent(MainActivity.this,SettingActivity.class);
+                startActivity(intent);
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+
+        }
     }
 
     @Override

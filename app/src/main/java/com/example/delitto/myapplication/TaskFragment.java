@@ -6,6 +6,7 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
@@ -27,6 +28,7 @@ public class TaskFragment extends Fragment implements View.OnClickListener {
     private ArrayAdapter<String> adapter;
     private EditText publicEdittext;
     private EditText privateEdittext;
+    private EditText inputphone;
     private BottomNavigationBar bottomNavigationBar;
     private CircleImageView expressCircleImage;
     private CircleImageView takeoutCircleImage;
@@ -39,11 +41,13 @@ public class TaskFragment extends Fragment implements View.OnClickListener {
 
         publicEdittext = (EditText) view.findViewById(R.id.public_edittext);
         privateEdittext = (EditText) view.findViewById(R.id.private_edittext);
+        inputphone = (EditText) view.findViewById(R.id.input_contact_phone);
         bottomNavigationBar = (BottomNavigationBar) getActivity().findViewById(R.id.bottom_navigation_bar);
         expressCircleImage = (CircleImageView) view.findViewById(R.id.express_logo);
         takeoutCircleImage = (CircleImageView) view.findViewById(R.id.takeout_logo);
         otherCircleImage = (CircleImageView) view.findViewById(R.id.other_logo);
 
+        //设置下拉选择框的数据
         spinner = (Spinner) view.findViewById(R.id.spinner);
         String[] ITEMS = {"0.5h", "1h", "1.5h", "2h", "2.5h", "3h", "3.5h", "4h"};
         adapter = new ArrayAdapter<String>(this.getContext(), android.R.layout.simple_spinner_item, ITEMS);
@@ -51,34 +55,10 @@ public class TaskFragment extends Fragment implements View.OnClickListener {
         spinner.setAdapter(adapter);
 
         //Edittext设置焦点监听,获取焦点时候隐藏底栏,否则隐藏输入键盘
-        publicEdittext.setOnFocusChangeListener(new View.OnFocusChangeListener() {
-            @Override
-            public void onFocusChange(View view, boolean hasFocus) {
-                if (hasFocus) {
-                    bottomNavigationBar.hide();
-                    Log.d("~focus", bottomNavigationBar.isHidden() + "");
-                }
-                else{
-                    InputMethodManager imm = (InputMethodManager)getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
-                    imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
-                    bottomNavigationBar.show();
-                }
-            }
-        });
-        privateEdittext.setOnFocusChangeListener(new View.OnFocusChangeListener() {
-            @Override
-            public void onFocusChange(View view, boolean hasFocus) {
-                if (hasFocus) {
-                    bottomNavigationBar.hide();
-                    Log.d("~focus", bottomNavigationBar.isHidden() + "");
-                }
-                else{
-                    InputMethodManager imm = (InputMethodManager)getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
-                    imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
-                    bottomNavigationBar.show();
-                }
-            }
-        });
+        hideWidget();
+        //解决外层Scrollview和Edittext滚动冲突问题
+        scrollConflict();
+
 
         //监听发布任务类型 选择的图标
         expressCircleImage.setOnClickListener(this);
@@ -94,7 +74,6 @@ public class TaskFragment extends Fragment implements View.OnClickListener {
             changeStyle(view);
         }
     }
-
 
     //改变Logo的Style，每次click重新设置三个logo的属性
     private void changeStyle(View view) {
@@ -119,14 +98,92 @@ public class TaskFragment extends Fragment implements View.OnClickListener {
     }
 
     //选择logo时的style
-    private void setSelectedStyle(CircleImageView cirview){
+    private void setSelectedStyle(CircleImageView cirview) {
         cirview.setBorderColor(getResources().getColor(R.color.primary_darker));
-        cirview.setBorderWidth(DisplayUtil.dip2px(this,2));
+        cirview.setBorderWidth(DisplayUtil.dip2px(this, 2));
     }
 
     //未选择logo时的style
-    private void setUnselectedStyle(CircleImageView cirview){
+    private void setUnselectedStyle(CircleImageView cirview) {
         cirview.setBorderColor(getResources().getColor(R.color.border_color));
-        cirview.setBorderWidth(DisplayUtil.dip2px(this,1));
+        cirview.setBorderWidth(DisplayUtil.dip2px(this, 1));
+    }
+
+
+    //解决外层Scrollview和Edittext滚动冲突问题
+    protected void scrollConflict() {
+        publicEdittext.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                if (v.getId() == R.id.public_edittext) {
+                    v.getParent().requestDisallowInterceptTouchEvent(true);
+                    switch (event.getAction() & MotionEvent.ACTION_MASK) {
+                        case MotionEvent.ACTION_UP:
+                            v.getParent().requestDisallowInterceptTouchEvent(false);
+                            break;
+                    }
+                }
+                return false;
+            }
+        });
+
+        privateEdittext.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                if (v.getId() == R.id.private_edittext) {
+                    v.getParent().requestDisallowInterceptTouchEvent(true);
+                    switch (event.getAction() & MotionEvent.ACTION_MASK) {
+                        case MotionEvent.ACTION_UP:
+                            v.getParent().requestDisallowInterceptTouchEvent(false);
+                            break;
+                    }
+                }
+                return false;
+            }
+        });
+    }
+
+    //Edittext设置焦点监听,获取焦点时候隐藏底栏,否则隐藏输入键盘
+    protected void hideWidget() {
+        publicEdittext.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View view, boolean hasFocus) {
+                if (hasFocus) {
+                    bottomNavigationBar.hide();
+                    Log.d("~focus", bottomNavigationBar.isHidden() + "");
+                } else {
+                    InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
+                    imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
+                    bottomNavigationBar.show();
+                }
+            }
+        });
+        privateEdittext.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View view, boolean hasFocus) {
+                if (hasFocus) {
+                    bottomNavigationBar.hide();
+                    Log.d("~focus", bottomNavigationBar.isHidden() + "");
+                } else {
+                    InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
+                    imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
+                    bottomNavigationBar.show();
+                }
+            }
+        });
+
+        inputphone.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View view, boolean hasFocus) {
+                if (hasFocus) {
+                    bottomNavigationBar.hide();
+                    Log.d("~focus", bottomNavigationBar.isHidden() + "");
+                } else {
+                    InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
+                    imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
+                    bottomNavigationBar.show();
+                }
+            }
+        });
     }
 }

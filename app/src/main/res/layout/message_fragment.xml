@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="#ECEFF1">
+    android:background="#E0E0E0">
 
     <android.support.v7.widget.RecyclerView
         android:layout_width="match_parent"

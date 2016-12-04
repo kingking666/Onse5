@@ -149,15 +149,15 @@ public class SettingFragment extends PreferenceFragmentCompat {
                     public void run() {
                         progressDialog.dismiss();
 
-                        final AlertDialog.Builder dialog = new AlertDialog.Builder(activity);
-                        dialog.setMessage("Onse5已是最新版本");
-                        dialog.setCancelable(true);
-                        dialog.setPositiveButton("确定", new DialogInterface.OnClickListener() {
+                        final AlertDialog.Builder dia = new AlertDialog.Builder(activity);
+                        dia.setMessage("Onse5已是最新版本");
+                        dia.setCancelable(true);
+                        dia.setPositiveButton("确定", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
                             }
                         });
-                        dialog.show();
+                        dia.show();
                     }
                 }, 2000);
     }

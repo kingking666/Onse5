@@ -1,5 +1,6 @@
 package com.example.delitto.myapplication;
 
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -8,6 +9,7 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.AttributeSet;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
@@ -37,7 +39,7 @@ public class SettingActivity extends AppCompatActivity {
 
     }
 
-    public void exit(View v) {
+    public void exit(View view) {
         final AlertDialog.Builder dialog = new AlertDialog.Builder(SettingActivity.this);
         dialog.setTitle("退出登录");
         dialog.setMessage("是否确认退出登录?");
@@ -56,9 +58,7 @@ public class SettingActivity extends AppCompatActivity {
             }
         });
         dialog.show();
-
     }
-
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
