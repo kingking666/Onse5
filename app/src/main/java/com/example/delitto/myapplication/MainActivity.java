@@ -167,7 +167,8 @@ public class MainActivity extends AppCompatActivity {
                 toolbar.setTitle("万事屋");
                 floatingActionButton.setImageResource(R.mipmap.ic_refresh_white_24dp);
                 floatingActionButton.show();
-
+                //settag特殊标识，方便各点击事件处理
+                floatingActionButton.setTag("refresh");
                 break;
             case 1:
                 getMenuInflater().inflate(R.menu.publish_task_menu, menu);
@@ -179,6 +180,7 @@ public class MainActivity extends AppCompatActivity {
                 toolbar.setTitle("私信");
                 floatingActionButton.setImageResource(R.mipmap.ic_add_white_24dp);
                 floatingActionButton.show();
+                floatingActionButton.setTag("add");
                 break;
         }
         return true;

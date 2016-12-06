@@ -10,15 +10,19 @@ import android.widget.TextView;
 
 public class MainListData {
     public int resourceid;
-    public String title;
+    public String type;
     public String content;
     public String time;
+    public String date;
+    public String username;
 
-    public MainListData(int resourceid, String title, String content, String time) {
+    public MainListData(int resourceid, String type, String content, String time) {
         this.resourceid = resourceid;
-        this.title = title;
+        this.type = type;
         this.content = content;
         this.time = time;
+        this.date = date;
+        this.username =username;
     }
 
     public int getResourceid() {
@@ -29,12 +33,12 @@ public class MainListData {
         this.resourceid = resourceid;
     }
 
-    public String getTitle() {
-        return title;
+    public String getType() {
+        return type;
     }
 
-    public void setTitle(String title) {
-        this.title = title;
+    public void setType(String type) {
+        this.type = type;
     }
 
     public String getContent() {
@@ -53,8 +57,19 @@ public class MainListData {
         this.time = time;
     }
 
-    public void addItem() {
+    public String getDate() {
+        return date;
+    }
 
+    public void setDate(String date) {
+        this.date = date;
+    }
 
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public String getUsername() {
+        return username;
     }
 }

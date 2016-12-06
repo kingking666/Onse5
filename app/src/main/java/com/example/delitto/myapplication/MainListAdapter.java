@@ -1,19 +1,12 @@
 package com.example.delitto.myapplication;
 
 import android.app.Activity;
-import android.content.Context;
-import android.graphics.drawable.BitmapDrawable;
 import android.support.v4.app.Fragment;
-import android.support.v7.widget.PopupMenu;
 import android.support.v7.widget.RecyclerView;
-import android.view.Gravity;
 import android.view.LayoutInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.WindowManager;
 import android.widget.ImageView;
-import android.widget.PopupWindow;
 import android.widget.TextView;
 
 import com.example.delitto.myapplication.Bean.MainListData;
@@ -53,8 +46,8 @@ class MainListAdapter extends RecyclerView.Adapter {
     }
 
 
-//    public void addItem(int id, String[] title, String content) {
-//        list_data.add(0, new ListData(id, title, content));
+//    public void addItem(int id, String[] type, String content) {
+//        list_data.add(0, new ListData(id, type, content));
 //        notifyItemInserted(0);
 //    }
 //
@@ -67,17 +60,17 @@ class MainListAdapter extends RecyclerView.Adapter {
 
     //自定义viewHolder ,获取每个子视图对象的里面的控件
     class RequireViewHolder extends RecyclerView.ViewHolder {
-        private TextView titleview1;
+        private TextView typeview1;
         private TextView contentview1;
         private ImageView imageView1;
         private ImageView morebutton;
 
         public RequireViewHolder(View itemView) {
             super(itemView);
-            titleview1 = (TextView) itemView.findViewById(R.id.require_title);
-            contentview1 = (TextView) itemView.findViewById(R.id.require_content);
+            typeview1 = (TextView) itemView.findViewById(R.id.main_list_type);
+            contentview1 = (TextView) itemView.findViewById(R.id.main_list_content);
             imageView1 = (ImageView) itemView.findViewById(R.id.require_image);
-            morebutton = (ImageView) itemView.findViewById(R.id.require_more_horiz);
+            morebutton = (ImageView) itemView.findViewById(R.id.main_list_more);
         }
     }
 
@@ -102,7 +95,7 @@ class MainListAdapter extends RecyclerView.Adapter {
         MainListData data = list_data.get(position);
         //初始化 触发morebutton后弹出的popupDialog
         popupDialog = new PopupDialog((Activity) fragment.getContext());
-        ((RequireViewHolder) holder).titleview1.setText(data.getTitle());
+        ((RequireViewHolder) holder).typeview1.setText(data.getType());
         ((RequireViewHolder) holder).contentview1.setText(data.getContent());
         ((RequireViewHolder) holder).imageView1.setImageResource(data.getResourceid());
         ((RequireViewHolder) holder).morebutton.setOnClickListener(new View.OnClickListener() {

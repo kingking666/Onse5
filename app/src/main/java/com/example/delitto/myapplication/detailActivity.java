@@ -5,9 +5,11 @@ import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.content.LocalBroadcastManager;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -20,6 +22,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import de.hdodenhof.circleimageview.CircleImageView;
+import fr.ganfra.materialspinner.MaterialSpinner;
 
 /**
  * Created by Administrator on 2016/11/30.
@@ -31,8 +34,8 @@ public class detailActivity extends AppCompatActivity {
     private AlertDialog.Builder _dialog;
     private ProgressDialog _progressDialog;
     private Intent _intent;
-    private Spinner _mspinner;
-    private Spinner _tspinner;
+    private MaterialSpinner _mspinner;
+    private MaterialSpinner _tspinner;
     private ArrayAdapter<String> adapter;
     private CircleImageView _circle;
     private TextView _nametextview;
@@ -46,8 +49,8 @@ public class detailActivity extends AppCompatActivity {
         setContentView(R.layout.detail_task);
 
         _toolbal = (Toolbar) findViewById(R.id.toolbar1);
-        _mspinner = (Spinner) findViewById(R.id.money_spinner);
-        _tspinner = (Spinner) findViewById(R.id.time_spinner);
+        _mspinner = (MaterialSpinner) findViewById(R.id.money_spinner);
+        _tspinner = (MaterialSpinner) findViewById(R.id.time_spinner);
         _circle = (CircleImageView) findViewById(R.id.circle_image);
         _nametextview = (TextView) findViewById(R.id.name_detail);
         _detailtextview = (TextView) findViewById(R.id.detail_task);
@@ -87,6 +90,8 @@ public class detailActivity extends AppCompatActivity {
         _timetextview.setText("5分钟以内");
         //.....
 
+        iniData();
+
         //设置完成时间
         final String[] TITEMS = {"5分钟以内", "15分钟以内", "30分钟以内", "一个小时以内"};
         adapter = new ArrayAdapter<String>(this.getApplicationContext(), android.R.layout.simple_spinner_item, TITEMS);
@@ -108,10 +113,24 @@ public class detailActivity extends AppCompatActivity {
     //设置对Toolbar的按钮监听
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
-            case R.id.home:
+            case android.R.id.home:
                 onBackPressed();
                 return true;
             case R.id.action_send:        //按发送键时弹出选择
+                switch (verify()) {
+                    case 1:
+                        _tspinner.setError("请选择该下拉项!");
+                        return true;
+                    case 2:
+                        _mspinner.setError("请选择该下拉项!");
+                        return true;
+                    case 3:
+                        _tspinner.setError("请选择该下拉项!");
+                        _mspinner.setError("请选择该下拉项!");
+                        return true;
+                    default:
+                        break;
+                }
                 _dialog = new AlertDialog.Builder(detailActivity.this);
                 _dialog.setTitle("确定");
                 _dialog.setMessage("领取任务之后不可取消，是否确认？");
@@ -148,6 +167,25 @@ public class detailActivity extends AppCompatActivity {
         }
     }
 
+    public void iniData() {
+        Intent intent = getIntent();
+        _button.setText(intent.getStringExtra("type"));
+        _detailtextview.setText(intent.getStringExtra("content"));
+        _timetextview.setText(intent.getStringExtra("time"));
+        _nametextview.setText(intent.getStringExtra("username"));
+    }
+
+    //验证发送信息
+    public int verify() {
+        if (_mspinner.getSelectedItem().equals(_mspinner.getHint()) &&
+                _tspinner.getSelectedItem().equals(_tspinner.getHint()))
+            return 3;
+        else if (_tspinner.getSelectedItem().equals(_tspinner.getHint()))
+            return 1;
+        else if (_mspinner.getSelectedItem().equals(_mspinner.getHint()))
+            return 2;
+        else return -1;
+    }
 
     //领取成功时
     public void _getSuccess() {
@@ -158,6 +196,10 @@ public class detailActivity extends AppCompatActivity {
                 _intent = new Intent(detailActivity.this, MainActivity.class);
                 startActivity(_intent);
                 finish();
+                Intent intent = new Intent("com.example.delitto.myapplication.TASK_SEND");
+//                intent.putExtra("type", CacheService.TYPE_DOUBAN);
+//                intent.putExtra("id", item.getId());
+                LocalBroadcastManager.getInstance(detailActivity.this).sendBroadcast(intent);
             }
         });
         _dialog.show();

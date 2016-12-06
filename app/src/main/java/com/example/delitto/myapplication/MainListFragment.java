@@ -1,11 +1,16 @@
 package com.example.delitto.myapplication;
 
+import android.content.BroadcastReceiver;
+import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
 import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
+import android.support.v4.content.LocalBroadcastManager;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -14,6 +19,7 @@ import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.delitto.myapplication.Listener.HttpCallbackListener;
@@ -57,6 +63,12 @@ public class MainListFragment extends Fragment {
 
     private int totalPage;
 
+    private Context mContext;
+
+    private LocalReceiver localReceiver;
+    private IntentFilter intentFilter;
+    private LocalBroadcastManager localBroadcastManager;
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -64,13 +76,15 @@ public class MainListFragment extends Fragment {
 
         floatingActionButton = (FloatingActionButton) getActivity().findViewById(R.id.floatingaction_button);
         refreshLayout = (SwipeRefreshLayout) view.findViewById(R.id.fresh);
+        recyclerView = (RecyclerView) view.findViewById(R.id.require_recycler_view);
 
+        //保存任务列表的数组
         list_data = new ArrayList<MainListData>();
 
-        //RecyclerView控件
-        recyclerView = (RecyclerView) view.findViewById(R.id.require_recycler_view);
-        layoutManager = new WrapContentLinearLayoutManager(this.getContext(), LinearLayoutManager.VERTICAL, false);
+        mContext = MainListFragment.this.getContext();
 
+        //RecyclerView控件
+        layoutManager = new WrapContentLinearLayoutManager(this.getContext(), LinearLayoutManager.VERTICAL, false);
         recyclerView.setLayoutManager(layoutManager);
 
         //设置下拉刷新的按钮的颜色
@@ -81,14 +95,18 @@ public class MainListFragment extends Fragment {
         refreshLayout.setProgressBackgroundColorSchemeColor(Color.WHITE);
         //设置下拉刷新按钮的大小
         refreshLayout.setSize(SwipeRefreshLayout.DEFAULT);
-        //刚创建页面时初始化加载数据
-//        refreshLayout.setRefreshing(true);
+
+        //首次初始化fragment时候刷新一次数据
+        load(true);
         currentPage = 1;
 
         //绘制title   decoration
         recyclerView.addItemDecoration(new TitleItemDecoration(this.getContext(), list_data));
 //        绘制item间隔
         recyclerView.addItemDecoration(new DividerItemDecoration(this.getContext(), DividerItemDecoration.VERTICAL_LIST));
+
+        //注册广播
+        registerBroadcast();
 
 //        addItem = (Button) findViewById(R.id.add_item);
 //        deleteItem = (Button) findViewById(R.id.delete_item);
@@ -107,7 +125,6 @@ public class MainListFragment extends Fragment {
 //            }
 //        });
 
-        load(true);
 
         refreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             //当上拉刷新时
@@ -142,7 +159,7 @@ public class MainListFragment extends Fragment {
                             load(false);
                             //滚动到最后一页底部时，提示没有更多数据
                         else
-                            Toast.makeText(MainListFragment.this.getContext(), "没有更多了!", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(mContext, "没有更多了!", Toast.LENGTH_SHORT).show();
                     }
                     //FIXME 有时候会出现totalItemCount已加载而lastVisibleItem未加载的情况，估计为adapter未通知recyclerview更新
                     if (adapter != null)
@@ -168,8 +185,10 @@ public class MainListFragment extends Fragment {
         floatingActionButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                refreshLayout.setRefreshing(true);
-                load(true);
+                //当为"刷新"fab时候
+                if (floatingActionButton.getTag().equals("refresh"))
+                    //点击fab加载
+                    load(true);
             }
         });
 
@@ -202,6 +221,11 @@ public class MainListFragment extends Fragment {
         return view;
     }
 
+
+    /**
+     * @param clearing true:清除list的数据，重新加载第一页的任务列表信息，并添加进list
+     *                 false:查询下一任务列表的信息，并添加进list
+     */
     public void load(final boolean clearing) {
         new AsyncTask<Void, Void, Integer>() {
             @Override
@@ -216,7 +240,7 @@ public class MainListFragment extends Fragment {
 
             @Override
             protected Integer doInBackground(Void... params) {
-                if (NetworkState.networkConnected(MainListFragment.this.getContext())) {
+                if (NetworkState.networkConnected(mContext)) {
 
                     //指定每次获取任务条数
                     int per = 12;
@@ -253,6 +277,7 @@ public class MainListFragment extends Fragment {
                                         if (clearing) {
                                             list_data.clear();
                                         }
+                                        //遍历json数组
                                         ArrayList<MainListData> list = gson.fromJson(response, new
                                                 TypeToken<ArrayList<MainListData>>() {
                                                 }.getType());
@@ -284,6 +309,11 @@ public class MainListFragment extends Fragment {
                 super.onProgressUpdate(values);
             }
 
+            /**
+             * @param code LOAD_SUCCESS:成功获取数据
+             *             CONNECT_ERROR:连接数据库失败
+             *             NETWORK_ERROE:网络错误
+             */
             @Override
             protected void onPostExecute(Integer code) {
                 switch (code) {
@@ -293,7 +323,13 @@ public class MainListFragment extends Fragment {
                             adapter.setOnItemClickListener(new MainListAdapter.OnItemClickListener() {
                                 @Override
                                 public void onItemClick(View view, int position) {
-                                    //启动activity
+                                    //启动活动
+                                    Intent intent = new Intent(mContext, detailActivity.class);
+                                    intent.putExtra("type", list_data.get(position).getType());
+                                    intent.putExtra("content", list_data.get(position).getContent());
+                                    intent.putExtra("time", list_data.get(position).getTime());
+                                    intent.putExtra("username", list_data.get(position).getUsername());
+                                    startActivity(intent);
                                 }
 
                                 @Override
@@ -308,10 +344,10 @@ public class MainListFragment extends Fragment {
                         }
                         break;
                     case CONNECT_ERROR:
-                        Toast.makeText(MainListFragment.this.getContext(), "加载失败!", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(mContext, "加载失败!", Toast.LENGTH_SHORT).show();
                         break;
                     case NETWORK_ERROE:
-                        Toast.makeText(MainListFragment.this.getContext(), "当前没有网络连接!", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(mContext, "当前没有网络连接!", Toast.LENGTH_SHORT).show();
                 }
                 refreshLayout.setRefreshing(false);
             }
@@ -342,9 +378,33 @@ public class MainListFragment extends Fragment {
         return "url" + "begin to end";
     }
 
-//    public void iniArrayList() {
-//        list_data.add(new MainListData(R.mipmap.logo, "类型", "谁在校门口帮我拿一个快递...", "今天"));
+//    @Override
+//    public void onAttach(Context context) {
+//
+//        super.onAttach(context);
 //    }
+
+//    @Override
+//    public void onDestroy() {
+//        localBroadcastManager.unregisterReceiver(localReceiver);
+//        super.onDestroy();
+//    }
+
+    //注册本地广播
+    public void registerBroadcast(){
+        localBroadcastManager = LocalBroadcastManager.getInstance(getActivity());
+         intentFilter = new IntentFilter();
+        intentFilter.addAction("com.example.delitto.myapplication.TASK_SEND");
+        localReceiver = new LocalReceiver();
+        localBroadcastManager.registerReceiver(localReceiver, intentFilter);
+    }
+    //收到广播后，刷新数据
+    class LocalReceiver extends BroadcastReceiver {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            load(true);
+        }
+    }
 }
 
 

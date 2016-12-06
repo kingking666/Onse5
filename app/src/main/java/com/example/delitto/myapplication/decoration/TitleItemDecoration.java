@@ -59,7 +59,7 @@ public class TitleItemDecoration extends RecyclerView.ItemDecoration {
                     drawTitleArea(c, left, right, child, params, position);
 
                 } else {//其他的通过判断
-                    if (null != mDatas.get(position).time && !mDatas.get(position).time.equals(mDatas.get(position - 1).time)) {
+                    if (null != mDatas.get(position).getDate() && !mDatas.get(position).getDate().equals(mDatas.get(position - 1).getDate())) {
                         //不为空 且跟前一个tag不一样了，说明是新的分类，也要title
                         drawTitleArea(c, left, right, child, params, position);
                     } else {
@@ -88,8 +88,8 @@ public class TitleItemDecoration extends RecyclerView.ItemDecoration {
         Paint.FontMetricsInt fontMetrics = mPaint.getFontMetricsInt();
         int baseline = (getMeasuredHeight() - fontMetrics.bottom + fontMetrics.top) / 2 - fontMetrics.top;*/
 
-        mPaint.getTextBounds(mDatas.get(position).time, 0, mDatas.get(position).time.length(), mBounds);
-        c.drawText(mDatas.get(position).time, child.getPaddingLeft(), child.getTop() - params.topMargin - (mTitleHeight / 2 - mBounds.height() / 2), mPaint);
+        mPaint.getTextBounds(mDatas.get(position).getDate(), 0, mDatas.get(position).getDate().length(), mBounds);
+        c.drawText(mDatas.get(position).getDate(), child.getPaddingLeft(), child.getTop() - params.topMargin - (mTitleHeight / 2 - mBounds.height() / 2), mPaint);
     }
 
     @Override
@@ -99,7 +99,7 @@ public class TitleItemDecoration extends RecyclerView.ItemDecoration {
         //修改,当pos<=0时，结束该方法，不然会报错
         if(pos<=0)
             return;
-        String tag = mDatas.get(pos).getTime();
+        String tag = mDatas.get(pos).getDate();
         //View child = parent.getChildAt(pos);
         View child = parent.findViewHolderForLayoutPosition(pos).itemView;//出现一个奇怪的bug，有时候child为空，所以将 child = parent.getChildAt(i)。-》 parent.findViewHolderForLayoutPosition(pos).itemView
         mPaint.setColor(COLOR_TITLE_BG);
@@ -120,7 +120,7 @@ public class TitleItemDecoration extends RecyclerView.ItemDecoration {
             if (position == 0) {//等于0肯定要有title的
                 outRect.set(0, mTitleHeight, 0, 0);
             } else {//其他的通过判断
-                if (null != mDatas.get(position).time && !mDatas.get(position).time.equals(mDatas.get(position - 1).time)) {
+                if (null != mDatas.get(position).getDate() && !mDatas.get(position).getDate().equals(mDatas.get(position - 1).getDate())) {
                     outRect.set(0, mTitleHeight, 0, 0);//不为空 且跟前一个tag不一样了，说明是新的分类，也要title
                 } else {
                     outRect.set(0, 0, 0, 0);
