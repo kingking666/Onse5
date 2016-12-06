@@ -196,9 +196,9 @@ public class detailActivity extends AppCompatActivity {
                 _intent = new Intent(detailActivity.this, MainActivity.class);
                 startActivity(_intent);
                 finish();
-                Intent intent = new Intent("com.example.delitto.myapplication.TASK_SEND");
-//                intent.putExtra("type", CacheService.TYPE_DOUBAN);
-//                intent.putExtra("id", item.getId());
+                //发送广播
+                Intent intent = new Intent("com.example.delitto.myapplication.TASK");
+                intent.putExtra("type","detail_task");
                 LocalBroadcastManager.getInstance(detailActivity.this).sendBroadcast(intent);
             }
         });

@@ -65,6 +65,7 @@ public class MainListFragment extends Fragment {
 
     private Context mContext;
 
+    //本地广播监听
     private LocalReceiver localReceiver;
     private IntentFilter intentFilter;
     private LocalBroadcastManager localBroadcastManager;
@@ -378,31 +379,30 @@ public class MainListFragment extends Fragment {
         return "url" + "begin to end";
     }
 
-//    @Override
-//    public void onAttach(Context context) {
-//
-//        super.onAttach(context);
-//    }
-
-//    @Override
-//    public void onDestroy() {
-//        localBroadcastManager.unregisterReceiver(localReceiver);
-//        super.onDestroy();
-//    }
+    @Override
+    public void onDestroy() {
+        localBroadcastManager.unregisterReceiver(localReceiver);
+        super.onDestroy();
+    }
 
     //注册本地广播
-    public void registerBroadcast(){
+    public void registerBroadcast() {
         localBroadcastManager = LocalBroadcastManager.getInstance(getActivity());
-         intentFilter = new IntentFilter();
-        intentFilter.addAction("com.example.delitto.myapplication.TASK_SEND");
+        intentFilter = new IntentFilter();
+        intentFilter.addAction("com.example.delitto.myapplication.TASK");
         localReceiver = new LocalReceiver();
         localBroadcastManager.registerReceiver(localReceiver, intentFilter);
     }
-    //收到广播后，刷新数据
+
+    //接收广播并重写实现方法
     class LocalReceiver extends BroadcastReceiver {
         @Override
         public void onReceive(Context context, Intent intent) {
-            load(true);
+            //从detail_activity发送过来的本地广播
+            if (intent.getStringExtra("type").equals("detail_task"))
+                load(true);
+            else if(intent.getStringExtra("type").equals("send_task"))
+                load(true);
         }
     }
 }

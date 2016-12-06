@@ -46,7 +46,6 @@ class sendHistoryAdapter extends RecyclerView.Adapter{
     class sendHistoryViewHolder extends RecyclerView.ViewHolder{
         private CircleImageView _circleView;
         private TextView _style;
-        private TextView _place;
         private TextView _state;
         private TextView _time;
 
@@ -54,7 +53,6 @@ class sendHistoryAdapter extends RecyclerView.Adapter{
             super(_itemView);
             _circleView=(CircleImageView)_itemView.findViewById(R.id.send_image);
             _style=(TextView)_itemView.findViewById(R.id.style_send);
-            _place=(TextView)_itemView.findViewById(R.id.place_send);
             _state=(TextView)_itemView.findViewById(R.id.state_send);
             _time=(TextView)_itemView.findViewById(R.id.time_send);
         }
@@ -64,7 +62,7 @@ class sendHistoryAdapter extends RecyclerView.Adapter{
     //实例化展示的View并实例化viewHolder,返回一个viewHolder对象
     //根据item类别加载不同ViewHolder
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup _parent,int _viewType){
-        View _itemview= LayoutInflater.from(_parent.getContext()).inflate(R.layout.send_history,_parent,false);
+        View _itemview= LayoutInflater.from(_parent.getContext()).inflate(R.layout.send_history_item_view,_parent,false);
         sendHistoryViewHolder _viewHolder=new sendHistoryViewHolder(_itemview);
         return _viewHolder;
     }
@@ -74,7 +72,6 @@ class sendHistoryAdapter extends RecyclerView.Adapter{
         SendHistoryData _data=_listData.get(_position);
         ((sendHistoryViewHolder)_holder)._circleView.setImageResource(_data._resouceid);
         ((sendHistoryViewHolder)_holder)._style.setText(_data._style);
-        ((sendHistoryViewHolder)_holder)._place.setText(_data._place);
         ((sendHistoryViewHolder)_holder)._state.setText(_data._state);
         ((sendHistoryViewHolder)_holder)._time.setText(_data._time);
 

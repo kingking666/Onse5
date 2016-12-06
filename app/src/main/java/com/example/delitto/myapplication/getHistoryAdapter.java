@@ -44,7 +44,6 @@ class getHistoryAdapter extends RecyclerView.Adapter{
     class getHistoryViewHolder extends RecyclerView.ViewHolder{
         private CircleImageView _circleView;
         private TextView _style;
-        private TextView _place;
         private TextView _name;
         private TextView _time;
 
@@ -52,7 +51,6 @@ class getHistoryAdapter extends RecyclerView.Adapter{
             super(_itemView);
             _circleView=(CircleImageView)_itemView.findViewById(R.id.get_image);
             _style=(TextView)_itemView.findViewById(R.id.style_get);
-            _place=(TextView)_itemView.findViewById(R.id.place_get);
             _name=(TextView)_itemView.findViewById(R.id.get_name);
             _time=(TextView)_itemView.findViewById(R.id.time_get);
         }
@@ -60,7 +58,7 @@ class getHistoryAdapter extends RecyclerView.Adapter{
 
 
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup _parent,int _viewType){
-        View _itemview= LayoutInflater.from(_parent.getContext()).inflate(R.layout.get_history,_parent,false);
+        View _itemview= LayoutInflater.from(_parent.getContext()).inflate(R.layout.get_history_item_view,_parent,false);
         getHistoryViewHolder _viewHolder=new getHistoryViewHolder(_itemview);
         return _viewHolder;
     }
@@ -70,7 +68,6 @@ class getHistoryAdapter extends RecyclerView.Adapter{
         GetHistoryData _data=_listData.get(_position);
         ((getHistoryViewHolder)_holder)._circleView.setImageResource(_data._resouceid);
         ((getHistoryViewHolder)_holder)._style.setText(_data._style);
-        ((getHistoryViewHolder)_holder)._place.setText(_data._place);
         ((getHistoryViewHolder)_holder)._name.setText(_data._name);
         ((getHistoryViewHolder)_holder)._time.setText(_data._time);
 

@@ -3,12 +3,17 @@ package com.example.delitto.myapplication;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
+import android.os.Message;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.content.LocalBroadcastManager;
 import android.support.v7.app.AlertDialog;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
@@ -21,6 +26,8 @@ import android.widget.Toast;
 
 import com.ashokvarma.bottomnavigation.BottomNavigationBar;
 import com.example.delitto.myapplication.util.DisplayUtil;
+import android.os.Handler;
+import java.util.logging.LogRecord;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 import fr.ganfra.materialspinner.MaterialSpinner;
@@ -40,6 +47,15 @@ public class TaskFragment extends Fragment implements View.OnClickListener {
     private CircleImageView takeoutCircleImage;
     private CircleImageView otherCircleImage;
     private Context mContext;
+    private AlertDialog.Builder _dialog;
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        //http://www.jcodecraeer.com/a/anzhuokaifa/androidkaifa/2014/1120/2025.html
+        //Fragment中控制外部的optionmenu
+        setHasOptionsMenu(true);
+        super.onCreate(savedInstanceState);
+    }
 
     @Nullable
     @Override
@@ -76,11 +92,18 @@ public class TaskFragment extends Fragment implements View.OnClickListener {
         return view;
     }
 
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        inflater.inflate(R.menu.publish_task_menu, menu);
+        super.onCreateOptionsMenu(menu, inflater);
+    }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        if(item.getItemId()==R.id.item_publish){
-            AlertDialog.Builder _dialog = new AlertDialog.Builder(mContext);
+        if (item.getItemId() == R.id.item_publish) {
+            if (!verify())
+                return true;
+            _dialog = new AlertDialog.Builder(mContext);
             _dialog.setTitle("确定");
             _dialog.setMessage("发布任务之后不可取消，是否确认？");
             _dialog.setCancelable(false);
@@ -96,6 +119,8 @@ public class TaskFragment extends Fragment implements View.OnClickListener {
                             new Runnable() {
                                 @Override
                                 public void run() {
+                                    _sendSuccess();
+
                                     _progressDialog.dismiss();
                                 }
                             }, 3000);
@@ -112,28 +137,37 @@ public class TaskFragment extends Fragment implements View.OnClickListener {
     }
 
     public boolean verify() {
+        boolean temp = true;
         if (spinner.getSelectedItem().equals(spinner.getHint())) {
             spinner.setError("请选择该下拉栏");
-            return false;
+            temp = false;
         }
         if (publicEdittext.getText().length() < 5) {
             publicEdittext.setError("字符长度必须大于5");
-            return false;
+            temp = false;
         }
-        if (publicEdittext.getText().length() < 5) {
+        if (privateEdittext.getText().length() < 5) {
             privateEdittext.setError("字符长度必须大于5");
-            return false;
+            temp = false;
         }
         if (inputphone.getText().length() != 11) {
             inputphone.setError("手机号码长度为11位");
-            return false;
+            temp = false;
         }
-        if (expressCircleImage.getBorderColor() == R.color.border_color && otherCircleImage.getBorderColor()
-                == R.color.border_color && takeoutCircleImage.getBorderColor() == R.color.border_color) {
+        int border_color = getResources().getColor(R.color.border_color);
+        if (expressCircleImage.getBorderColor() == border_color && otherCircleImage.getBorderColor()
+                == border_color && takeoutCircleImage.getBorderColor() == border_color) {
             Toast.makeText(mContext, "请选择任务类型!", Toast.LENGTH_SHORT).show();
-            return false;
+            temp = false;
         }
-        return true;
+        Log.d("~verify", temp + "");
+        Log.d("~color", getResources().getColor(R.color.border_color) + "");
+        Log.d("~color", expressCircleImage.getBorderColor() + "");
+        Log.d("~color", otherCircleImage.getBorderColor() + "");
+        if (temp)
+            return true;
+        else
+            return false;
     }
 
     @Override
@@ -175,6 +209,27 @@ public class TaskFragment extends Fragment implements View.OnClickListener {
     private void setUnselectedStyle(CircleImageView cirview) {
         cirview.setBorderColor(getResources().getColor(R.color.border_color));
         cirview.setBorderWidth(DisplayUtil.dip2px(this, 1));
+    }
+
+    public void _sendSuccess() {
+        _dialog = new AlertDialog.Builder(mContext);
+        _dialog.setMessage("领取任务成功！");
+        _dialog.setPositiveButton("确认", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface _dialog, int which) {
+                Intent _intent = new Intent(mContext, MainActivity.class);
+                startActivity(_intent);
+                //intent1 : 刷新数据
+                Intent intent1 = new Intent("com.example.delitto.myapplication.TASK");
+                intent1.putExtra("type","send_task");
+                //intent2 : 更改viewpager页面
+                Intent intent2 = new Intent("com.example.delitto.myapplication.MAINACT");
+                intent2.putExtra("type","change_page");
+                LocalBroadcastManager manager = LocalBroadcastManager.getInstance(mContext);
+                manager.sendBroadcast(intent1);
+                manager.sendBroadcast(intent2);
+            }
+        });
+        _dialog.show();
     }
 
     //解决外层Scrollview和Edittext滚动冲突问题

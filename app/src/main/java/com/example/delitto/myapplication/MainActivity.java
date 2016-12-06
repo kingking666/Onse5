@@ -1,18 +1,20 @@
 package com.example.delitto.myapplication;
 
-import android.app.ProgressDialog;
-import android.content.DialogInterface;
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
+import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.*;
+import android.support.v4.content.LocalBroadcastManager;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
@@ -42,6 +44,10 @@ public class MainActivity extends AppCompatActivity {
     private ViewPager viewPager;
     private static int switchPosition;
 
+    //本地广播监听
+    private LocalReceiver localReceiver;
+    private IntentFilter intentFilter;
+    private LocalBroadcastManager localBroadcastManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,6 +63,8 @@ public class MainActivity extends AppCompatActivity {
         bottomNavigationBar = (BottomNavigationBar) findViewById(R.id.bottom_navigation_bar);
         viewPager = (ViewPager) findViewById(R.id.view_pager);
 
+        //注册本地广播
+        registerBroadcast();
 
         //设置toolbar
         setSupportActionBar(toolbar);
@@ -80,16 +88,23 @@ public class MainActivity extends AppCompatActivity {
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
 //                Log.d("~start","start");
                 switch (item.getItemId()) {
-                    case R.id.drawer_publish: {
+                    case R.id.drawer_send: {
+                        Intent intent = new Intent(MainActivity.this,sendHistoryActivity.class);
+                        //TODO  获取当前的用户id，在下一个activity中直接利用该id查询记录
+                        intent.putExtra("userid","id");
+                        startActivity(intent);
                     }
                     break;
                     case R.id.drawer_get: {
+                        Intent intent = new Intent(MainActivity.this,getHistoryActivity.class);
+                        //TODO 获取当前的用户id，在下一个activity中直接利用该id查询记录
+                        intent.putExtra("userid","id");
+                        startActivity(intent);
                     }
                     break;
                     case R.id.nav_setting: {
                         Intent intent = new Intent(MainActivity.this, SettingActivity.class);
                         startActivity(intent);
-                        Log.d("~start", "start");
                     }
                     break;
                 }
@@ -174,8 +189,8 @@ public class MainActivity extends AppCompatActivity {
                 floatingActionButton.setTag("refresh");
                 break;
             case 1:
-                getMenuInflater().inflate(R.menu.publish_task_menu, menu);
-                toolbar.setTitle("发布任务");
+//                getMenuInflater().inflate(R.menu.publish_task_menu, menu);
+//                toolbar.setTitle("发布任务");
                 floatingActionButton.hide();
                 break;
             case 2:
@@ -200,36 +215,37 @@ public class MainActivity extends AppCompatActivity {
                 intent = new Intent(MainActivity.this, SettingActivity.class);
                 startActivity(intent);
                 return true;
-            case R.id.item_publish: {
-                AlertDialog.Builder _dialog = new AlertDialog.Builder(MainActivity.this);
-                _dialog.setTitle("确定");
-                _dialog.setMessage("发布任务之后不可取消，是否确认？");
-                _dialog.setCancelable(false);
-                _dialog.setPositiveButton("确认", new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface _dialog, int which) {
-                        final ProgressDialog _progressDialog = new ProgressDialog(MainActivity.this);   //弹出进度条
-                        _progressDialog.setTitle("正在确认发布");
-                        _progressDialog.setMessage("请稍后..");
-                        _progressDialog.show();
-                        //3秒后返回首页
-                        new android.os.Handler().postDelayed(
-                                new Runnable() {
-                                    @Override
-                                    public void run() {
-                                        _progressDialog.dismiss();
-                                    }
-                                }, 3000);
-                    }
-                });
-                _dialog.setNegativeButton("取消", new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface _dialog, int which) {
-                    }
-                });
-                _dialog.show();
-                return true;
-            }
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    //注册本地广播
+    public void registerBroadcast() {
+        localBroadcastManager = LocalBroadcastManager.getInstance(MainActivity.this);
+        intentFilter = new IntentFilter();
+        intentFilter.addAction("com.example.delitto.myapplication.MAINACT");
+        localReceiver = new LocalReceiver();
+        localBroadcastManager.registerReceiver(localReceiver, intentFilter);
+    }
+
+    //接收广播并重写实现方法
+    class LocalReceiver extends BroadcastReceiver {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            if (intent.getStringExtra("type").equals("change_page"))
+                //TODO 当发送完成任务后，如果同时刷新和更改页面，TitleDecoration会抛出异常，故延迟一秒执行
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        viewPager.setCurrentItem(0);
+                    }
+                }, 1000);
+        }
+    }
+
+    public void onDestroy() {
+        localBroadcastManager.unregisterReceiver(localReceiver);
+        super.onDestroy();
     }
 
     @Override

@@ -1,22 +1,18 @@
 package com.example.delitto.myapplication;
 
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.ListView;
 import android.widget.Toast;
 
 import com.example.delitto.myapplication.Bean.GetHistoryData;
-import com.example.delitto.myapplication.Bean.SendHistoryData;
 import com.example.delitto.myapplication.decoration.DividerItemDecoration;
 
 import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Created by Administrator on 2016/12/5.
@@ -31,7 +27,7 @@ public class getHistoryActivity extends AppCompatActivity {
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.get_historyfragment);
+        setContentView(R.layout.activity_get_history);
 
         _listdata = new ArrayList<>();
         iniArrayList();
@@ -67,7 +63,7 @@ public class getHistoryActivity extends AppCompatActivity {
     //设置对toolbar的按钮监听
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
-            case R.id.home:
+            case android.R.id.home:
                 onBackPressed();
                 return true;
             default:
