@@ -96,7 +96,10 @@ public class TitleItemDecoration extends RecyclerView.ItemDecoration {
     public void onDrawOver(Canvas c, RecyclerView parent, RecyclerView.State state) {//最后调用 绘制在最上层
         int pos = ((LinearLayoutManager) (parent.getLayoutManager())).findFirstVisibleItemPosition();
 
-        String tag = mDatas.get(pos).time;
+        //修改,当pos<=0时，结束该方法，不然会报错
+        if(pos<=0)
+            return;
+        String tag = mDatas.get(pos).getTime();
         //View child = parent.getChildAt(pos);
         View child = parent.findViewHolderForLayoutPosition(pos).itemView;//出现一个奇怪的bug，有时候child为空，所以将 child = parent.getChildAt(i)。-》 parent.findViewHolderForLayoutPosition(pos).itemView
         mPaint.setColor(COLOR_TITLE_BG);

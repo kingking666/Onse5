@@ -16,6 +16,7 @@
     <!--其他-->
     <color name="popup_press">#FAFAFA</color>
     <color name="popup_unpress">#ECEFF1</color>
+    <color name="red">#B71C1C</color>
 
     <!--exit_button-->
     <color name="exit_highlight">#B71C1C</color>

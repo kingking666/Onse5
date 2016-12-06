@@ -28,7 +28,7 @@ class MessageListAdapter extends RecyclerView.Adapter {
 
 
     //自定义接口的一个对象
-    private MessageListAdapter.OnItemClickListener onItemClickListener;
+    private OnItemClickListener onItemClickListener;
 
     //写为一个自定义接口，在主acitiity代码中添加具体的实现内容
     //再在myAdapter中传入对应被Click时每项的参数，并调用对用方法

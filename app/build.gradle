@@ -1,5 +1,4 @@
 apply plugin: 'com.android.application'
-
 android {
     compileSdkVersion 25
     buildToolsVersion "25.0.0"
@@ -39,4 +38,8 @@ android {
         compile 'com.android.support:preference-v14:25.0.1'
 
     }
+}
+
+dependencies {
+    compile 'com.google.code.gson:gson:2.8.0'
 }

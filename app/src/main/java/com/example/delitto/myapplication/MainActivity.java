@@ -125,6 +125,8 @@ public class MainActivity extends AppCompatActivity {
         fragmentArrayList.add(new MessageFragment());
         myFragmentPagerAdapter = new MyFragmentPagerAdapter(this.getSupportFragmentManager(), fragmentArrayList);
         viewPager.setAdapter(myFragmentPagerAdapter);
+        //增加viewpager的缓存页面，防止被销毁
+        viewPager.setOffscreenPageLimit(2);
         viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
@@ -135,7 +137,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onPageSelected(int position) {
                 switchPosition = position;
-//                Log.d("~selected", "+(" + position + ")");
+////                Log.d("~selected", "+(" + position + ")");
                 bottomNavigationBar.clearAll();
                 bottomNavigationBar.addItem(new BottomNavigationItem(R.mipmap.ic_store_black_24dp, "列表"));
                 bottomNavigationBar.addItem(new BottomNavigationItem(R.mipmap.ic_add_circle_black_24dp, "发布"));
@@ -150,7 +152,7 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onPageScrollStateChanged(int state) {
-                Log.d("~statechanged", "+(" + state + ")");
+//                Log.d("~statechanged", "+(" + state + ")");
             }
         });
     }

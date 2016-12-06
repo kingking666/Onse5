@@ -100,12 +100,11 @@ class MainListAdapter extends RecyclerView.Adapter {
 //        ((MyViewHolder) holder).textView.setText("item" + position);
 //        ((MyViewHolder) holder).imageView.setImageResource(R.mipmap.ic_launcher);
         MainListData data = list_data.get(position);
-        String title = data.title[0] + "·" + data.title[1];
         //初始化 触发morebutton后弹出的popupDialog
         popupDialog = new PopupDialog((Activity) fragment.getContext());
-        ((RequireViewHolder) holder).titleview1.setText(title);
-        ((RequireViewHolder) holder).contentview1.setText(data.content);
-        ((RequireViewHolder) holder).imageView1.setImageResource(data.resourceid);
+        ((RequireViewHolder) holder).titleview1.setText(data.getTitle());
+        ((RequireViewHolder) holder).contentview1.setText(data.getContent());
+        ((RequireViewHolder) holder).imageView1.setImageResource(data.getResourceid());
         ((RequireViewHolder) holder).morebutton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
