@@ -1,5 +1,7 @@
 package com.example.delitto.myapplication;
 
+import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.design.widget.CoordinatorLayout;
@@ -10,6 +12,7 @@ import android.support.v4.view.GravityCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
@@ -64,7 +67,7 @@ public class MainActivity extends AppCompatActivity {
         drawerLayout.addDrawerListener(actionBarDrawerToggle);
 
         //fab点击事件
-        floatingActionButton. setOnClickListener(new View.OnClickListener() {
+        floatingActionButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
@@ -86,7 +89,7 @@ public class MainActivity extends AppCompatActivity {
                     case R.id.nav_setting: {
                         Intent intent = new Intent(MainActivity.this, SettingActivity.class);
                         startActivity(intent);
-                        Log.d("~start","start");
+                        Log.d("~start", "start");
                     }
                     break;
                 }
@@ -190,24 +193,50 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         Intent intent;
-        switch (item.getItemId()){
+        switch (item.getItemId()) {
             case R.id.item_change_theme:
                 return true;
             case R.id.item_seeting:
-                intent = new Intent(MainActivity.this,SettingActivity.class);
+                intent = new Intent(MainActivity.this, SettingActivity.class);
                 startActivity(intent);
                 return true;
-            default:
-                return super.onOptionsItemSelected(item);
-
+            case R.id.item_publish: {
+                AlertDialog.Builder _dialog = new AlertDialog.Builder(MainActivity.this);
+                _dialog.setTitle("确定");
+                _dialog.setMessage("发布任务之后不可取消，是否确认？");
+                _dialog.setCancelable(false);
+                _dialog.setPositiveButton("确认", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface _dialog, int which) {
+                        final ProgressDialog _progressDialog = new ProgressDialog(MainActivity.this);   //弹出进度条
+                        _progressDialog.setTitle("正在确认发布");
+                        _progressDialog.setMessage("请稍后..");
+                        _progressDialog.show();
+                        //3秒后返回首页
+                        new android.os.Handler().postDelayed(
+                                new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        _progressDialog.dismiss();
+                                    }
+                                }, 3000);
+                    }
+                });
+                _dialog.setNegativeButton("取消", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface _dialog, int which) {
+                    }
+                });
+                _dialog.show();
+                return true;
+            }
         }
+        return super.onOptionsItemSelected(item);
     }
 
     @Override
-    public void onBackPressed(){
-        if(drawerLayout.isDrawerOpen(navigationView)){
+    public void onBackPressed() {
+        if (drawerLayout.isDrawerOpen(navigationView)) {
             drawerLayout.closeDrawers();
-        }else {
+        } else {
             super.onBackPressed();
         }
     }
