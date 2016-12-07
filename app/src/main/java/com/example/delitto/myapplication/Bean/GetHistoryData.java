@@ -5,36 +5,41 @@ package com.example.delitto.myapplication.Bean;
  */
 
 public class GetHistoryData {
-    public int _resouceid;
-    public String _style;
-    public String _place;
-    public String _time;
-    public String _name;
+    public int resouceid;
+    public String type;
+    public String date;
+    public String username;
+    public int userid;
 
-    public GetHistoryData(int _resouceid, String _style, String _place, String _time, String _name) {
-        this._resouceid = _resouceid;
-        this._style = _style;
-        this._place = _place;
-        this._time = _time;
-        this._name = _name;
+    public GetHistoryData(int resouceid, String type, String date, String username, int userid) {
+        this.userid = userid;
+        this.resouceid = resouceid;
+        this.type = type;
+        this.date = date;
+        this.username = username;
     }
+
+    public int get_userid() {
+        return userid;
+    }
+
+    public void set_userid(int userid) {
+        this.userid = userid;
+    }
+
     public int get_resouceid() {
-        return _resouceid;
+        return resouceid;
     }
 
-    public String get_style() {
-        return _style;
+    public String get_type() {
+        return type;
     }
 
-    public String get_place() {
-        return _place;
+    public String get_date() {
+        return date;
     }
 
-    public String get_time() {
-        return _time;
-    }
-
-    public String get_name() {
-        return _name;
+    public String get_username() {
+        return username;
     }
 }

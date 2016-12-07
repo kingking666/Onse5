@@ -6,6 +6,7 @@
     android:paddingBottom="25dp"
     android:orientation="vertical">
 
+    <!--在SettingActivity的exit(View v) 方法中调用-->
     <Button
         android:id="@+id/exit_button"
         android:padding="15dp"

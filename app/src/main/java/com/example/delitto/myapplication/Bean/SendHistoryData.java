@@ -6,37 +6,37 @@ package com.example.delitto.myapplication.Bean;
 
 public class SendHistoryData {
     public int _resouceid;
-    public String _style;
-    public String _place;
-    public String _time;
-    public String _state;
+    public String type;
+    public String date;
+    public String state;
+    public int userid;
 
     //保存数据
-    public SendHistoryData(int _resouceid, String _style, String __place, String _time, String _state) {
+    public SendHistoryData(int _resouceid, String type, String date, String state,int userid) {
         this._resouceid = _resouceid;
-        this._style = _style;
-        this._place = __place;
-        this._time = _time;
-        this._state = _state;
+        this.type = type;
+        this.date = date;
+        this.state = state;
+        this.userid = userid;
+    }
+
+    public int getUserid() {
+        return userid;
     }
 
     public int get_resouceid() {
         return _resouceid;
     }
 
-    public String get_style() {
-        return _style;
+    public String gettype() {
+        return type;
     }
 
-    public String get_place() {
-        return _place;
+    public String getdate() {
+        return date;
     }
 
-    public String get_time() {
-        return _time;
-    }
-
-    public String get_state() {
-        return _state;
+    public String getstate() {
+        return state;
     }
 }

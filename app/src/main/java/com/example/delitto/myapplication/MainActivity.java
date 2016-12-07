@@ -119,7 +119,6 @@ public class MainActivity extends AppCompatActivity {
         bottomNavigationBar.addItem(new BottomNavigationItem(R.mipmap.ic_add_circle_black_24dp, "发布"));
         bottomNavigationBar.addItem(new BottomNavigationItem(R.mipmap.ic_chat_bubble_black_24dp, "消息")
                 .setBadgeItem(new BadgeItem().setText("5").setTextColor("#ffffff")));
-//        bottomNavigationBar.setFab(floatingActionButton);
         bottomNavigationBar.initialise();
         bottomNavigationBar.setTabSelectedListener(new BottomNavigationBar.OnTabSelectedListener() {
             @Override
@@ -155,7 +154,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onPageSelected(int position) {
                 switchPosition = position;
-////                Log.d("~selected", "+(" + position + ")");
+//                Log.d("~selected", "+(" + position + ")");
                 bottomNavigationBar.clearAll();
                 bottomNavigationBar.addItem(new BottomNavigationItem(R.mipmap.ic_store_black_24dp, "列表"));
                 bottomNavigationBar.addItem(new BottomNavigationItem(R.mipmap.ic_add_circle_black_24dp, "发布"));
@@ -189,8 +188,9 @@ public class MainActivity extends AppCompatActivity {
                 floatingActionButton.setTag("refresh");
                 break;
             case 1:
-//                getMenuInflater().inflate(R.menu.publish_task_menu, menu);
-//                toolbar.setTitle("发布任务");
+                //在fragment中生成菜单，并监听事件,解耦处理
+                getMenuInflater().inflate(R.menu.publish_task_menu, menu);
+                toolbar.setTitle("发布任务");
                 floatingActionButton.hide();
                 break;
             case 2:
@@ -238,6 +238,7 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void run() {
                         viewPager.setCurrentItem(0);
+                        myFragmentPagerAdapter.notifyDataSetChanged();
                     }
                 }, 1000);
         }

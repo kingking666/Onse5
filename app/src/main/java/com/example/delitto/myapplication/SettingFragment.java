@@ -109,33 +109,8 @@ public class SettingFragment extends PreferenceFragmentCompat {
                 return false;
             }
         });
-
-//        Preference preference = findPreference("exit");
-//        preference.setWidgetLayoutResource(R.layout.layout_exit_button);
-////        Log.d("~name",""+preference.get);
-//        findPreference("exit").setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
-//            @Override
-//            public boolean onPreferenceClick(Preference preference) {
-////                Log.d("~click", "true");
-////                Log.d("~inflate", view + "");
-////                Log.d("~test", "" + view.isShown());
-////
-////                Button button = (Button) view.findViewById(R.id.exit_button);
-////                button.setOnClickListener(new View.OnClickListener() {
-////                    @Override
-////                    public void onClick(View view) {
-////                        Log.d("~test", "true");
-////                    }
-////                });
-//                return false;
-//            }
-//        });
-
     }
 
-//    public void exit (View v) {
-//        Log.d("~", "ffff");
-//    }
 
     protected void update() {
         final ProgressDialog progressDialog = new ProgressDialog(activity);

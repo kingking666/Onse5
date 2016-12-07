@@ -147,6 +147,8 @@ public class detailActivity extends AppCompatActivity {
                                 new Runnable() {
                                     @Override
                                     public void run() {
+                                        //FIXME 这里进行上传数据处理,监听上传成功和失败的情况回调函数
+
                                         //if(任务还没被领取，则领取成功)
                                         _getSuccess();
                                         //else{若任务已被领取，则领取不成功}

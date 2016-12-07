@@ -92,15 +92,11 @@ public class TaskFragment extends Fragment implements View.OnClickListener {
         return view;
     }
 
-    @Override
-    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        inflater.inflate(R.menu.publish_task_menu, menu);
-        super.onCreateOptionsMenu(menu, inflater);
-    }
-
+    //在fragment设置菜单监听
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == R.id.item_publish) {
+            //验证
             if (!verify())
                 return true;
             _dialog = new AlertDialog.Builder(mContext);
@@ -114,6 +110,7 @@ public class TaskFragment extends Fragment implements View.OnClickListener {
                     _progressDialog.setMessage("请稍后..");
                     _progressDialog.show();
 
+                    //FIXME 这里进行上传数据处理,监听上传成功和失败的情况回调函数
                     //3秒后返回首页
                     new android.os.Handler().postDelayed(
                             new Runnable() {
@@ -136,6 +133,7 @@ public class TaskFragment extends Fragment implements View.OnClickListener {
         return super.onOptionsItemSelected(item);
     }
 
+    //验证
     public boolean verify() {
         boolean temp = true;
         if (spinner.getSelectedItem().equals(spinner.getHint())) {
@@ -160,10 +158,10 @@ public class TaskFragment extends Fragment implements View.OnClickListener {
             Toast.makeText(mContext, "请选择任务类型!", Toast.LENGTH_SHORT).show();
             temp = false;
         }
-        Log.d("~verify", temp + "");
-        Log.d("~color", getResources().getColor(R.color.border_color) + "");
-        Log.d("~color", expressCircleImage.getBorderColor() + "");
-        Log.d("~color", otherCircleImage.getBorderColor() + "");
+//        Log.d("~verify", temp + "");
+//        Log.d("~color", getResources().getColor(R.color.border_color) + "");
+//        Log.d("~color", expressCircleImage.getBorderColor() + "");
+//        Log.d("~color", otherCircleImage.getBorderColor() + "");
         if (temp)
             return true;
         else
@@ -227,9 +225,21 @@ public class TaskFragment extends Fragment implements View.OnClickListener {
                 LocalBroadcastManager manager = LocalBroadcastManager.getInstance(mContext);
                 manager.sendBroadcast(intent1);
                 manager.sendBroadcast(intent2);
+                reload();
             }
         });
         _dialog.show();
+    }
+
+    //重新加载视图
+    public void reload(){
+        spinner.setSelection(0);
+        setUnselectedStyle(takeoutCircleImage);
+        setUnselectedStyle(otherCircleImage);
+        setUnselectedStyle(expressCircleImage);
+        publicEdittext.setText("");
+        privateEdittext.setText("");
+        inputphone.setText("");
     }
 
     //解决外层Scrollview和Edittext滚动冲突问题

@@ -16,15 +16,6 @@
         apps:showAsAction="ifRoom">
         <menu>
             <group>
-                <item android:title="按报酬">
-                    <menu>
-                        <item android:title="升序" />
-                        <item android:title="降序" />
-                    </menu>
-                </item>
-            </group>
-
-            <group>
                 <item android:title="按类型">
                     <menu>
                         <item android:title="外卖" />
@@ -33,7 +24,6 @@
                     </menu>
                 </item>
             </group>
-
         </menu>
 
     </item>

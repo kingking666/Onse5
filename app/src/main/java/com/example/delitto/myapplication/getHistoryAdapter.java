@@ -43,16 +43,16 @@ class getHistoryAdapter extends RecyclerView.Adapter{
 
     class getHistoryViewHolder extends RecyclerView.ViewHolder{
         private CircleImageView _circleView;
-        private TextView _style;
-        private TextView _name;
-        private TextView _time;
+        private TextView _type;
+        private TextView _username;
+        private TextView _date;
 
         public getHistoryViewHolder(View _itemView){
             super(_itemView);
             _circleView=(CircleImageView)_itemView.findViewById(R.id.get_image);
-            _style=(TextView)_itemView.findViewById(R.id.style_get);
-            _name=(TextView)_itemView.findViewById(R.id.get_name);
-            _time=(TextView)_itemView.findViewById(R.id.time_get);
+            _type=(TextView)_itemView.findViewById(R.id.type_get);
+            _username=(TextView)_itemView.findViewById(R.id.get_username);
+            _date=(TextView)_itemView.findViewById(R.id.date_get);
         }
     }
 
@@ -66,10 +66,10 @@ class getHistoryAdapter extends RecyclerView.Adapter{
 
     public void onBindViewHolder(final RecyclerView.ViewHolder _holder,int _position){
         GetHistoryData _data=_listData.get(_position);
-        ((getHistoryViewHolder)_holder)._circleView.setImageResource(_data._resouceid);
-        ((getHistoryViewHolder)_holder)._style.setText(_data._style);
-        ((getHistoryViewHolder)_holder)._name.setText(_data._name);
-        ((getHistoryViewHolder)_holder)._time.setText(_data._time);
+        ((getHistoryViewHolder)_holder)._circleView.setImageResource(_data.get_resouceid());
+        ((getHistoryViewHolder)_holder)._type.setText(_data.get_type());
+        ((getHistoryViewHolder)_holder)._username.setText(_data.get_username());
+        ((getHistoryViewHolder)_holder)._date.setText(_data.get_date());
 
 
         _holder.itemView.setOnClickListener(new View.OnClickListener(){

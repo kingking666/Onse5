@@ -39,6 +39,7 @@ public class SettingActivity extends AppCompatActivity {
 
     }
 
+    //NOTE 自定义退出登录的执行方法，，暂时没找到其他方法获取实例化的exit_button，只能在xml的onClick方法中调用
     public void exit(View view) {
         final AlertDialog.Builder dialog = new AlertDialog.Builder(SettingActivity.this);
         dialog.setTitle("退出登录");

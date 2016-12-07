@@ -45,16 +45,16 @@ class sendHistoryAdapter extends RecyclerView.Adapter{
     //自定义viewHolder，获取每个子视图对象的里面的控件
     class sendHistoryViewHolder extends RecyclerView.ViewHolder{
         private CircleImageView _circleView;
-        private TextView _style;
+        private TextView _type;
         private TextView _state;
-        private TextView _time;
+        private TextView _date;
 
         public sendHistoryViewHolder(View _itemView){
             super(_itemView);
             _circleView=(CircleImageView)_itemView.findViewById(R.id.send_image);
-            _style=(TextView)_itemView.findViewById(R.id.style_send);
+            _type=(TextView)_itemView.findViewById(R.id.type_send);
             _state=(TextView)_itemView.findViewById(R.id.state_send);
-            _time=(TextView)_itemView.findViewById(R.id.time_send);
+            _date=(TextView)_itemView.findViewById(R.id.date_send);
         }
     }
 
@@ -71,9 +71,9 @@ class sendHistoryAdapter extends RecyclerView.Adapter{
     public void onBindViewHolder(final RecyclerView.ViewHolder _holder,int _position){
         SendHistoryData _data=_listData.get(_position);
         ((sendHistoryViewHolder)_holder)._circleView.setImageResource(_data._resouceid);
-        ((sendHistoryViewHolder)_holder)._style.setText(_data._style);
-        ((sendHistoryViewHolder)_holder)._state.setText(_data._state);
-        ((sendHistoryViewHolder)_holder)._time.setText(_data._time);
+        ((sendHistoryViewHolder)_holder)._type.setText(_data.gettype());
+        ((sendHistoryViewHolder)_holder)._state.setText(_data.getstate());
+        ((sendHistoryViewHolder)_holder)._date.setText(_data.getdate());
 
         //实际的itemView监听者
         _holder.itemView.setOnClickListener(new View.OnClickListener(){

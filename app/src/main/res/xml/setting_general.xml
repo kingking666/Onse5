@@ -47,6 +47,7 @@
             android:title="检查更新" />
 
     </PreferenceCategory>
+
     <Preference
         android:selectable="false"
         android:layout="@layout/layout_exit_button"

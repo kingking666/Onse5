@@ -16,10 +16,8 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.delitto.myapplication.Listener.HttpCallbackListener;
@@ -88,14 +86,8 @@ public class MainListFragment extends Fragment {
         layoutManager = new WrapContentLinearLayoutManager(this.getContext(), LinearLayoutManager.VERTICAL, false);
         recyclerView.setLayoutManager(layoutManager);
 
-        //设置下拉刷新的按钮的颜色
-        refreshLayout.setColorSchemeResources(android.R.color.holo_blue_bright, android.R.color.holo_green_light, android.R.color.holo_orange_light, android.R.color.holo_red_light);
-        //设置手指在屏幕上下拉多少距离开始刷新
-        refreshLayout.setDistanceToTriggerSync(300);
-        //设置下拉刷新按钮的背景颜色
-        refreshLayout.setProgressBackgroundColorSchemeColor(Color.WHITE);
-        //设置下拉刷新按钮的大小
-        refreshLayout.setSize(SwipeRefreshLayout.DEFAULT);
+        //初始化refresh
+        inirefresh();
 
         //首次初始化fragment时候刷新一次数据
         load(true);
@@ -109,15 +101,6 @@ public class MainListFragment extends Fragment {
         //注册广播
         registerBroadcast();
 
-//        addItem = (Button) findViewById(R.id.add_item);
-//        deleteItem = (Button) findViewById(R.id.delete_item);
-//        addItem.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                myAdapter.addItem(R.mipmap.logo, "new Item");
-//                linearLayoutManager.scrollToPosition(0);
-//            }
-//        });
 //        deleteItem.setOnClickListener(new View.OnClickListener() {
 //            @Override
 //            public void onClick(View v) {
@@ -125,7 +108,6 @@ public class MainListFragment extends Fragment {
 //                linearLayoutManager.scrollToPosition(0);
 //            }
 //        });
-
 
         refreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             //当上拉刷新时
@@ -172,7 +154,6 @@ public class MainListFragment extends Fragment {
             @Override
             public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
                 super.onScrolled(recyclerView, dx, dy);
-//                Log.d("dy",dy+"");
                 isSlidingToLast = dy > 0;
                 //上下隐藏fab
                 if (dy > 0) {
@@ -192,33 +173,6 @@ public class MainListFragment extends Fragment {
                     load(true);
             }
         });
-
-        //myAdapter设置自定义接口监听者,重写OnItemClickLIstener的方法
-//        adapter.setOnItemClickListener(new MainListAdapter.OnItemClickListener() {
-//
-//            @Override
-//            public void onItemClick(View view, int position) {
-//                Toast.makeText(getContext(), "You click item" + position, Toast.LENGTH_SHORT).show();
-//            }
-//
-//            @Override
-//            public void onItemLongClick(View view, int position) {
-//                Toast.makeText(getContext(), "You click item" + position, Toast.LENGTH_SHORT).show();
-//            }
-//        });
-
-//        recyclerView.setOnTouchListener(
-//                new View.OnTouchListener() {
-//                    @Override
-//                    public boolean onTouch(View v, MotionEvent event) {
-//                        if (mIsRefreshing) {
-//                            return true;
-//                        } else {
-//                            return false;
-//                        }
-//                    }
-//                }
-//        );
         return view;
     }
 
@@ -231,10 +185,12 @@ public class MainListFragment extends Fragment {
         new AsyncTask<Void, Void, Integer>() {
             @Override
             protected void onPreExecute() {
+                //当刷新时，当前页为1，处于刷新状态
                 if (clearing) {
                     currentPage = 1;
                     refreshLayout.setRefreshing(true);
-                } else {
+                } //加载更多时，page++
+                else {
                     currentPage++;
                 }
             }
@@ -252,7 +208,7 @@ public class MainListFragment extends Fragment {
 //                        count = getCount();
 //                    else
 //                        return CONNECT_ERROR;
-                    totalPage = (int) Math.ceil((double) 37 / per);
+                    totalPage = (int) Math.ceil((double) count / per);
                     Log.d("~total", totalPage + "");
 
                     //查询当前页数 至 下一页数的 任务列表
@@ -286,8 +242,8 @@ public class MainListFragment extends Fragment {
                                             list_data.add(item);
                                         }
                                     } catch (Exception e) {
-                                        Log.d("~Exception", e.getMessage());
                                         e.printStackTrace();
+                                        return CONNECT_ERROR;
                                     }
                                     return LOAD_SUCCESS;
                                 }
@@ -338,10 +294,9 @@ public class MainListFragment extends Fragment {
                                 }
                             });
                             recyclerView.setAdapter(adapter);
-                            Log.d("~setadapter", "true");
                         } else {
+                            //通知recyclerview更新数据
                             adapter.notifyDataSetChanged();
-                            Log.d("~notifyadapter", "true");
                         }
                         break;
                     case CONNECT_ERROR:
@@ -404,6 +359,17 @@ public class MainListFragment extends Fragment {
             else if(intent.getStringExtra("type").equals("send_task"))
                 load(true);
         }
+    }
+
+    public void inirefresh(){
+        //设置下拉刷新的按钮的颜色
+        refreshLayout.setColorSchemeResources(R.color.primary_dark, android.R.color.holo_green_light, android.R.color.holo_orange_light, android.R.color.holo_red_light);
+        //设置手指在屏幕上下拉多少距离开始刷新
+        refreshLayout.setDistanceToTriggerSync(300);
+        //设置下拉刷新按钮的背景颜色
+        refreshLayout.setProgressBackgroundColorSchemeColor(Color.WHITE);
+        //设置下拉刷新按钮的大小
+        refreshLayout.setSize(SwipeRefreshLayout.DEFAULT);
     }
 }
 
