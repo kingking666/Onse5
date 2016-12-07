@@ -129,21 +129,21 @@
     </item>
     <item
         is-multidex="false"
-        jar="D:\android_project\Onse5\app\build\intermediates\exploded-aar\com.android.support\support-core-ui\25.0.1\jars\libs\internal_impl-25.0.1.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="25.0.0"
-        sha1="e5343c9d19cb19ff55f6b268c7f3fe8c9d224f6f">
-        <dex dex="D:\android_project\Onse5\app\build\intermediates\pre-dexed\debug\internal_impl-25.0.1_5a91f893ea389c401c88b9bcc6b6d0d1c6f93013.jar" />
-    </item>
-    <item
-        is-multidex="false"
         jar="D:\android_project\Onse5\app\build\intermediates\exploded-aar\com.android.support\animated-vector-drawable\25.0.1\jars\classes.jar"
         jumboMode="false"
         optimize="true"
         revision="25.0.0"
         sha1="772bed2d992b67b9d0327f766cc95cd63031dcd3">
         <dex dex="D:\android_project\Onse5\app\build\intermediates\pre-dexed\debug\com.android.support-animated-vector-drawable-25.0.1_2a300dc7adc591f4385f21fedea28e62b1848871.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="D:\android_project\Onse5\app\build\intermediates\exploded-aar\com.android.support\support-core-ui\25.0.1\jars\libs\internal_impl-25.0.1.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.0"
+        sha1="e5343c9d19cb19ff55f6b268c7f3fe8c9d224f6f">
+        <dex dex="D:\android_project\Onse5\app\build\intermediates\pre-dexed\debug\internal_impl-25.0.1_5a91f893ea389c401c88b9bcc6b6d0d1c6f93013.jar" />
     </item>
     <item
         is-multidex="false"

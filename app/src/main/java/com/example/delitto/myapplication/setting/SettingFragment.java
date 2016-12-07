@@ -1,4 +1,4 @@
-package com.example.delitto.myapplication;
+package com.example.delitto.myapplication.setting;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
@@ -18,6 +18,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.Toast;
+
+import com.example.delitto.myapplication.R;
 
 /**
  * Created by pokedo on 2016/11/30.

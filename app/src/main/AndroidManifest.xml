@@ -31,28 +31,28 @@
         </activity>
 
         <activity
-            android:name=".getHistoryActivity"
+            android:name=".getHistory.getHistoryActivity"
             android:label="领取历史"
             android:theme="@style/AppTheme">
 
         </activity>
 
         <activity
-            android:name=".sendHistoryActivity"
+            android:name=".sendHistory.sendHistoryActivity"
             android:label="发布历史"
             android:theme="@style/AppTheme">
 
         </activity>
 
         <activity
-            android:name=".detailActivity"
+            android:name=".detail.detailActivity"
             android:label="任务详情"
             android:theme="@style/AppTheme">
 
         </activity>
 
         <activity
-            android:name=".SettingActivity"
+            android:name=".setting.SettingActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:label="设置"
             android:theme="@style/AppTheme" />

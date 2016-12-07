@@ -1,4 +1,4 @@
-package com.example.delitto.myapplication;
+package com.example.delitto.myapplication.sendHistory;
 
 import android.content.Context;
 import android.graphics.Color;
@@ -13,9 +13,9 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 
-import com.example.delitto.myapplication.Bean.GetHistoryData;
 import com.example.delitto.myapplication.Bean.SendHistoryData;
 import com.example.delitto.myapplication.Listener.HttpCallbackListener;
+import com.example.delitto.myapplication.R;
 import com.example.delitto.myapplication.decoration.DividerItemDecoration;
 import com.example.delitto.myapplication.other.WrapContentLinearLayoutManager;
 import com.example.delitto.myapplication.util.HttpUtil;

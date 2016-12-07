@@ -18,7 +18,6 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -28,6 +27,9 @@ import android.view.Window;
 import com.ashokvarma.bottomnavigation.BadgeItem;
 import com.ashokvarma.bottomnavigation.BottomNavigationBar;
 import com.ashokvarma.bottomnavigation.BottomNavigationItem;
+import com.example.delitto.myapplication.getHistory.getHistoryActivity;
+import com.example.delitto.myapplication.sendHistory.sendHistoryActivity;
+import com.example.delitto.myapplication.setting.SettingActivity;
 
 import java.util.ArrayList;
 

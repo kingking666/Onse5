@@ -1,4 +1,4 @@
-package com.example.delitto.myapplication;
+package com.example.delitto.myapplication.sendHistory;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.example.delitto.myapplication.Bean.SendHistoryData;
+import com.example.delitto.myapplication.R;
 
 import java.util.ArrayList;
 

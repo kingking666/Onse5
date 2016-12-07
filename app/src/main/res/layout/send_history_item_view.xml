@@ -42,17 +42,28 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
         <TextView
             android:id="@+id/date_send"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="5dp"
             android:layout_marginTop="5dp"
-            android:layout_marginRight="10dp"
             android:gravity="right"
-            android:textSize="12dp"
+            android:textSize="11dp"
             tools:text="刚刚" />
+
+        <Button
+            android:layout_gravity="right"
+            android:id="@+id/exit_button"
+            android:layout_marginTop="2dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="确认完成"
+            android:textSize="13sp"
+            android:theme="@style/ExitButtonStyle" />
     </LinearLayout>
 
 </LinearLayout>

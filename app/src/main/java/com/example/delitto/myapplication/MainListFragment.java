@@ -24,6 +24,7 @@ import com.example.delitto.myapplication.Listener.HttpCallbackListener;
 import com.example.delitto.myapplication.Bean.MainListData;
 import com.example.delitto.myapplication.decoration.DividerItemDecoration;
 import com.example.delitto.myapplication.decoration.TitleItemDecoration;
+import com.example.delitto.myapplication.detail.detailActivity;
 import com.example.delitto.myapplication.other.WrapContentLinearLayoutManager;
 import com.example.delitto.myapplication.util.HttpUtil;
 import com.example.delitto.myapplication.util.NetworkState;

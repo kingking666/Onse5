@@ -1,7 +1,6 @@
-package com.example.delitto.myapplication;
+package com.example.delitto.myapplication.getHistory;
 
 import android.content.Context;
-import android.content.Intent;
 import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -10,14 +9,13 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 
 import com.example.delitto.myapplication.Bean.GetHistoryData;
-import com.example.delitto.myapplication.Bean.MainListData;
 import com.example.delitto.myapplication.Listener.HttpCallbackListener;
+import com.example.delitto.myapplication.R;
 import com.example.delitto.myapplication.decoration.DividerItemDecoration;
 import com.example.delitto.myapplication.other.WrapContentLinearLayoutManager;
 import com.example.delitto.myapplication.util.HttpUtil;
@@ -26,7 +24,6 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
 import java.util.ArrayList;
-import java.util.concurrent.CopyOnWriteArrayList;
 
 /**
  * Created by Administrator on 2016/12/5.
