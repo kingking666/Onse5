@@ -3,12 +3,12 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:background="@drawable/ripple"
     android:orientation="horizontal"
+    android:paddingBottom="8dp"
     android:paddingLeft="12dp"
     android:paddingRight="20dp"
-    android:paddingTop="8dp"
-    android:paddingBottom="8dp"
-    android:background="#FFF">
+    android:paddingTop="8dp">
 
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/require_image"

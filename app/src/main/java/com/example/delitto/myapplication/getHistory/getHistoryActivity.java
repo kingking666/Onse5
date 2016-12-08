@@ -112,6 +112,7 @@ public class getHistoryActivity extends AppCompatActivity {
             protected Integer doInBackground(Void... params) {
                 if (NetworkState.networkConnected(mContext)) {
 
+                    //利用当前自己用户的id查询被选择作为接单人id的任务
                     //TODO 编写url获取用户所有已领取任务的历史记录
                     String url = "url";
                     //工具类HttpUtil，可直接解析url

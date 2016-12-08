@@ -1,31 +1,26 @@
-package com.example.delitto.myapplication.sendHistory;
+package com.example.delitto.myapplication.getHistory;
 
-import android.app.ProgressDialog;
 import android.content.Context;
-import android.content.DialogInterface;
-import android.content.Intent;
 import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.support.v4.content.LocalBroadcastManager;
+import android.support.annotation.Nullable;
+import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
-import android.support.v7.app.AlertDialog;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
+import android.view.ViewGroup;
 import android.widget.Toast;
 
-import com.example.delitto.myapplication.Bean.SendHistoryData;
+import com.example.delitto.myapplication.Bean.GetHistoryData;
 import com.example.delitto.myapplication.Listener.HttpCallbackListener;
-import com.example.delitto.myapplication.MainActivity;
 import com.example.delitto.myapplication.R;
 import com.example.delitto.myapplication.decoration.DividerItemDecoration;
 import com.example.delitto.myapplication.other.WrapContentLinearLayoutManager;
-import com.example.delitto.myapplication.select.selectActivity;
 import com.example.delitto.myapplication.util.HttpUtil;
 import com.example.delitto.myapplication.util.NetworkState;
 import com.google.gson.Gson;
@@ -34,53 +29,48 @@ import com.google.gson.reflect.TypeToken;
 import java.util.ArrayList;
 
 /**
- * Created by Administrator on 2016/12/5.
+ * Created by pokedo on 2016/12/7.
  */
 
-public class sendHistoryActivity extends AppCompatActivity {
+public class getHistoryFragment extends Fragment{
     private Toolbar _toolbar;
-    private ArrayList<SendHistoryData> _listdata;
+    private ArrayList<GetHistoryData> _listdata;
     private RecyclerView _recyclerView;
-    private sendHistoryAdapter _adapter;
+    private getHistoryAdapter _adapter;
     private WrapContentLinearLayoutManager _layoutManager;
     private SwipeRefreshLayout refreshLayout;
     private Context mContext;
     private Gson gson;
-    private AlertDialog.Builder _dialog;
     public final static int LOAD_SUCCESS = -1;
     public final static int NETWORK_ERROE = -2;
     public final static int CONNECT_ERROR = -3;
 
 
-    protected void onCreate(Bundle savedInstanceState) {
+
+    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_send_history);
+        View view = inflater.inflate(R.layout.get_history_fragment,container,false);
 
         _listdata = new ArrayList<>();
 
-        mContext = sendHistoryActivity.this;
+        mContext = getHistoryFragment.this.getContext();
 
         gson = new Gson();
 
-        _recyclerView = (RecyclerView) findViewById(R.id.send_historyfragment);
-        _toolbar = (Toolbar) findViewById(R.id.toolbar1);
-        refreshLayout = (SwipeRefreshLayout) findViewById(R.id.refresh);
+        _recyclerView = (RecyclerView) view.findViewById(R.id.get_historyfragment);
+        _toolbar = (Toolbar) view.findViewById(R.id.toolbar1);
+        refreshLayout = (SwipeRefreshLayout) view.findViewById(R.id.refresh);
 
-        _layoutManager = new WrapContentLinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
+        _layoutManager = new WrapContentLinearLayoutManager(mContext, LinearLayoutManager.VERTICAL, false);
         _recyclerView.setLayoutManager(_layoutManager);
 
-        //绘制item间隔
-        _recyclerView.addItemDecoration(new DividerItemDecoration(this.getApplicationContext(), DividerItemDecoration.VERTICAL_LIST));
+        _recyclerView.addItemDecoration(new DividerItemDecoration(mContext, DividerItemDecoration.VERTICAL_LIST));
 
-        //设置toolbar
-        setSupportActionBar(_toolbar);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         //初始化refresh
         inirefresh();
         load();
 
-        //只能监听手势的刷新事件
         refreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             //当上拉刷新时
             @Override
@@ -111,33 +101,34 @@ public class sendHistoryActivity extends AppCompatActivity {
                 isSlidingToLast = dy > 0;
             }
         });
+        return view;
     }
 
     public void load() {
         new AsyncTask<Void, Void, Integer>() {
             @Override
             protected void onPreExecute() {
-                refreshLayout.setRefreshing(true);
             }
 
             @Override
             protected Integer doInBackground(Void... params) {
                 if (NetworkState.networkConnected(mContext)) {
 
-                    //TODO 编写url获取用户所有已发布任务的历史记录
+                    //利用当前自己用户的id查询被选择作为接单人id的任务
+                    //TODO 编写url获取用户所有已领取任务的历史记录
                     String url = "url";
                     //工具类HttpUtil，可直接解析url
-                    HttpUtil.sendHttpRequest("http://10.0.2.2/send_history.json", new HttpCallbackListener() {
+                    HttpUtil.sendHttpRequest("http://10.0.2.2/get_history.json", new HttpCallbackListener() {
                                 @Override
                                 public int onFinish(String response) {
                                     //respone解析为list<MainListData>，遍历list,将每个元素添加到_listdata
                                     try {
                                         _listdata.clear();
                                         //遍历json数组
-                                        ArrayList<SendHistoryData> list = gson.fromJson(response, new
-                                                TypeToken<ArrayList<SendHistoryData>>() {
+                                        ArrayList<GetHistoryData> list = gson.fromJson(response, new
+                                                TypeToken<ArrayList<GetHistoryData>>() {
                                                 }.getType());
-                                        for (SendHistoryData item : list) {
+                                        for (GetHistoryData item : list) {
                                             _listdata.add(item);
                                         }
                                     } catch (Exception e) {
@@ -175,34 +166,19 @@ public class sendHistoryActivity extends AppCompatActivity {
                 switch (code) {
                     case LOAD_SUCCESS:
                         if (_adapter == null) {
-                            _adapter = new sendHistoryAdapter(mContext, _listdata);
-                            _adapter.setOnItemClickListener(new sendHistoryAdapter.OnItemClickListener() {
+                            _adapter = new getHistoryAdapter(mContext, _listdata);
+                            _adapter.setOnItemClickListener(new getHistoryAdapter.OnItemClickListener() {
                                 @Override
                                 public void onItemClick(View view, int position) {
-                                    //TODO 启动活动，对应选人页面正在编写
-                                    Intent intent = new Intent(mContext,selectActivity.class);
-//                                  携带当前点击任务的id,可利用查询当前任务的接单的用户列表
-                                    intent.putExtra("taskid",_listdata.get(position).getTaskid());
-//                                    intent.putExtra("state",_listdata.get(position).getstate());
-                                    startActivity(intent);
                                 }
 
                                 @Override
                                 public void onItemLongClick(View view, int position) {
                                 }
-
-                                @Override
-                                public void onButtonClick(Button button, int _position) {
-                                    confirming();
-                                }
                             });
                             _recyclerView.setAdapter(_adapter);
-                        }
-                         /*调用adapter.notifyDataSetChanged与listView.setAdapter函数都会引起界面重绘，
-                         区别是前者会保留原有位置、数据信息，后者是回到初始状态。
-                        TODO 如果用adapter.notifydatasetchange(),确认按钮有时候会显示错位*/
-                        else {
-                            _recyclerView.setAdapter(_adapter);
+                        } else {
+                            _adapter.notifyDataSetChanged();
                         }
                         break;
                     case CONNECT_ERROR:
@@ -216,63 +192,6 @@ public class sendHistoryActivity extends AppCompatActivity {
         }.execute();
     }
 
-    public void confirming() {
-        _dialog = new AlertDialog.Builder(mContext);
-        _dialog.setTitle("确定");
-        _dialog.setMessage("是否确认完成任务？");
-        _dialog.setCancelable(true);
-        _dialog.setPositiveButton("确认", new DialogInterface.OnClickListener() {
-            public void onClick(DialogInterface _dialog, int which) {
-                final ProgressDialog _progressDialog = new ProgressDialog(mContext);   //弹出进度条
-                _progressDialog.setTitle("正在确认完成");
-                _progressDialog.setMessage("请稍后..");
-                _progressDialog.show();
-
-                //3秒后返回首页
-                new android.os.Handler().postDelayed(
-                        new Runnable() {
-                            @Override
-                            public void run() {
-                                //FIXME 这里进行上传数据处理,监听上传成功和失败的情况回调函数
-//                                if(success)
-                                _confirmSuccess();
-//                                else
-//                                _confirmFail();
-                                _progressDialog.dismiss();
-                            }
-                        }, 3000);
-            }
-        });
-        _dialog.setNegativeButton("取消", new DialogInterface.OnClickListener() {
-            public void onClick(DialogInterface _dialog, int which) {
-            }
-        });
-        _dialog.show();
-    }
-
-    public void _confirmSuccess() {
-        _dialog = new AlertDialog.Builder(mContext);
-        _dialog.setMessage("已确认完成任务");
-        _dialog.setPositiveButton("确认", new DialogInterface.OnClickListener() {
-            public void onClick(DialogInterface _dialog, int which) {
-                //确认后刷新数据
-                load();
-            }
-        });
-        _dialog.show();
-    }
-
-    //设置对toolbar的按钮监听
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case android.R.id.home:
-                onBackPressed();
-                return true;
-            default:
-                return super.onOptionsItemSelected(item);
-        }
-    }
-
     public void inirefresh() {
         //设置下拉刷新的按钮的颜色
         refreshLayout.setColorSchemeResources(R.color.primary_dark, android.R.color.holo_green_light, android.R.color.holo_orange_light, android.R.color.holo_red_light);
@@ -283,4 +202,7 @@ public class sendHistoryActivity extends AppCompatActivity {
         //设置下拉刷新按钮的大小
         refreshLayout.setSize(SwipeRefreshLayout.DEFAULT);
     }
+
+
 }
+

@@ -7,21 +7,22 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.support.v4.content.LocalBroadcastManager;
+import android.support.annotation.Nullable;
+import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AlertDialog;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.Toast;
 
 import com.example.delitto.myapplication.Bean.SendHistoryData;
 import com.example.delitto.myapplication.Listener.HttpCallbackListener;
-import com.example.delitto.myapplication.MainActivity;
 import com.example.delitto.myapplication.R;
 import com.example.delitto.myapplication.decoration.DividerItemDecoration;
 import com.example.delitto.myapplication.other.WrapContentLinearLayoutManager;
@@ -32,12 +33,14 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
 import java.util.ArrayList;
+import java.util.zip.Inflater;
 
 /**
- * Created by Administrator on 2016/12/5.
+ * Created by pokedo on 2016/12/7.
  */
 
-public class sendHistoryActivity extends AppCompatActivity {
+public class sendHistoryFragment extends Fragment {
+
     private Toolbar _toolbar;
     private ArrayList<SendHistoryData> _listdata;
     private RecyclerView _recyclerView;
@@ -51,30 +54,26 @@ public class sendHistoryActivity extends AppCompatActivity {
     public final static int NETWORK_ERROE = -2;
     public final static int CONNECT_ERROR = -3;
 
-
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_send_history);
+    @Nullable
+    @Override
+    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.send_history_fragment,container,false);
 
         _listdata = new ArrayList<>();
 
-        mContext = sendHistoryActivity.this;
+        mContext = sendHistoryFragment.this.getContext();
 
         gson = new Gson();
 
-        _recyclerView = (RecyclerView) findViewById(R.id.send_historyfragment);
-        _toolbar = (Toolbar) findViewById(R.id.toolbar1);
-        refreshLayout = (SwipeRefreshLayout) findViewById(R.id.refresh);
+        _recyclerView = (RecyclerView) view.findViewById(R.id.send_historyfragment);
+        _toolbar = (Toolbar) view.findViewById(R.id.toolbar1);
+        refreshLayout = (SwipeRefreshLayout) view.findViewById(R.id.refresh);
 
-        _layoutManager = new WrapContentLinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
+        _layoutManager = new WrapContentLinearLayoutManager(mContext, LinearLayoutManager.VERTICAL, false);
         _recyclerView.setLayoutManager(_layoutManager);
 
         //绘制item间隔
-        _recyclerView.addItemDecoration(new DividerItemDecoration(this.getApplicationContext(), DividerItemDecoration.VERTICAL_LIST));
-
-        //设置toolbar
-        setSupportActionBar(_toolbar);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        _recyclerView.addItemDecoration(new DividerItemDecoration(mContext, DividerItemDecoration.VERTICAL_LIST));
 
         //初始化refresh
         inirefresh();
@@ -111,6 +110,7 @@ public class sendHistoryActivity extends AppCompatActivity {
                 isSlidingToLast = dy > 0;
             }
         });
+        return view;
     }
 
     public void load() {
@@ -260,17 +260,6 @@ public class sendHistoryActivity extends AppCompatActivity {
             }
         });
         _dialog.show();
-    }
-
-    //设置对toolbar的按钮监听
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case android.R.id.home:
-                onBackPressed();
-                return true;
-            default:
-                return super.onOptionsItemSelected(item);
-        }
     }
 
     public void inirefresh() {

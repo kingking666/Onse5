@@ -20,12 +20,26 @@
         <item name="android:textColor">#000</item>
     </style>
 
-    <style name="ExitButtonStyle">
+    <style name="MyCustomTabLayout" parent="Widget.Design.TabLayout">
+        <item name="tabIndicatorColor">?attr/colorAccent</item>
+        <item name="tabIndicatorHeight">2dp</item>
+        <item name="tabPaddingStart">12dp</item>
+        <item name="tabPaddingEnd">12dp</item>
+        <item name="tabBackground">?attr/selectableItemBackground</item>
+        <item name="tabTextAppearance">@style/MyCustomTabTextAppearance</item>
+        <item name="tabSelectedTextColor">?android:textColorPrimary</item>
+    </style>
+    <style name="MyCustomTabTextAppearance" parent="TextAppearance.Design.Tab">
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColor">?android:textColorSecondary</item>
+        <item name="textAllCaps">true</item>
+    </style>
+
+    <style name="RedButtonStyle">
         <item name="android:textColor">@color/white</item>
         <item name="colorControlHighlight">@color/exit_highlight</item>
         <item name="colorButtonNormal">@color/exit_normal</item>
         <item name="android:colorButtonNormal">@color/exit_normal</item>
-        <item name="android:textSize">20sp</item>
     </style>
 
     <!--必须指定preferenceScreen主题-->

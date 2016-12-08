@@ -38,10 +38,25 @@
         </activity>
 
         <activity
+            android:name=".profile.ProfileActivity"
+            android:label="个人资料"
+            android:theme="@style/AppTheme">
+
+
+
+        </activity>
+
+        <activity
             android:name=".sendHistory.sendHistoryActivity"
             android:label="发布历史"
             android:theme="@style/AppTheme">
 
+        </activity>
+
+        <activity
+            android:name=".select.selectActivity"
+            android:label="领取用户"
+            android:theme="@style/AppTheme">
         </activity>
 
         <activity

@@ -317,6 +317,7 @@ public class MainListFragment extends Fragment {
 //        HttpUtil.sendHttpRequest("url", new HttpCallbackListener() {
 //            @Override
 //            public int onFinish(String response) {
+//            public int onFinish(String response) {
 //                //解析成int类型
 ////                int count = gson.fromJson(response, Integer);
 //                int count = 30;
