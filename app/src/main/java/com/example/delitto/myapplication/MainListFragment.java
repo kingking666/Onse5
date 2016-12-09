@@ -64,10 +64,14 @@ public class MainListFragment extends Fragment {
 
     private Context mContext;
 
+    private ArrayList<MainListData> list;
+
     //本地广播监听
     private LocalReceiver localReceiver;
     private IntentFilter intentFilter;
     private LocalBroadcastManager localBroadcastManager;
+
+    private int returncode;
 
     @Nullable
     @Override
@@ -231,22 +235,19 @@ public class MainListFragment extends Fragment {
                                 public int onFinish(String response) {
                                     //respone解析为list<MainListData>，遍历list,将每个元素添加到list_data
                                     try {
-                                        //每次刷新都清除list_data的数据项，重新加载解析的元素
-                                        if (clearing) {
-                                            list_data.clear();
-                                        }
-                                        //遍历json数组
-                                        ArrayList<MainListData> list = gson.fromJson(response, new
+                                        //解析json
+                                        list = gson.fromJson(response, new
                                                 TypeToken<ArrayList<MainListData>>() {
                                                 }.getType());
-                                        for (MainListData item : list) {
-                                            list_data.add(item);
-                                        }
+                                        Log.d("~response",response);
+
                                     } catch (Exception e) {
                                         e.printStackTrace();
-                                        return CONNECT_ERROR;
+                                        Log.d("~exception","exception");
+                                        return returncode=CONNECT_ERROR;
                                     }
-                                    return LOAD_SUCCESS;
+                                    Log.d("~LOAD_SUCCESS","LOAD_SUCCESS");
+                                    return returncode=LOAD_SUCCESS;
                                 }
 
                                 @Override
@@ -255,11 +256,11 @@ public class MainListFragment extends Fragment {
                                 }
                             }
                     );
+                    return returncode;
                 } else {
                     return NETWORK_ERROE;
                 }
                 //提示missing return method
-                return -1;
             }
 
             @Override
@@ -274,8 +275,17 @@ public class MainListFragment extends Fragment {
              */
             @Override
             protected void onPostExecute(Integer code) {
+                Log.d("~code",code+"");
                 switch (code) {
                     case LOAD_SUCCESS:
+                        //每次刷新都清除list_data的数据项，重新加载解析的元素
+                        if (clearing) {
+                            list_data.clear();
+                        }
+                        //遍历json数组
+                        for (MainListData item : list) {
+                            list_data.add(item);
+                        }
                         if (adapter == null) {
                             adapter = new MainListAdapter(MainListFragment.this, list_data);
                             adapter.setOnItemClickListener(new MainListAdapter.OnItemClickListener() {

@@ -93,12 +93,12 @@ public class detailActivity extends AppCompatActivity {
 
         //设置完成时间
         final String[] TITEMS = {"5分钟以内", "15分钟以内", "30分钟以内", "一个小时以内"};
-        adapter = new ArrayAdapter<String>(this.getApplicationContext(), android.R.layout.simple_spinner_item, TITEMS);
+        adapter = new ArrayAdapter<String>(detailActivity.this, android.R.layout.simple_spinner_item, TITEMS);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         _tspinner.setAdapter(adapter);
         //设置完成赏金
         String[] MITEMS = {"1", "1.5", "2", "2.5", "3", "3.5", "4", "4.5", "5", "5.5", "6", "6.5", "7", "7.5", "8", "8.5", "9", "9.5", "10"};
-        adapter = new ArrayAdapter<String>(this.getApplicationContext(), android.R.layout.simple_spinner_item, MITEMS);
+        adapter = new ArrayAdapter<String>(detailActivity.this, android.R.layout.simple_spinner_item, MITEMS);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         _mspinner.setAdapter(adapter);
     }

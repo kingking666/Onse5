@@ -39,10 +39,12 @@ public class HttpUtil {
                     }
                     if (listener != null) {
                     // 成功时回调onFinish()方法
+                        Log.d("~onFinish()","onFinish()");
                         listener.onFinish(response.toString());
                     }
                 } catch (Exception e) {
                     if (listener != null) {
+                        Log.d("~onError()","onError()");
                     // 连接过程中出现异常，回调onError()方法
                         listener.onError(e);
                     }
