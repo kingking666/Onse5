@@ -4,6 +4,8 @@ import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.design.widget.AppBarLayout;
+import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v4.content.LocalBroadcastManager;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -55,6 +57,7 @@ public class detailActivity extends AppCompatActivity {
         _detailtextview = (TextView) findViewById(R.id.detail_task);
         _timetextview = (TextView) findViewById(R.id.detail_time);
         _button = (Button) findViewById(R.id.style_detail);
+
 
         //设置toolbal
         setSupportActionBar(_toolbal);
@@ -199,7 +202,7 @@ public class detailActivity extends AppCompatActivity {
                 finish();
                 //发送广播
                 Intent intent = new Intent("com.example.delitto.myapplication.TASK");
-                intent.putExtra("type","detail_task");
+                intent.putExtra("type", "detail_task");
                 LocalBroadcastManager.getInstance(detailActivity.this).sendBroadcast(intent);
             }
         });

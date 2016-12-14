@@ -18,6 +18,8 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Toast;
 
 import com.example.delitto.myapplication.Listener.HttpCallbackListener;
@@ -72,6 +74,9 @@ public class MainListFragment extends Fragment {
     private LocalBroadcastManager localBroadcastManager;
 
     private int returncode;
+
+    private int begin;
+    private int end;
 
     @Nullable
     @Override
@@ -142,12 +147,13 @@ public class MainListFragment extends Fragment {
 //                    Log.d("~totalItemCount", "totalItemCount:" + totalItemCount);
 //                    Log.d("~底部", "底部" + (lastVisibleItem == (totalItemCount - 1)));
                     if (lastVisibleItem == (totalItemCount - 1) && isSlidingToLast) {
-                        //当前页！=总页数时，继续加载
-                        if (currentPage != totalPage)
-                            load(false);
-                            //滚动到最后一页底部时，提示没有更多数据
-                        else
+
+                        //滚动到最后一页底部时，提示没有更多数据
+                        if (currentPage == totalPage)
                             Toast.makeText(mContext, "没有更多了!", Toast.LENGTH_SHORT).show();
+                            //当前页！=总页数时，继续加载
+                        else
+                            load(false);
                     }
                     //FIXME 有时候会出现totalItemCount已加载而lastVisibleItem未加载的情况，估计为adapter未通知recyclerview更新
                     if (adapter != null)
@@ -173,9 +179,11 @@ public class MainListFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 //当为"刷新"fab时候
-                if (floatingActionButton.getTag().equals("refresh"))
+                if (floatingActionButton.getTag().equals("refresh")) {
                     //点击fab加载
                     load(true);
+                    floatingActionButton.startAnimation(AnimationUtils.loadAnimation(mContext,R.anim.rote));
+                }
             }
         });
         return view;
@@ -190,6 +198,8 @@ public class MainListFragment extends Fragment {
         new AsyncTask<Void, Void, Integer>() {
             @Override
             protected void onPreExecute() {
+                Animation anil = AnimationUtils.loadAnimation(mContext,R.anim.rote);
+                floatingActionButton.startAnimation(anil);
                 //当刷新时，当前页为1，处于刷新状态
                 if (clearing) {
                     currentPage = 1;
@@ -205,10 +215,10 @@ public class MainListFragment extends Fragment {
                 if (NetworkState.networkConnected(mContext)) {
 
                     //指定每次获取任务条数
-                    int per = 12;
+                    int per = 8;
                     //TODO count:获取数据库总用户发布任务数量
                     //TODO getcount():返回所有任务列表总条数
-                    int count = 0;
+                    int count = 9;
 //                    if (getCount() >= 0)
 //                        count = getCount();
 //                    else
@@ -217,15 +227,16 @@ public class MainListFragment extends Fragment {
                     Log.d("~total", totalPage + "");
 
                     //查询当前页数 至 下一页数的 任务列表
-                    int begin;
-                    int end;
-                    if (currentPage != totalPage - 1) {
+                    if (currentPage != totalPage ) {
                         begin = (currentPage - 1) * per;
-                        end = currentPage * per;
+                        end = currentPage * per-1;
                     } else {
-                        begin = currentPage * per;
-                        end = count;
+                        begin = (currentPage-1) * per;
+                        end = count-1;
                     }
+                    Log.d("~current",currentPage+"");
+                    Log.d("~begin",begin+"");
+                    Log.d("~end",end+"");
 
                     //TODO 编写url获取指定条数的任务列表，返回查询的url
                     String url = selectUrl(begin, end);
@@ -239,15 +250,15 @@ public class MainListFragment extends Fragment {
                                         list = gson.fromJson(response, new
                                                 TypeToken<ArrayList<MainListData>>() {
                                                 }.getType());
-                                        Log.d("~response",response);
+                                        Log.d("~response", response);
 
                                     } catch (Exception e) {
                                         e.printStackTrace();
-                                        Log.d("~exception","exception");
-                                        return returncode=CONNECT_ERROR;
+                                        Log.d("~exception", "exception");
+                                        return returncode = CONNECT_ERROR;
                                     }
-                                    Log.d("~LOAD_SUCCESS","LOAD_SUCCESS");
-                                    return returncode=LOAD_SUCCESS;
+                                    Log.d("~LOAD_SUCCESS", "LOAD_SUCCESS");
+                                    return returncode = LOAD_SUCCESS;
                                 }
 
                                 @Override
@@ -275,7 +286,7 @@ public class MainListFragment extends Fragment {
              */
             @Override
             protected void onPostExecute(Integer code) {
-                Log.d("~code",code+"");
+                Log.d("~code", code + "");
                 switch (code) {
                     case LOAD_SUCCESS:
                         //每次刷新都清除list_data的数据项，重新加载解析的元素
@@ -283,9 +294,7 @@ public class MainListFragment extends Fragment {
                             list_data.clear();
                         }
                         //遍历json数组
-                        for (MainListData item : list) {
-                            list_data.add(item);
-                        }
+                        addJson(begin, end);
                         if (adapter == null) {
                             adapter = new MainListAdapter(MainListFragment.this, list_data);
                             adapter.setOnItemClickListener(new MainListAdapter.OnItemClickListener() {
@@ -317,6 +326,7 @@ public class MainListFragment extends Fragment {
                         Toast.makeText(mContext, "当前没有网络连接!", Toast.LENGTH_SHORT).show();
                 }
                 refreshLayout.setRefreshing(false);
+                floatingActionButton.clearAnimation();
             }
         }.execute();
     }
@@ -346,6 +356,14 @@ public class MainListFragment extends Fragment {
         return "url" + "begin to end";
     }
 
+    //从begin到end部分遍历数组
+    public void addJson(int begin, int end) {
+        for (int i = begin; i <= end; i++){
+            MainListData item =list.get(i);
+            list_data.add(item);
+        }
+    }
+
     @Override
     public void onDestroy() {
         localBroadcastManager.unregisterReceiver(localReceiver);
@@ -368,12 +386,12 @@ public class MainListFragment extends Fragment {
             //从detail_activity发送过来的本地广播
             if (intent.getStringExtra("type").equals("detail_task"))
                 load(true);
-            else if(intent.getStringExtra("type").equals("send_task"))
+            else if (intent.getStringExtra("type").equals("send_task"))
                 load(true);
         }
     }
 
-    public void inirefresh(){
+    public void inirefresh() {
         //设置下拉刷新的按钮的颜色
         refreshLayout.setColorSchemeResources(R.color.primary_dark, android.R.color.holo_green_light, android.R.color.holo_orange_light, android.R.color.holo_red_light);
         //设置手指在屏幕上下拉多少距离开始刷新

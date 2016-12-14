@@ -51,12 +51,6 @@ public class ProfileActivity extends AppCompatActivity {
 
         setupViewPager(viewPager);
 
-//        fragmentArrayList = new ArrayList<>();
-//        fragmentArrayList.add(new MessageFragment());
-//        fragmentArrayList.add(new TaskFragment());
-//        fragmentArrayList.add(new MessageFragment());
-//        myFragmentPagerAdapter = new MyFragmentPagerAdapter(this.getSupportFragmentManager(), fragmentArrayList);
-//        viewPager.setAdapter(myFragmentPagerAdapter);
 
         tabLayout.setupWithViewPager(viewPager);
         super.onCreate(savedInstanceState);

@@ -12,6 +12,7 @@ import android.view.View;
 
 import com.example.delitto.myapplication.LoginActivity;
 import com.example.delitto.myapplication.R;
+import com.example.delitto.myapplication.util.PreferenceUtils;
 
 /**
  * Created by pokedo on 2016/11/30.

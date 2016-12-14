@@ -28,6 +28,7 @@ import com.ashokvarma.bottomnavigation.BadgeItem;
 import com.ashokvarma.bottomnavigation.BottomNavigationBar;
 import com.ashokvarma.bottomnavigation.BottomNavigationItem;
 import com.example.delitto.myapplication.getHistory.getHistoryActivity;
+import com.example.delitto.myapplication.profile.ProfileActivity;
 import com.example.delitto.myapplication.sendHistory.sendHistoryActivity;
 import com.example.delitto.myapplication.setting.SettingActivity;
 
@@ -109,6 +110,10 @@ public class MainActivity extends AppCompatActivity {
                         startActivity(intent);
                     }
                     break;
+                    case R.id.nav_profile:
+                        Intent intent = new Intent(MainActivity.this, ProfileActivity.class);
+                        startActivity(intent);
+                        break;
                 }
                 drawerLayout.closeDrawer(GravityCompat.START);
                 return true;

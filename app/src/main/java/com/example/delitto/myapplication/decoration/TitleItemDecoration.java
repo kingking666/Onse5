@@ -90,7 +90,6 @@ public class TitleItemDecoration extends RecyclerView.ItemDecoration {
         int baseline = (getMeasuredHeight() - fontMetrics.bottom + fontMetrics.top) / 2 - fontMetrics.top;*/
 
         mPaint.getTextBounds(mDatas.get(position).getDate(), 0, mDatas.get(position).getDate().length(), mBounds);
-        Log.d("~title",position+"");
         c.drawText(mDatas.get(position).getDate(), child.getPaddingLeft(), child.getTop() - params.topMargin - (mTitleHeight / 2 - mBounds.height() / 2), mPaint);
     }
 
