@@ -1,0 +1,161 @@
+package httpservice;
+
+/**
+ * Created by ASUS on 2016/12/4.
+ */
+
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.io.UnsupportedEncodingException;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.net.URLEncoder;
+import java.util.HashMap;
+import java.util.Map;
+import com.google.gson.JsonElement;
+import com.google.gson.Gson;
+import gson.Gsonanalyze;
+import gson.t_user;
+import java.util.Iterator;
+public class DisplayallInformationPost
+{
+    // 请求服务器端的url
+    private static String PATH = "http://123.207.237.45/webtt/Allimfomation";
+    private static URL url;
+
+    public DisplayallInformationPost() {
+        // TODO Auto-generated constructor stub
+    }
+
+    static {
+        try {
+            url = new URL(PATH);
+        } catch (MalformedURLException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+    }
+    public static String executeHttpPost(String uCPN) {
+
+        try {
+            // 发送指令和信息
+            Map<String, String> params = new HashMap<String, String>();
+
+            params.put("uCPN",uCPN);
+            return sendPostMessage(params, "utf-8");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    /**
+     * @param params
+     *            填写的url的参数
+     * @param encode
+     *            字节编码
+     * @return
+     */
+    public static String sendPostMessage(Map<String, String> params,
+                                         String encode) {
+        // 作为StringBuffer初始化的字符串
+        StringBuffer buffer = new StringBuffer();
+        try {
+            if (params != null && !params.isEmpty()) {
+                for (Map.Entry<String, String> entry : params.entrySet()) {
+                    // 完成转码操作
+                    buffer.append(entry.getKey()).append("=").append(
+                            URLEncoder.encode(entry.getValue(), encode))
+                            .append("&");
+                }
+                buffer.deleteCharAt(buffer.length() - 1);
+            }
+            // System.out.println(buffer.toString());
+            // 删除掉最有一个&
+
+           /* System.out.println("-->>"+buffer.toString());*/
+            HttpURLConnection urlConnection = (HttpURLConnection) url
+                    .openConnection();
+            urlConnection.setConnectTimeout(3000);
+            urlConnection.setRequestMethod("POST");
+            urlConnection.setDoInput(true);// 表示从服务器获取数据
+            urlConnection.setDoOutput(true);// 表示向服务器写数据
+            // 获得上传信息的字节大小以及长度
+            byte[] mydata = buffer.toString().getBytes();
+            // 表示设置请求体的类型是文本类型
+            urlConnection.setRequestProperty("Content-Type",
+                    "application/x-www-form-urlencoded");
+            urlConnection.setRequestProperty("Content-Length",
+                    String.valueOf(mydata.length));
+            // 获得输出流,向服务器输出数据
+            OutputStream outputStream = urlConnection.getOutputStream();
+            outputStream.write(mydata,0,mydata.length);
+            outputStream.close();
+            // 获得服务器响应的结果和状态码
+            int responseCode = urlConnection.getResponseCode();
+            if (responseCode == 200) {
+                return changeInputStream(urlConnection.getInputStream(), encode);
+            }
+        } catch (UnsupportedEncodingException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+        return "";
+    }
+
+    /**
+     * 将一个输入流转换成指定编码的字符串
+     *
+     * @param inputStream
+     * @param encode
+     * @return
+     */
+    private static String changeInputStream(InputStream inputStream,
+                                            String encode) {
+        // TODO Auto-generated method stub
+        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+        byte[] data = new byte[1024];
+        int len = 0;
+        String result = "";
+        if (inputStream != null) {
+            try {
+                while ((len = inputStream.read(data)) != -1) {
+                    outputStream.write(data, 0, len);
+                }
+                result = new String(outputStream.toByteArray(), encode);
+            } catch (IOException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            }
+        }
+        return result;
+    }
+   /*public static void main(String[] args)
+    {
+        DisplayallInformationPost po=new DisplayallInformationPost();
+        t_user field=new t_user();
+        Iterator it=new Gsonanalyze().getword(po.executeHttpPost("15502080236"));
+        Gson gson = new Gson();
+        while (it.hasNext()) {
+            JsonElement ee = (JsonElement) it.next();
+            field = gson.fromJson(ee, t_user.class);
+            //表示服务器端返回的结果
+        }
+        System.out.print(field.getuID());
+        System.out.print(field.getuN());
+        System.out.println(field.getuSID());
+        System.out.println(field.getuCN());
+        System.out.println(field.getuCPN());
+        System.out.print(field.getuTN());
+        System.out.print(field.getuE());
+        System.out.print(field.getuC());
+        System.out.print(field.getuS());
+        System.out.print(field.getuQ());
+    }*/
+}

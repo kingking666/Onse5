@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:fitsSystemWindows="true">
+    <!-- 给父layout添加id以便设置点击事件 -->
+    <!-- 同时设置父layout为可点击 clickable="true" -->
+    <LinearLayout
+        android:id="@+id/view_info"
+
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="56dp"
+        android:paddingLeft="24dp"
+        android:paddingRight="24dp"
+        android:clickable="true" >
+        <!-- 不可视的控件 防止加载Activity时第一个EditText控件变为编辑状态  -->
+        <LinearLayout
+            android:focusable="true"
+            android:focusableInTouchMode="true"
+            android:layout_width="0px"
+            android:layout_height="0px"/>
+
+        <!-- LOGO -->
+        <ImageView android:src="@drawable/logo"
+            android:layout_width="wrap_content"
+            android:layout_height="72dp"
+            android:layout_marginBottom="24dp"
+            android:layout_gravity="center_horizontal" />
+
+        <!-- 昵称 -->
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp">
+            <com.rengwuxian.materialedittext.MaterialEditText
+                android:id="@+id/input_uname"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:met_baseColor="@color/accent"
+                app:met_primaryColor="@color/accent"
+                android:inputType="text"
+                app:met_maxCharacters="10"
+                app:met_errorColor="@color/pink_500"
+
+                android:hint="昵称(必填)" />
+        </android.support.design.widget.TextInputLayout>
+
+        <!--  个性签名 -->
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp">
+            <com.rengwuxian.materialedittext.MaterialEditText
+                android:id="@+id/input_signature"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:met_baseColor="@color/accent"
+                app:met_primaryColor="@color/accent"
+                android:inputType="text"
+                android:hint="个性签名"
+                app:met_maxCharacters="20"/>
+        </android.support.design.widget.TextInputLayout>
+        <RadioGroup
+            android:id="@+id/sexradio"
+            android:text="性别:"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <RadioButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/radioMale"
+                android:text="男"
+                android:checked="true"/>
+            <RadioButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/radioFemale"
+                android:text="女" />
+        </RadioGroup>
+
+
+        <android.support.v7.widget.AppCompatButton
+            android:id="@+id/btn_infonext"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:layout_marginBottom="24dp"
+            android:padding="12dp"
+            android:text="下一步"/>
+
+
+
+    </LinearLayout>
+</ScrollView>
