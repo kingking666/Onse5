@@ -6,25 +6,32 @@ package com.example.delitto.myapplication.Bean;
 
 public class GetHistoryData {
     public int resouceid;
-    public String type;
-    public String date;
-    public String username;
-    public int userid;
+    public String assigT;
+    public String assigTi;
+    public String uN;
+    public int uID;
+    public int assigID;
+    public String assigRM;
+    public String assigS;
 
-    public GetHistoryData(int resouceid, String type, String date, String username, int userid) {
-        this.userid = userid;
+
+    public GetHistoryData(int resouceid, String type, String date, String username, int userid,int assigID,String assigRM,String assigS) {
+        this.uID = userid;
         this.resouceid = resouceid;
-        this.type = type;
-        this.date = date;
-        this.username = username;
+        this.assigT = type;
+        this.assigTi = date;
+        this.uN = username;
+        this.assigID=assigID;
+        this.assigRM=assigRM;
+        this.assigS=assigS;
     }
 
     public int get_userid() {
-        return userid;
+        return uID;
     }
 
     public void set_userid(int userid) {
-        this.userid = userid;
+        this.uID = userid;
     }
 
     public int get_resouceid() {
@@ -32,14 +39,20 @@ public class GetHistoryData {
     }
 
     public String get_type() {
-        return type;
+        return assigT;
     }
 
     public String get_date() {
-        return date;
+        return assigTi;
     }
 
     public String get_username() {
-        return username;
+        return uN;
     }
+
+    public int get_assigID(){return assigID;}
+
+    public String get_assigRM(){return assigRM;}
+
+    public String get_assigS(){return  assigS;}
 }

@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<view xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:id="@+id/swipeRefreshLayout"
+    class="android.support.v4.widget.SwipeRefreshLayout"
     android:background="#E0E0E0">
 
     <android.support.v7.widget.RecyclerView
@@ -11,4 +13,4 @@
         android:id="@+id/message_recyclerview">
     </android.support.v7.widget.RecyclerView>
 
-</LinearLayout>
+</view>

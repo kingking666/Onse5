@@ -13,7 +13,7 @@
         android:layout_width="250dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:theme="@style/ExitButtonStyle"
+        android:theme="@style/RedButtonStyle"
         android:onClick="exit"
         android:text="退出账号" />
 

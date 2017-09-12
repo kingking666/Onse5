@@ -10,21 +10,42 @@ import android.widget.TextView;
 
 public class MainListData {
     public int resourceid;
-    public String type;
-    public String content;
-    public String time;
-    public String date;
-    public String username;
+    public Integer uID;
+    public String assigCPN;
+    public int assigID;
+    public String assigT;
+    public String assigRM;
+    public String assigTi;
+    public String uN;
 
-    public MainListData(int resourceid, String type, String content, String time) {
+    public MainListData(Integer uID,String assigCPN,int assigID,int resourceid, String assigT, String assigRM, String assigTi,String uN) {
         this.resourceid = resourceid;
-        this.type = type;
-        this.content = content;
-        this.time = time;
-        this.date = date;
-        this.username =username;
+        this.assigT = assigT;
+        this.assigRM = assigRM;
+        this.assigTi = assigTi;
+        this.uN =uN;
+        this.assigCPN=assigCPN;
+        this.uID=uID;
+        this.assigID=assigID;
     }
-
+    public Integer getuID(){return  uID;}
+    public void setuID(Integer uID){this.uID=uID;}
+    public String getAssigCPN()
+    {
+        return assigCPN;
+    }
+    public void setAssigCPN(String assigCPN)
+    {
+        this.assigCPN=assigCPN;
+    }
+    public Integer getAssigID()
+    {
+        return assigID;
+    }
+    public void setAssigID(int assigID)
+    {
+        this.assigID= assigID;
+    }
     public int getResourceid() {
         return resourceid;
     }
@@ -34,42 +55,36 @@ public class MainListData {
     }
 
     public String getType() {
-        return type;
+        return assigT;
     }
 
-    public void setType(String type) {
-        this.type = type;
+    public void setType(String assigT) {
+        this.assigT = assigT;
     }
 
     public String getContent() {
-        return content;
+        return assigRM;
     }
 
-    public void setContent(String content) {
-        this.content = content;
+    public void setContent(String assigRM) {
+        this.assigRM = assigRM;
     }
 
-    public String getTime() {
-        return time;
-    }
 
-    public void setTime(String time) {
-        this.time = time;
-    }
 
     public String getDate() {
-        return date;
+        return assigTi;
     }
 
     public void setDate(String date) {
-        this.date = date;
+        this.assigTi = date;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
+    public void setUsername(String uN) {
+        this.uN = uN;
     }
 
     public String getUsername() {
-        return username;
+        return uN;
     }
 }

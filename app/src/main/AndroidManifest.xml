@@ -6,20 +6,27 @@
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
     <application
+        android:name=".ECApplication"
         android:allowBackup="true"
         android:configChanges="keyboardHidden|orientation|screenSize"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".SplashScreen"
+            android:name=".Activity.SplashScreen"
+            android:label="Ones5"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.Dark">
 
         </activity>
+        <activity
+            android:name=".Activity.ChatActivity"
+            android:label="聊天页面"
+            android:theme="@style/AppTheme.Dark"
+            />
 
         <activity
-            android:name=".MainActivity"
+            android:name=".Activity.MainActivity"
             android:label="@string/app_name"
             android:launchMode="singleTask"
             android:theme="@style/AppTheme">
@@ -31,37 +38,46 @@
         </activity>
 
         <activity
-            android:name=".getHistoryActivity"
+            android:name=".getHistory.getHistoryActivity"
             android:label="领取历史"
             android:theme="@style/AppTheme">
 
         </activity>
 
         <activity
-            android:name=".sendHistoryActivity"
+            android:name=".sendHistory.sendHistoryActivity"
             android:label="发布历史"
             android:theme="@style/AppTheme">
 
         </activity>
-
         <activity
-            android:name=".detailActivity"
-            android:label="任务详情"
+            android:name=".select.selectActivity"
+            android:label="选择委托人"
             android:theme="@style/AppTheme">
 
         </activity>
 
         <activity
-            android:name=".SettingActivity"
+            android:name=".detail.detailActivity"
+            android:label="任务详情"
+            android:theme="@style/AppTheme">
+
+        </activity>
+        <activity
+            android:name=".Activity.RegistinfoActivity"
+            android:label="注册时的个人信息填写"
+            android:theme="@style/AppTheme.Dark" />
+        <activity
+            android:name=".setting.SettingActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:label="设置"
             android:theme="@style/AppTheme" />
 
         <activity
-            android:name=".LoginActivity"
+            android:name=".Activity.LoginActivity"
             android:theme="@style/AppTheme.Dark" />
         <activity
-            android:name=".SignupActivity"
+            android:name=".Activity.SignupActivity"
             android:theme="@style/AppTheme.Dark" />
         <!-- ATTENTION: This was auto-generated to add Google Play services to your project for
          App Indexing.  See https://g.co/AppIndexing/AndroidStudio for more information. -->
@@ -69,11 +85,45 @@
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />
         <service android:name="cn.ciaapp.sdk.CIAService"></service>
+        <meta-data
+            android:name="EASEMOB_APPKEY"
+            android:value="1106161203178286#ones5" />
+                <!-- 声明SDK所需的service SDK核心功能-->
+                <service android:name="com.hyphenate.chat.EMChatService" android:exported="true"/>
+                <!-- 声明SDK所需的receiver -->
+                <receiver android:name="com.hyphenate.chat.EMMonitorReceiver">
+                    <intent-filter>
+                        <action android:name="android.intent.action.PACKAGE_REMOVED"/>
+                        <data android:scheme="package"/>
+                    </intent-filter>
+                    <!-- 可选filter -->
+                    <intent-filter>
+                        <action android:name="android.intent.action.BOOT_COMPLETED"/>
+                        <action android:name="android.intent.action.USER_PRESENT" />
+                    </intent-filter>
+                </receiver>
     </application>
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.VIBRATE"/>
+    <uses-permission android:name="android.permission.RECORD_AUDIO"/>
+    <uses-permission android:name="android.permission.CAMERA"/>
+    <!--    <uses-permission android:name="android.permission.ACCESS_MOCK_LOCATION"/> -->
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS"/>
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
+    <uses-permission android:name="android.permission.GET_TASKS" />
+    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE"/>
+    <uses-permission android:name="android.permission.WAKE_LOCK"/>
+    <uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS"/>
+    <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED"/>
 
 </manifest>
