@@ -40,15 +40,6 @@
             android:layout_height="wrap_content"
             android:layout_gravity="bottom" />
 
-        <!--<com.roughike.bottombar.BottomBar-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="80dp"-->
-        <!--android:id="@+id/bottom_navigation_bar"-->
-        <!--android:layout_gravity="bottom"-->
-        <!--app:bb_tabXmlResource="@xml/bottombar_tabs_three"-->
-        <!--app:bb_activeTabColor="@color/colorPrimary"-->
-        <!--app:bb_behavior="shy"-->
-        <!--/>-->
 
         <android.support.design.widget.FloatingActionButton
             android:id="@+id/floatingaction_button"

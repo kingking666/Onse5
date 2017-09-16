@@ -3,6 +3,7 @@ package com.example.delitto.myapplication.Fragment;
 import android.app.Activity;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,16 +15,23 @@ import com.example.delitto.myapplication.Animation.PopupDialog;
 import com.example.delitto.myapplication.R;
 import com.example.delitto.myapplication.Tools.AppTools;
 
+import org.w3c.dom.Text;
+
 import java.util.ArrayList;
 
 /**
  * Created by pokedo on 2016/11/14.
  */
 class MainListAdapter extends RecyclerView.Adapter {
+    private static final String TAG = "~MainListAdapter";
 
     private Fragment fragment;
     private ArrayList<MainListData> list_data;
     private PopupDialog popupDialog;
+
+    private final int SHOW_TIME = 0;
+    private final int HIDE_TIME = 1;
+    private String lastTime;
 
     //实例化时传入一个Context
     public MainListAdapter(Fragment fragment, ArrayList<MainListData> list_data) {
@@ -48,21 +56,25 @@ class MainListAdapter extends RecyclerView.Adapter {
         this.onItemClickListener = listener;
     }
 
+    @Override
+    public int getItemViewType(int position) {
+        if (position == 0)
+            return SHOW_TIME;
 
-//    public void addItem(int id, String[] type, String content) {
-//        list_data.add(0, new ListData(id, type, content));
-//        notifyItemInserted(0);
-//    }
-//
-//    public void deleteItem() {
-//        if (!list_data.isEmpty())
-//            list_data.remove(0);
-//        notifyItemRemoved(0);
-//    }
-
+        MainListData mData = list_data.get(position);
+        MainListData mLastData = list_data.get(position - 1);
+        String currentTime = mData.getDate();
+        String lastTime = mLastData.getDate();
+        if (currentTime.equals(lastTime))
+            return HIDE_TIME;
+        else
+            return SHOW_TIME;
+    }
 
     //自定义viewHolder ,获取每个子视图对象的里面的控件
     class RequireViewHolder extends RecyclerView.ViewHolder {
+        private View mTimeLinearLayout;
+        private TextView mTimeTextView;
         private TextView typeview1;
         private TextView contentview1;
         private ImageView imageView1;
@@ -70,10 +82,20 @@ class MainListAdapter extends RecyclerView.Adapter {
 
         public RequireViewHolder(View itemView) {
             super(itemView);
+            mTimeLinearLayout = itemView.findViewById(R.id.main_list_time_linearlayout);
+            mTimeTextView = (TextView) itemView.findViewById(R.id.main_list_time);
             typeview1 = (TextView) itemView.findViewById(R.id.main_list_type);
             contentview1 = (TextView) itemView.findViewById(R.id.main_list_content);
             imageView1 = (ImageView) itemView.findViewById(R.id.require_image);
             morebutton = (ImageView) itemView.findViewById(R.id.main_list_more);
+        }
+
+        public void showTime() {
+            mTimeLinearLayout.setVisibility(View.VISIBLE);
+        }
+
+        public void hideTime() {
+            mTimeLinearLayout.setVisibility(View.GONE);
         }
     }
 
@@ -83,9 +105,14 @@ class MainListAdapter extends RecyclerView.Adapter {
     //根据item类别加载不同ViewHolder
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View itemview = LayoutInflater.from(parent.getContext()).inflate(R.layout.main_item_view,
+        View itemview = LayoutInflater.from(parent.getContext()).inflate(R.layout.main_item_cardview,
                 parent, false);
         RequireViewHolder viewHolder = new RequireViewHolder(itemview);
+        if (viewType == SHOW_TIME) {
+            viewHolder.showTime();
+        } else {
+            viewHolder.hideTime();
+        }
         return viewHolder;
     }
 
@@ -99,6 +126,7 @@ class MainListAdapter extends RecyclerView.Adapter {
         //初始化 触发morebutton后弹出的popupDialog
         popupDialog = new PopupDialog((Activity) fragment.getContext());
 
+        ((RequireViewHolder) holder).mTimeTextView.setText(data.getDate());
         ((RequireViewHolder) holder).typeview1.setText(data.getType());
         ((RequireViewHolder) holder).contentview1.setText(data.getContent());
         ((RequireViewHolder) holder).imageView1.setImageResource(AppTools.getPhotoResourseId());

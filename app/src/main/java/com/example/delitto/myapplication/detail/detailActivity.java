@@ -140,7 +140,6 @@ public class detailActivity extends AppCompatActivity {
                                     @Override
                                     public void run() {
                                         //FIXME 这里进行上传数据处理,监听上传成功和失败的情况回调函数
-
                                         if(detailAction.getdetailinfoFlag()) {
                                             _getSuccess();
                                             _progressDialog.dismiss();

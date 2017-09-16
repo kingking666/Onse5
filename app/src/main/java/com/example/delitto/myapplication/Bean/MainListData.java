@@ -9,14 +9,14 @@ import android.widget.TextView;
  */
 
 public class MainListData {
-    public int resourceid;
+    public int resourceid;  //图片id
     public Integer uID;
     public String assigCPN;
-    public int assigID;
-    public String assigT;
-    public String assigRM;
-    public String assigTi;
-    public String uN;
+    public int assigID; //任务id
+    public String assigT;   //类型
+    public String assigRM;  //内容,详情
+    public String assigTi;  //任务时限
+    public String uN;   //userName
 
     public MainListData(Integer uID,String assigCPN,int assigID,int resourceid, String assigT, String assigRM, String assigTi,String uN) {
         this.resourceid = resourceid;

@@ -4,6 +4,7 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.res.AssetManager;
 import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -21,6 +22,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import com.example.delitto.myapplication.Json.FakeJson;
 import com.example.delitto.myapplication.Listener.HttpCallbackListener;
 import com.example.delitto.myapplication.Bean.MainListData;
 import com.example.delitto.myapplication.R;
@@ -33,6 +35,10 @@ import com.example.delitto.myapplication.util.NetworkState;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 
 import gson.Gsonanalyze;
@@ -49,6 +55,7 @@ import static com.example.delitto.myapplication.Action.DisplayAssigAction.getDis
  */
 
 public class MainListFragment extends Fragment {
+    private static final String TAG = "~MainListFragment";
     public final static int LOAD_SUCCESS = -1;
     public final static int NETWORK_ERROE = -2;
     public final static int CONNECT_ERROR = -3;
@@ -65,8 +72,6 @@ public class MainListFragment extends Fragment {
 
     //数据适配器 MyAdapter
     private MainListAdapter adapter;
-
-    private Gson gson = new Gson();
 
     private int currentPage;
 
@@ -109,9 +114,9 @@ public class MainListFragment extends Fragment {
         currentPage = 1;
 
         //绘制title   decoration
-        recyclerView.addItemDecoration(new TitleItemDecoration(this.getContext(), list_data));
+//        recyclerView.addItemDecoration(new TitleItemDecoration(this.getContext(), list_data));
 //        绘制item间隔
-        recyclerView.addItemDecoration(new DividerItemDecoration(this.getContext(), DividerItemDecoration.VERTICAL_LIST));
+//        recyclerView.addItemDecoration(new DividerItemDecoration(this.getContext(), DividerItemDecoration.VERTICAL_LIST));
 
         //注册广播
         registerBroadcast();
@@ -218,15 +223,15 @@ public class MainListFragment extends Fragment {
                     int per = 8;
                     //TODO count:获取数据库总用户发布任务数量
                     //TODO getcount():返回所有任务列表总条数
-                    int count =0;
-                   if (getCount() >= 0)
-                      count = getCount();
-                   else
-                      return CONNECT_ERROR;
+                    int count = 0;
+                    if (getCount() >= 0)
+                        count = getCount();
+                    else
+                        return CONNECT_ERROR;
                     totalPage = (int) Math.ceil((double) count / per);
 
                     //查询当前页数 至 下一页数的 任务列表
-                    if (currentPage != totalPage ) {
+                    if (currentPage != totalPage) {
                         begin = (currentPage - 1) * per;
                         end = currentPage * per - 1;
                     } else {
@@ -254,8 +259,6 @@ public class MainListFragment extends Fragment {
                     //工具类HttpUtil，可直接解析url
              /*       HttpUtil.sendHttpRequest("http://123.207.237.45/webtt/DisplayAssigAction", new HttpCallbackListener() {
                                 @Override
-
-
                                 @Override
                                 public int onError(Exception e) {
                                     return CONNECT_ERROR;
@@ -264,15 +267,11 @@ public class MainListFragment extends Fragment {
                     );*/
                     /*list_data.clear();*/
 
-
-
-                    GetDisplayAssig();
-                    String jsonresult= getDisplayAssigFlag();
+//                    GetDisplayAssig();
+//                    String jsonresult= getDisplayAssigFlag();   //TODO   伪造JSON数据
                     try {
-                         list = gson.fromJson(jsonresult, new
-                                TypeToken<ArrayList<MainListData>>() {
-                                }.getType());
-                        Log.d("~list",list.size()+"");
+                        list = FakeJson.fromFakeJson();
+                        Log.d(TAG, "get list: " + list);
                     } catch (Exception e) {
                         e.printStackTrace();
                         return CONNECT_ERROR;
@@ -297,9 +296,9 @@ public class MainListFragment extends Fragment {
             protected void onPostExecute(Integer code) {
                 switch (code) {
                     case LOAD_SUCCESS:
-                        if(clearing)
+                        if (clearing)
                             list_data.clear();
-                        addJson(begin,end);
+                        addJson(begin, end);
                   /*      for (MainListData item : list) {
                             list_data.add(item);
                         }*/
@@ -310,15 +309,15 @@ public class MainListFragment extends Fragment {
                                 public void onItemClick(View view, int position) {
                                     //启动活动
                                     Intent intent = new Intent(mContext, detailActivity.class);
-                                    intent.putExtra("uID",list_data.get(position).getuID());
-                                    intent.putExtra("assigID",list_data.get(position).getAssigID());
+                                    intent.putExtra("uID", list_data.get(position).getuID());
+                                    intent.putExtra("assigID", list_data.get(position).getAssigID());
                                     intent.putExtra("uN", list_data.get(position).getUsername());
                                     intent.putExtra("assigT", list_data.get(position).getType());
                                     intent.putExtra("assigRM", list_data.get(position).getContent());
                                     intent.putExtra("assigTi", list_data.get(position).getDate());
-                                    intent.putExtra("assigCPN",list_data.get(position).getAssigCPN());
-                                //    intent.putExtra("resourceid",list_data.get(position).getResourceid());
-                                    Log.d("~id",list_data.get(position).getAssigID()+"");
+                                    intent.putExtra("assigCPN", list_data.get(position).getAssigCPN());
+                                    //    intent.putExtra("resourceid",list_data.get(position).getResourceid());
+                                    Log.d("~id", list_data.get(position).getAssigID() + "");
                                     startActivity(intent);
                                 }
 
@@ -343,8 +342,8 @@ public class MainListFragment extends Fragment {
         }.execute();
     }
 
-    public void addJson(int begin ,int end){
-        for(int i=begin;i<=end;i++){
+    public void addJson(int begin, int end) {
+        for (int i = begin; i <= end; i++) {
             MainListData item = list.get(i);
             list_data.add(item);
         }
@@ -354,13 +353,20 @@ public class MainListFragment extends Fragment {
     public int getCount() {
         int flag = 0;
         try {
-            GetAssigCount();
-            flag = getAssigCountFlag();
+            Log.d(TAG, "getCount: ");
+//            GetAssigCount();
+//            flag = getAssigCountFlag();
+            FakeJson.readJson(getActivity());
+            flag = FakeJson.getFakeJsonCount();
+            Log.d(TAG, "getCount: " + flag);
         } catch (Exception e) {
+            e.printStackTrace();
             return NETWORK_ERROE;
         }
         return flag;
     }
+
+
 //        HttpUtil.sendHttpRequest("url", new HttpCallbackListener() {
 //            @Override
 //            public int onFinish(String response) {
@@ -406,12 +412,12 @@ public class MainListFragment extends Fragment {
             //从detail_activity发送过来的本地广播
             if (intent.getStringExtra("type").equals("detail_task"))
                 load(true);
-            else if(intent.getStringExtra("type").equals("send_task"))
+            else if (intent.getStringExtra("type").equals("send_task"))
                 load(true);
         }
     }
 
-    public void inirefresh(){
+    public void inirefresh() {
         //设置下拉刷新的按钮的颜色
         refreshLayout.setColorSchemeResources(R.color.primary_dark, android.R.color.holo_green_light, android.R.color.holo_orange_light, android.R.color.holo_red_light);
         //设置手指在屏幕上下拉多少距离开始刷新

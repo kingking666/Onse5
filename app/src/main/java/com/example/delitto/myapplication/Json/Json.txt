@@ -1,0 +1,35 @@
+﻿[
+{
+    "resourceid": 1,
+    "assigID": 1,
+    "assigT": "快递",
+    "assigRM": "帮忙拿一件快递",
+    "assigTi": "5min",
+    "uN": "pokedo"
+},
+{
+    "resourceid": 1,
+    "assigID": 1,
+    "assigT": "快递",
+    "assigRM": "帮忙拿一件快递",
+    "assigTi": "10min",
+    "uN": "pokedo"
+},
+{
+    "resourceid": 1,
+    "assigID": 2,
+    "assigT": "快递",
+    "assigRM": "帮忙拿一件快递",
+    "assigTi": "5min",
+    "uN": "pokedo"
+},
+{
+    "resourceid": 1,
+    "assigID": 3,
+    "assigT": "快递",
+    "assigRM": "帮忙拿一件快递",
+    "assigTi": "5min",
+    "uN": "pokedo"
+}
+
+]
