@@ -121,7 +121,6 @@ public class MainListFragment extends Fragment {
         //注册广播
         registerBroadcast();
 
-
         refreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             //当上拉刷新时
             @Override
