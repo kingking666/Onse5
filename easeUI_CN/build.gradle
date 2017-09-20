@@ -2,7 +2,12 @@ apply plugin: 'com.android.library'
 
 android {
     compileSdkVersion 21
-    buildToolsVersion "23.0.2"
+    buildToolsVersion '26.0.1'
+
+    packagingOptions {
+        exclude 'META-INF/LICENSE'
+        exclude 'META-INF/NOTICE'
+    }
 
     defaultConfig {
         minSdkVersion 9

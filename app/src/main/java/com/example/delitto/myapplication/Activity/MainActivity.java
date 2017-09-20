@@ -7,6 +7,7 @@ import android.content.IntentFilter;
 import android.os.Handler;
 import android.os.Message;
 import android.support.annotation.NonNull;
+import android.support.design.widget.BottomNavigationView;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
@@ -19,6 +20,7 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -48,13 +50,14 @@ import java.util.List;
 import static com.example.delitto.myapplication.Tools.ECTools.addMSGListener;
 
 public class MainActivity extends AppCompatActivity {
+    private static final String TAG = "~MainActivity";
 
     private CoordinatorLayout coordinatorLayout;
     private FloatingActionButton floatingActionButton;
     private NavigationView navigationView;
     private DrawerLayout drawerLayout;
     private Toolbar toolbar;
-    private BottomNavigationBar bottomNavigationBar;
+    private BottomNavigationView mNavigationView;
     private MyFragmentPagerAdapter myFragmentPagerAdapter;
     private ArrayList<Fragment> fragmentArrayList;
     private ViewPager viewPager;
@@ -76,7 +79,7 @@ public class MainActivity extends AppCompatActivity {
         coordinatorLayout = (CoordinatorLayout) findViewById(R.id.coordinator);
         floatingActionButton = (FloatingActionButton) findViewById(R.id.floatingaction_button);
         navigationView = (NavigationView) findViewById(R.id.nav_view);
-        bottomNavigationBar = (BottomNavigationBar) findViewById(R.id.bottom_navigation_bar);
+        mNavigationView = (BottomNavigationView) findViewById(R.id.bottom_navigation_view);
         viewPager = (ViewPager) findViewById(R.id.view_pager);
 
         //注册本地广播
@@ -107,16 +110,16 @@ public class MainActivity extends AppCompatActivity {
 //                Log.d("~start","start");
                 switch (item.getItemId()) {
                     case R.id.drawer_send: {
-                        Intent intent = new Intent(MainActivity.this,sendHistoryActivity.class);
+                        Intent intent = new Intent(MainActivity.this, sendHistoryActivity.class);
                         //TODO  获取当前的用户id，在下一个activity中直接利用该id查询记录
-                        intent.putExtra("userid","id");
+                        intent.putExtra("userid", "id");
                         startActivity(intent);
                     }
                     break;
                     case R.id.drawer_get: {
-                        Intent intent = new Intent(MainActivity.this,getHistoryActivity.class);
+                        Intent intent = new Intent(MainActivity.this, getHistoryActivity.class);
                         //TODO 获取当前的用户id，在下一个activity中直接利用该id查询记录
-                        intent.putExtra("userid","id");
+                        intent.putExtra("userid", "id");
                         startActivity(intent);
                     }
                     break;
@@ -132,24 +135,21 @@ public class MainActivity extends AppCompatActivity {
         });
 
 
-        //BottomNavigation
-        bottomNavigationBar.addItem(new BottomNavigationItem(R.mipmap.ic_store_black_24dp, "列表"));
-        bottomNavigationBar.addItem(new BottomNavigationItem(R.mipmap.ic_add_circle_black_24dp, "发布"));
-        bottomNavigationBar.addItem(new BottomNavigationItem(R.mipmap.ic_chat_bubble_black_24dp, "消息")
-                .setBadgeItem(new BadgeItem().setText("5").setTextColor("#ffffff")));
-        bottomNavigationBar.initialise();
-        bottomNavigationBar.setTabSelectedListener(new BottomNavigationBar.OnTabSelectedListener() {
+        mNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
-            public void onTabSelected(int position) {
-                viewPager.setCurrentItem(position);
-            }
-
-            @Override
-            public void onTabUnselected(int position) {
-            }
-
-            @Override
-            public void onTabReselected(int position) {
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                switch (item.getItemId()){
+                    case R.id.navigation_list:
+                        viewPager.setCurrentItem(0);
+                        break;
+                    case R.id.navigation_publish:
+                        viewPager.setCurrentItem(1);
+                        break;
+                    case R.id.navigation_message:
+                        viewPager.setCurrentItem(3);
+                        break;
+                }
+                return true;
             }
         });
 
@@ -172,23 +172,11 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onPageSelected(int position) {
                 switchPosition = position;
-//                Log.d("~selected", "+(" + position + ")");
-                bottomNavigationBar.clearAll();
-                bottomNavigationBar.addItem(new BottomNavigationItem(R.mipmap.ic_store_black_24dp, "列表"));
-                bottomNavigationBar.addItem(new BottomNavigationItem(R.mipmap.ic_add_circle_black_24dp, "发布"));
-                bottomNavigationBar.addItem(new BottomNavigationItem(R.mipmap.ic_chat_bubble_black_24dp, "消息"));
-
-                bottomNavigationBar.setFirstSelectedPosition(position);
-                bottomNavigationBar.initialise();
-                bottomNavigationBar.show();
-                //重新调用onCreateOptionsMenu()方法重新绘制toolbar
-
                 invalidateOptionsMenu();
             }
 
             @Override
             public void onPageScrollStateChanged(int state) {
-//                Log.d("~statechanged", "+(" + state + ")");
             }
         });
     }
@@ -265,7 +253,7 @@ public class MainActivity extends AppCompatActivity {
 
     public void onDestroy() {
         localBroadcastManager.unregisterReceiver(localReceiver);
-        PreferenceUtils.setPrefString(MainActivity.this,"Ones5User", UserThis.userPhone);
+        PreferenceUtils.setPrefString(MainActivity.this, "Ones5User", UserThis.userPhone);
         super.onDestroy();
     }
 

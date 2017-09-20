@@ -4,9 +4,11 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.Nullable;
+import android.support.annotation.RequiresApi;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.LocalBroadcastManager;
 import android.support.v7.app.AlertDialog;
@@ -19,42 +21,43 @@ import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
+import android.widget.ScrollView;
+import android.widget.TextView;
 import android.widget.Toast;
 
-import com.ashokvarma.bottomnavigation.BottomNavigationBar;
 import com.example.delitto.myapplication.Action.PublishAction;
 import com.example.delitto.myapplication.Activity.MainActivity;
 import com.example.delitto.myapplication.R;
-import com.example.delitto.myapplication.User.UserThis;
 import com.example.delitto.myapplication.util.DisplayUtil;
+import com.xw.repo.BubbleSeekBar;
 
 import de.hdodenhof.circleimageview.CircleImageView;
-import fr.ganfra.materialspinner.MaterialSpinner;
-import function.getTime;
-import httpservice.assigPost;
 
 /**
  * Created by pokedo on 2016/11/18.
  */
 
 public class TaskFragment extends Fragment implements View.OnClickListener {
-    private MaterialSpinner spinner;
+    private static final String TAG = "~TaskFragment";
+
+    //    private MaterialSpinner spinner;
     private ArrayAdapter<String> adapter;
     private EditText publicEdittext;
     private EditText privateEdittext;
     private EditText inputphone;
-    private BottomNavigationBar bottomNavigationBar;
+    private ScrollView mScrollView;
     private CircleImageView expressCircleImage;
     private CircleImageView takeoutCircleImage;
     private CircleImageView otherCircleImage;
+    private BubbleSeekBar mBSeekBar;
+    private TextView mTimeTextView;
     private Context mContext;
     private AlertDialog.Builder _dialog;
     private static Handler mHandler = new Handler();
-    private String type1="快递";
-    private String type2="外卖";
-    private String type3="其它";
+    private String type1 = "快递";
+    private String type2 = "外卖";
+    private String type3 = "其它";
     private String type;
-
 
 
     @Override
@@ -65,28 +68,34 @@ public class TaskFragment extends Fragment implements View.OnClickListener {
         super.onCreate(savedInstanceState);
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.M)
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.task_fragment, container, false);
+        View view = inflater.inflate(R.layout.task_fragment2, container, false);
 
         publicEdittext = (EditText) view.findViewById(R.id.public_edittext);
         privateEdittext = (EditText) view.findViewById(R.id.private_edittext);
         inputphone = (EditText) view.findViewById(R.id.input_contact_phone);
-        bottomNavigationBar = (BottomNavigationBar) getActivity().findViewById(R.id.bottom_navigation_bar);
         expressCircleImage = (CircleImageView) view.findViewById(R.id.express_logo);
         takeoutCircleImage = (CircleImageView) view.findViewById(R.id.takeout_logo);
         otherCircleImage = (CircleImageView) view.findViewById(R.id.other_logo);
+        mBSeekBar = (BubbleSeekBar) view.findViewById(R.id.publish_time_limit_seekbar);
+        mScrollView = (ScrollView) view.findViewById(R.id.task_scroll_view);
+        mTimeTextView = (TextView) view.findViewById(R.id.task_time_limit_text_view);
 
         mContext = TaskFragment.this.getContext();
 
+        //
+        initSeekbar();
+
         //设置下拉选择框的数据
-        spinner = (MaterialSpinner) view.findViewById(R.id.spinner);
+//        spinner = (MaterialSpinner) view.findViewById(R.id.spinner);
         String[] ITEMS = {"0.5h", "1h", "1.5h", "2h", "2.5h", "3h", "3.5h", "4h"};
 
         adapter = new ArrayAdapter<String>(this.getContext(), android.R.layout.simple_spinner_item, ITEMS);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinner.setAdapter(adapter);
+//        spinner.setAdapter(adapter);
 
         //Edittext设置焦点监听,获取焦点时候隐藏底栏,否则隐藏输入键盘
         hideWidget();
@@ -99,6 +108,33 @@ public class TaskFragment extends Fragment implements View.OnClickListener {
         otherCircleImage.setOnClickListener(this);
 
         return view;
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.M)
+    private void initSeekbar() {
+        mScrollView.setOnScrollChangeListener(new View.OnScrollChangeListener() {
+            @Override
+            public void onScrollChange(View v, int scrollX, int scrollY, int oldScrollX, int oldScrollY) {
+                mBSeekBar.correctOffsetWhenContainerOnScrolling();
+                Log.d(TAG, "onScrollChange: ");
+            }
+        });
+
+        mBSeekBar.setOnProgressChangedListener(new BubbleSeekBar.OnProgressChangedListener() {
+            @Override
+            public void onProgressChanged(BubbleSeekBar bubbleSeekBar, int progress, float progressFloat) {
+            }
+
+            @Override
+            public void getProgressOnActionUp(BubbleSeekBar bubbleSeekBar, int progress, float progressFloat) {
+            }
+
+            @Override
+            public void getProgressOnFinally(BubbleSeekBar bubbleSeekBar, int progress, float progressFloat) {
+                String time = (getResources().getString(R.string.task_time_limit_string));
+                mTimeTextView.setText(String.format(time, String.valueOf(progressFloat)));
+            }
+        });
     }
 
     //在fragment设置菜单监听
@@ -118,40 +154,33 @@ public class TaskFragment extends Fragment implements View.OnClickListener {
                     _progressDialog.setTitle("正在确认发布");
                     _progressDialog.setMessage("请稍后..");
                     _progressDialog.show();
-                    if(expressCircleImage.getBorderColor()!=getResources().getColor(R.color.border_color))
-                    {
-                        type=type1;
+                    if (expressCircleImage.getBorderColor() != getResources().getColor(R.color.border_color)) {
+                        type = type1;
+                    } else if (takeoutCircleImage.getBorderColor() != getResources().getColor(R.color.border_color)) {
+                        type = type2;
+                    } else if (otherCircleImage.getBorderColor() != getResources().getColor(R.color.border_color)) {
+                        type = type3;
                     }
-                    else if( takeoutCircleImage.getBorderColor()!=getResources().getColor(R.color.border_color))
-                    {
-                        type=type2;
-                    }
-                    else if(otherCircleImage.getBorderColor()!=getResources().getColor(R.color.border_color))
-                    {
-                        type=type3;
-                    }
-                    final String time=new getTime().gettime((String)spinner.getSelectedItem());
-                   PublishAction.GetPublish(type, privateEdittext.getText().toString(), publicEdittext.getText().toString(),time,inputphone.getText().toString());
+//                    final String time=new getTime().gettime((String)spinner.getSelectedItem());
+//                   PublishAction.GetPublish(type, privateEdittext.getText().toString(), publicEdittext.getText().toString(),time,inputphone.getText().toString());
                     //FIXME 这里进行上传数据处理,监听上传成功和失败的情况回调函数
                     //3秒后返回首页
 
-                            mHandler.postDelayed(
-                                    new Runnable() {
-                                        @Override
-                                        public void run()
-                                        {
-                                            if(PublishAction.getPublishFlag()){
-                                                _sendSuccess();
-                                                _progressDialog.dismiss();
-                                            }
-                                            else{
-                                                _progressDialog.dismiss();
-                                                return;
-                                            }
-                                        }
-                                    }, 3000);
-                        }
-
+                    mHandler.postDelayed(
+                            new Runnable() {
+                                @Override
+                                public void run() {
+                                    if (PublishAction.getPublishFlag()) {
+                                        _sendSuccess();
+                                        _progressDialog.dismiss();
+                                    } else {
+                                        _progressDialog.dismiss();
+                                        Toast.makeText(mContext, "Send failed.", Toast.LENGTH_SHORT).show();
+                                        return;
+                                    }
+                                }
+                            }, 3000);
+                }
 
 
             });
@@ -168,10 +197,10 @@ public class TaskFragment extends Fragment implements View.OnClickListener {
     //验证
     public boolean verify() {
         boolean temp = true;
-        if (spinner.getSelectedItem().equals(spinner.getHint())) {
-            spinner.setError("请选择该下拉栏");
-            temp = false;
-        }
+//        if (spinner.getSelectedItem().equals(spinner.getHint())) {
+//            spinner.setError("请选择该下拉栏");
+//            temp = false;
+//        }
         if (publicEdittext.getText().length() < 5) {
             publicEdittext.setError("字符长度必须大于5");
             temp = false;
@@ -250,10 +279,10 @@ public class TaskFragment extends Fragment implements View.OnClickListener {
                 startActivity(_intent);
                 //intent1 : 刷新数据
                 Intent intent1 = new Intent("com.example.delitto.myapplication.TASK");
-                intent1.putExtra("type","send_task");
+                intent1.putExtra("type", "send_task");
                 //intent2 : 更改viewpager页面
                 Intent intent2 = new Intent("com.example.delitto.myapplication.MAINACT");
-                intent2.putExtra("type","change_page");
+                intent2.putExtra("type", "change_page");
                 LocalBroadcastManager manager = LocalBroadcastManager.getInstance(mContext);
                 manager.sendBroadcast(intent1);
                 manager.sendBroadcast(intent2);
@@ -264,8 +293,8 @@ public class TaskFragment extends Fragment implements View.OnClickListener {
     }
 
     //重新加载视图
-    public void reload(){
-        spinner.setSelection(0);
+    public void reload() {
+//        spinner.setSelection(0);
         setUnselectedStyle(takeoutCircleImage);
         setUnselectedStyle(otherCircleImage);
         setUnselectedStyle(expressCircleImage);
@@ -313,12 +342,9 @@ public class TaskFragment extends Fragment implements View.OnClickListener {
             @Override
             public void onFocusChange(View view, boolean hasFocus) {
                 if (hasFocus) {
-                    bottomNavigationBar.hide();
-                    Log.d("~focus", bottomNavigationBar.isHidden() + "");
                 } else {
                     InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
                     imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
-                    bottomNavigationBar.show();
                 }
             }
         });
@@ -326,12 +352,9 @@ public class TaskFragment extends Fragment implements View.OnClickListener {
             @Override
             public void onFocusChange(View view, boolean hasFocus) {
                 if (hasFocus) {
-                    bottomNavigationBar.hide();
-                    Log.d("~focus", bottomNavigationBar.isHidden() + "");
                 } else {
                     InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
                     imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
-                    bottomNavigationBar.show();
                 }
             }
         });
@@ -340,12 +363,9 @@ public class TaskFragment extends Fragment implements View.OnClickListener {
             @Override
             public void onFocusChange(View view, boolean hasFocus) {
                 if (hasFocus) {
-                    bottomNavigationBar.hide();
-                    Log.d("~focus", bottomNavigationBar.isHidden() + "");
                 } else {
                     InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
                     imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
-                    bottomNavigationBar.show();
                 }
             }
         });

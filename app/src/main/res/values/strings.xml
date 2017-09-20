@@ -2,6 +2,14 @@
     <string name="app_name">Ones5</string>
     <string name="action_settings">设置</string>
     <string name="versionNumber">0.4.0</string>
-     <string name="drawer_open">Open navigation drawer</string>
+    <string name="drawer_open">Open navigation drawer</string>
     <string name="drawer_close">Close navigation drawer</string>
+    <string name="navigation_menu_list">列表</string>
+    <string name="navigation_menu_public">发布</string>
+    <string name="navigation_menu_message">消息</string>
+
+    <string name="task_time_limit_string">(%1$s小时内到达)</string>
+    <string name="detail_time_limit_string">(%1$s小时内完成)</string>
+    <string name="detail_money_select_string">(%1$s元)</string>
+
 </resources>

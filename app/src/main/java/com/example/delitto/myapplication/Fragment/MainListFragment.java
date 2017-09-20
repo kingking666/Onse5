@@ -121,13 +121,6 @@ public class MainListFragment extends Fragment {
         //注册广播
         registerBroadcast();
 
-//        deleteItem.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                myAdapter.deleteItem();
-//                linearLayoutManager.scrollToPosition(0);
-//            }
-//        });
 
         refreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             //当上拉刷新时

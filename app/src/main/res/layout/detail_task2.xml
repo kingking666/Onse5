@@ -1,0 +1,311 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/coordinator"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/page_background">
+
+    <android.support.design.widget.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
+
+        <android.support.v7.widget.Toolbar xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/toolbar1"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="@color/colorPrimary"
+            app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+            app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar" />
+    </android.support.design.widget.AppBarLayout>
+
+    <android.support.v4.widget.NestedScrollView
+        android:id="@+id/nested_scroll_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
+        android:scrollbars="vertical"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+        <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/style_detail"
+                    android:layout_width="wrap_content"
+                    android:layout_height="23dp"
+                    android:layout_marginBottom="3dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="12dp"
+                    android:background="@drawable/button_shape"
+                    android:textColor="@color/colorPrimary"
+                    tools:text="快递" />
+
+            </LinearLayout>
+            <!--..................................................................-->
+
+            <android.support.v7.widget.CardView style="@style/cardview_style">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <de.hdodenhof.circleimageview.CircleImageView
+                        android:id="@+id/circle_image"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="15dp"
+                        app:civ_border_color="@color/colorPrimary"
+                        app:civ_border_width="2dp"
+                        tools:src="@mipmap/logo" />
+
+                    <TextView
+                        android:id="@+id/name_detail"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="10dp"
+                        android:textColor="@color/gz_1_primary_text"
+                        android:textSize="20dp"
+                        tools:text="用户昵称" />
+
+                </LinearLayout>
+
+            </android.support.v7.widget.CardView>
+
+            <!--......................................................-->
+
+            <android.support.v7.widget.CardView style="@style/cardview_style">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+
+                    <LinearLayout style="@style/task_item_title_layout_style">
+
+                        <ImageView
+                            style="@style/task_icon_style"
+                            android:src="@drawable/ic_description" />
+
+                        <TextView
+                            style="@style/textview_group"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="任务详情" />
+
+                    </LinearLayout>
+
+                    <View style="@style/interval_view" />
+
+                    <android.support.v7.widget.CardView
+                        style="@style/inner_cardview_style"
+                        android:layout_width="match_parent"
+                        android:layout_height="100dp">
+
+                        <TextView
+                            android:id="@+id/detail_task"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:padding="10dp"
+                            tools:text="顺丰快递，中小件热水壶" />
+
+                    </android.support.v7.widget.CardView>
+
+                </LinearLayout>
+
+            </android.support.v7.widget.CardView>
+
+
+            <!--.......................................................-->
+
+
+            <android.support.v7.widget.CardView style="@style/cardview_style">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+
+                    <LinearLayout style="@style/task_item_title_layout_style">
+
+                        <ImageView
+                            style="@style/task_icon_style"
+                            android:src="@drawable/ic_description" />
+
+                        <TextView
+                            style="@style/textview_group"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="任务时限" />
+
+                    </LinearLayout>
+
+                    <View style="@style/interval_view" />
+
+                    <android.support.v7.widget.CardView
+                        style="@style/inner_cardview_style"
+                        android:layout_width="match_parent"
+                        android:layout_height="70dp">
+
+                        <TextView
+                            android:id="@+id/detail_time"
+                            style="@style/textview_group"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:padding="10dp"
+                            tools:text="5分钟以内" />
+
+                    </android.support.v7.widget.CardView>
+
+                </LinearLayout>
+
+            </android.support.v7.widget.CardView>
+
+            <!--....................................................-->
+
+
+            <android.support.v7.widget.CardView style="@style/cardview_style">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        style="@style/task_item_title_layout_style"
+                        android:layout_height="50dp">
+
+                        <ImageView
+                            style="@style/task_icon_style"
+                            android:src="@drawable/ic_access_time" />
+
+                        <TextView
+                            android:id="@+id/textView2"
+                            style="@style/textview_group"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="您打算多长时间内完成这个任务？" />
+
+                        <TextView
+                            android:id="@+id/detail_time_limit_text_view"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="end"
+                            android:paddingEnd="20dp"
+                            android:text="(请选择时间)"
+                            android:textColor="#3b8ad5" />
+
+                    </LinearLayout>
+
+                    <View style="@style/interval_view" />
+
+                    <com.xw.repo.BubbleSeekBar
+                        android:id="@+id/detail_time_limit_seekbar"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="20dp"
+                        app:bsb_auto_adjust_section_mark="true"
+                        app:bsb_bubble_color="@color/primary"
+                        app:bsb_is_float_type="true"
+                        app:bsb_max="4"
+                        app:bsb_min="0.5"
+                        app:bsb_second_track_color="@color/colorPrimary"
+                        app:bsb_section_count="7"
+                        app:bsb_section_text_position="below_section_mark"
+                        app:bsb_show_section_mark="true"
+                        app:bsb_show_section_text="true"
+                        app:bsb_show_thumb_text="true"
+                        app:bsb_thumb_color="@color/primary_darker"
+                        app:bsb_thumb_text_size="18sp"
+                        app:bsb_touch_to_seek="true"
+                        app:bsb_track_color="@color/monsoon" />
+
+                </LinearLayout>
+
+            </android.support.v7.widget.CardView>
+
+
+            <!--.........................................................-->
+
+
+            <android.support.v7.widget.CardView style="@style/cardview_style">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+
+                    <LinearLayout style="@style/task_item_title_layout_style">
+
+                        <ImageView
+                            style="@style/task_icon_style"
+                            android:src="@drawable/ic_money" />
+
+                        <TextView
+                            style="@style/textview_group"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:paddingTop="10dp"
+                            android:text="您想获得多少赏金？" />
+
+                        <TextView
+                            android:id="@+id/detail_money_text_view"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="end"
+                            android:paddingEnd="20dp"
+                            android:text="(请选择金额)"
+                            android:textColor="#3b8ad5" />
+
+                    </LinearLayout>
+
+                    <View style="@style/interval_view" />
+
+                    <com.xw.repo.BubbleSeekBar
+                        android:id="@+id/detail_money_seekbar"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="20dp"
+                        app:bsb_auto_adjust_section_mark="true"
+                        app:bsb_bubble_color="@color/primary"
+                        app:bsb_max="10"
+                        app:bsb_min="2"
+                        app:bsb_second_track_color="@color/colorPrimary"
+                        app:bsb_section_count="4"
+                        app:bsb_section_text_position="below_section_mark"
+                        app:bsb_show_section_mark="true"
+                        app:bsb_show_section_text="true"
+                        app:bsb_show_thumb_text="true"
+                        app:bsb_thumb_color="@color/primary_darker"
+                        app:bsb_thumb_text_size="18sp"
+                        app:bsb_touch_to_seek="true"
+                        app:bsb_track_color="@color/monsoon" />
+
+                </LinearLayout>
+
+            </android.support.v7.widget.CardView>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="20dp" />
+
+        </LinearLayout>
+
+    </android.support.v4.widget.NestedScrollView>
+
+
+</android.support.design.widget.CoordinatorLayout>

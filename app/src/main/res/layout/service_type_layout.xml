@@ -1,95 +1,66 @@
 <?xml version="1.0" encoding="utf-8"?>
+
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="match_parent"
+    android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:orientation="vertical">
+    android:layout_gravity="center"
+    android:padding="15dp">
 
-    <TextView
-        style="@style/textview_group"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="类型" />
+    <LinearLayout style="@style/service_type_style">
 
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/express_logo"
+            style="@style/cicview_type"
+            android:layout_gravity="center"
+            android:src="@drawable/ic_folder"
+            app:civ_border_color="@color/border_color"
+            app:civ_border_width="@dimen/border_width" />
 
-    <android.support.v7.widget.CardView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="10dp"
+            android:text="快递" />
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+    </LinearLayout>
 
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="10dp"
-                android:layout_weight="1"
-                android:orientation="vertical">
+    <LinearLayout style="@style/service_type_style">
 
-                <de.hdodenhof.circleimageview.CircleImageView
-                    android:id="@+id/express_logo"
-                    style="@style/cicview_type"
-                    android:layout_gravity="center"
-                    android:src="@drawable/ic_folder"
-                    app:civ_border_color="@color/border_color"
-                    app:civ_border_width="@dimen/border_width" />
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/takeout_logo"
+            style="@style/cicview_type"
+            android:layout_gravity="center"
+            android:src="@drawable/ic_restaurant"
+            app:civ_border_color="@color/border_color"
+            app:civ_border_width="@dimen/border_width" />
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_marginTop="10dp"
-                    android:text="快递" />
-            </LinearLayout>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="10dp"
+            android:text="外卖" />
+    </LinearLayout>
 
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="10dp"
-                android:layout_weight="1"
-                android:orientation="vertical">
+    <LinearLayout style="@style/service_type_style">
 
-                <de.hdodenhof.circleimageview.CircleImageView
-                    android:id="@+id/takeout_logo"
-                    style="@style/cicview_type"
-                    android:layout_gravity="center"
-                    android:src="@drawable/ic_restaurant"
-                    app:civ_border_color="@color/border_color"
-                    app:civ_border_width="@dimen/border_width" />
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/other_logo"
+            style="@style/cicview_type"
+            android:layout_gravity="center"
+            android:src="@drawable/ic_toys"
+            app:civ_border_color="@color/border_color"
+            app:civ_border_width="@dimen/border_width" />
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_marginTop="10dp"
-                    android:text="外卖" />
-            </LinearLayout>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="10dp"
+            android:text="其他" />
+    </LinearLayout>
 
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="10dp"
-                android:layout_weight="1"
-                android:orientation="vertical">
-
-                <de.hdodenhof.circleimageview.CircleImageView
-                    android:id="@+id/other_logo"
-                    style="@style/cicview_type"
-                    android:layout_gravity="center"
-                    android:src="@drawable/ic_toys"
-                    app:civ_border_color="@color/border_color"
-                    app:civ_border_width="@dimen/border_width" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_marginTop="10dp"
-                    android:text="其他" />
-            </LinearLayout>
-
-        </LinearLayout>
-
-    </android.support.v7.widget.CardView>
 </LinearLayout>
+

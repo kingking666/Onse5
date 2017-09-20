@@ -10,66 +10,73 @@
 {
     "resourceid": 1,
     "assigID": 1,
+    "assigT": "快递",
+    "assigRM": "帮忙拿一件快递~~~~",
+    "assigTi": "5min",
+    "uN": "default2"
+},
+{
+    "resourceid": 1,
+    "assigID": 1,
     "assigT": "食物",
-    "assigRM": "帮忙拿一件快递",
+    "assigRM": "帮忙拿一份食物",
+    "assigTi": "5min",
+    "uN": "panda"
+},
+{
+    "resourceid": 1,
+    "assigID": 1,
+    "assigT": "其他",
+    "assigRM": "一份重要的东西~",
+    "assigTi": "5min",
+    "uN": "ppdell"
+},
+{
+    "resourceid": 1,
+    "assigID": 1,
+    "assigT": "其他",
+    "assigRM": "一份重要的东西~",
     "assigTi": "10min",
-    "uN": "pokedo"
+    "uN": "default4"
 },
 {
     "resourceid": 1,
-    "assigID": 2,
+    "assigID": 1,
     "assigT": "快递",
-    "assigRM": "帮忙拿一件快递",
-    "assigTi": "5min",
-    "uN": "pokedo"
+    "assigRM": "一份重要的东西~",
+    "assigTi": "10min",
+    "uN": "dmokkoo"
 },
 {
     "resourceid": 1,
-    "assigID": 3,
+    "assigID": 1,
     "assigT": "快递",
-    "assigRM": "帮忙拿一件快递",
-    "assigTi": "5min",
-    "uN": "pokedo"
+    "assigRM": "一份重要的东西~",
+    "assigTi": "10min",
+    "uN": "dmooaao"
 },
 {
     "resourceid": 1,
-    "assigID": 3,
-    "assigT": "快递",
-    "assigRM": "帮忙拿一件快递",
-    "assigTi": "2min",
-    "uN": "pokedo"
+    "assigID": 1,
+    "assigT": "其他",
+    "assigRM": "一份重要的东西~",
+    "assigTi": "10min",
+    "uN": "dmooggo"
 },
 {
     "resourceid": 1,
-    "assigID": 3,
+    "assigID": 1,
     "assigT": "快递",
-    "assigRM": "帮忙拿一件快递",
-    "assigTi": "2min",
-    "uN": "pokedo"
+    "assigRM": "热水壶~",
+    "assigTi": "20min",
+    "uN": "dmoogago"
 },
 {
     "resourceid": 1,
-    "assigID": 3,
-    "assigT": "快递",
-    "assigRM": "帮忙拿一件快递",
-    "assigTi": "2min",
-    "uN": "pokedo"
-},
-{
-    "resourceid": 1,
-    "assigID": 3,
-    "assigT": "快递",
-    "assigRM": "帮忙拿一件快递",
-    "assigTi": "3min",
-    "uN": "pokedo"
-},
-{
-    "resourceid": 1,
-    "assigID": 3,
-    "assigT": "快递",
-    "assigRM": "帮忙拿一件快递",
-    "assigTi": "2min",
-    "uN": "pokedo"
+    "assigID": 1,
+    "assigT": "其他",
+    "assigRM": "一份东西~",
+    "assigTi": "20min",
+    "uN": "dmoogwwgo"
 }
-
 ]

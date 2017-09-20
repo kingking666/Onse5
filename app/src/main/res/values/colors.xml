@@ -13,6 +13,12 @@
     
     <color name="accent">#FFFFFF</color>
 
+    <!--task_fragment-->
+    <color name="page_background">#efefef</color>
+    <color name="interval">#eaeaea</color>
+    <color name="task_input_text_area">#fafafa</color>
+    <color name="task_input_hint">#e5e5e5</color>
+
     <!--其他-->
     <color name="popup_press">#FAFAFA</color>
     <color name="popup_unpress">#ECEFF1</color>
